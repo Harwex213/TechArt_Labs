@@ -27,11 +27,17 @@ $max-width: 1020px;
 }
 
 // Styles
-
 .index {
+  display: flex;
+  flex-direction: column;
   margin: 0;
+
+  &__slider {
+    min-height: calc(100vh - 95px);
+  }
 }
 
+// HEADER
 .header {
   @include fontSite;
   background: $base-blue;
@@ -44,15 +50,11 @@ $max-width: 1020px;
     justify-content: space-between;
     align-items: center;
     min-height: 89px;
+    padding: 0 40px;
   }
 
   &__logo {
     background: transparent;
-    margin-left: 40px;
-  }
-
-  &__navbar {
-    margin-right: 40px;
   }
 }
 
@@ -91,14 +93,80 @@ $max-width: 1020px;
     }
   }
 
-  &__linkSeparator {
+  &__link-separator {
     color: $font-white;
     margin: 0 12px;
   }
 }
 
+// SLIDER
+.slider {
+  display: flex;
+  background: $base-red;
 
+  &__container {
+    width: 100%;
+    @include container;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+  }
+}
 
+.slider__button {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  &_direction_right {
+    transform: rotate(0.5turn);
+  }
+}
+
+.phone-icon {
+  height: 483px;
+  width: 240px;
+  position: relative;
+
+  &_direction_horizontal {
+    height: 240px;
+    width: 483px;
+  }
+
+  &__shadow {
+    width: 240px;
+    height: 483px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+
+    &_direction_horizontal {
+      z-index: 9;
+    }
+  }
+  &__body {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+  }
+
+  &__screen-image {
+    position: absolute;
+    top: 65px;
+    left: 14.5px;
+    z-index: 2;
+
+    &_direction_horizontal {
+      top: 14.5px;
+      left: 60px;
+    }
+  }
+}
 
 
 
