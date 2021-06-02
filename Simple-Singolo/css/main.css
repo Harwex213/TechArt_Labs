@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap");
 .index {
+  font-family: 'Lato', serif;
+  font-style: normal;
   display: flex;
   flex-direction: column;
   margin: 0; }
@@ -7,19 +9,17 @@
     min-height: calc(100vh - 95px); }
 
 .header {
-  font-family: 'Lato', serif;
-  font-style: normal;
   background: #2D303A;
   border-bottom: 6px solid #323746; }
   .header__container {
     margin: 0 auto;
-    max-width: 1020px;
+    padding: 0 40px;
+    max-width: 940px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    min-height: 89px;
-    padding: 0 40px; }
+    min-height: 89px; }
   .header__logo {
     background: transparent; }
 
@@ -39,8 +39,6 @@
 .navbar {
   display: flex;
   flex-direction: row;
-  font-family: 'Lato', serif;
-  font-style: normal;
   text-transform: uppercase;
   font-size: 16px;
   font-weight: bold; }
@@ -59,18 +57,20 @@
   .slider__container {
     width: 100%;
     margin: 0 auto;
-    max-width: 1020px;
+    padding: 0 40px;
+    max-width: 940px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
-    padding: 0 40px; }
+    align-items: center; }
 
 .slider__button {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center; }
+  .slider__button:hover {
+    cursor: pointer; }
   .slider__button_direction_right {
     transform: rotate(0.5turn); }
 
@@ -98,10 +98,115 @@
   .phone-icon__screen-image {
     position: absolute;
     top: 65px;
-    left: 14.5px;
+    left: 13.5px;
     z-index: 2; }
     .phone-icon__screen-image_direction_horizontal {
-      top: 14.5px;
+      top: 13.5px;
       left: 60px; }
+
+.section-name {
+  color: #666D89;
+  font-weight: 900;
+  font-size: 36px;
+  line-height: 36px;
+  margin: 0; }
+
+.section-description {
+  color: #767E9E;
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 30px;
+  margin: 0; }
+
+.services-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  flex: 1;
+  grid-row-gap: 35px; }
+  .services-list__service-item {
+    align-self: stretch; }
+
+.service-item {
+  display: flex;
+  flex-direction: row; }
+  .service-item__icon {
+    display: flex;
+    width: 60px;
+    height: 60px;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid #666D89;
+    border-radius: 50%; }
+  .service-item__info-about {
+    margin-left: 15px;
+    max-width: 220px; }
+  .service-item__name {
+    color: #666D89;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 18px;
+    margin: 0; }
+  .service-item__description {
+    color: #767E9E;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 22px;
+    text-align: justify;
+    margin: 14px 0 0 0; }
+
+.services {
+  background: #F2F2F2;
+  border-bottom: 6px solid #FFFFFF; }
+  .services__container {
+    margin: 0 auto;
+    padding: 0 40px;
+    max-width: 940px; }
+  .services__section-name {
+    margin: 60px 0 25px 0; }
+  .services__services-list {
+    margin: 60px 0 60px 0; }
+
+.portfolio {
+  background: #2D303A;
+  border-bottom: 6px solid #323746; }
+  .portfolio__container {
+    margin: 0 auto;
+    padding: 0 40px;
+    max-width: 940px; }
+  .portfolio__section-name {
+    margin: 60px 0 25px 0; }
+  .portfolio__filter-list {
+    margin: 18px 0; }
+  .portfolio__portfolio-list {
+    margin: 0 0 60px 0; }
+
+.filter-list {
+  display: flex;
+  flex-direction: row;
+  color: #767E9E;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 12px; }
+  .filter-list__filter-item {
+    margin: 0 10px 0 0;
+    border: 1px solid #767E9E;
+    box-sizing: border-box;
+    border-radius: 5px; }
+    .filter-list__filter-item:hover {
+      cursor: pointer;
+      border-color: #FFFFFF;
+      color: #FFF; }
+  .filter-list__filter-item-content {
+    margin: 5px; }
+
+.portfolio-list {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px; }
 
 /*# sourceMappingURL=main.css.map */
