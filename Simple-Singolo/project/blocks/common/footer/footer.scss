@@ -1,0 +1,19 @@
+.footer {
+  background: $base-blue;
+
+  &__container {
+    @include container;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 76px;
+  }
+
+  &__description {
+    color: $section-headers;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 18px;
+  }
+}
