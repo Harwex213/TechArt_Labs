@@ -399,10 +399,16 @@
     justify-content: space-between;
     align-items: center;
     min-height: 76px; }
+    @media (max-width: 425px) {
+      .footer__container {
+        justify-content: center; } }
   .footer__description {
     color: #666D89;
     font-weight: 900;
-    font-size: 16px;
+    font-size: 14px;
     line-height: 18px; }
+    @media (max-width: 425px) {
+      .footer__description {
+        display: none; } }
 
 /*# sourceMappingURL=styles.css.map */
