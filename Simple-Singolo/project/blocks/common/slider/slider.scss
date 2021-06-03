@@ -1,6 +1,7 @@
 .slider {
   display: flex;
   background: $base-red;
+  border-bottom: 6px solid $border-red;
 
   &__container {
     width: 100%;
