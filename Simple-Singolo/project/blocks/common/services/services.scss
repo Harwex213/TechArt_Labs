@@ -4,10 +4,22 @@
 
   &__container {
     @include container;
+
+    @media (max-width: $tablet+px) {
+      padding: 0 33px;
+    }
   }
 
   &__section-name {
     margin: 60px 0 25px 0;
+
+    @media (max-width: $tablet+px) {
+      margin: 40px 0 20px 0;
+    }
+
+    @media (max-width: $mobile+px) {
+      margin: 25px 0 15px 0;
+    }
   }
 
   &__section-description {
@@ -15,5 +27,18 @@
 
   &__services-list {
     margin: 60px 0 60px 0;
+
+    @media (max-width: $laptop+px) {
+      justify-content: center;
+      column-gap: 35px;
+    }
+
+    @media (max-width: $tablet+px) {
+      margin: 40px 0 40px 0;
+    }
+
+    @media (max-width: $mobile+px) {
+      margin: 25px 0 25px 0;
+    }
   }
 }
