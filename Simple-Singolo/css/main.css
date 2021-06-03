@@ -82,23 +82,29 @@
     height: 240px;
     width: 483px; }
   .phone-icon__shadow {
-    width: 240px;
     height: 483px;
+    width: 240px;
     position: absolute;
     top: 0;
     left: 0;
     z-index: 0; }
     .phone-icon__shadow_direction_horizontal {
-      z-index: 9; }
+      height: 240px;
+      width: 483px; }
   .phone-icon__body {
+    height: 458px;
+    width: 216px;
     position: absolute;
     top: 0;
     left: 0;
     z-index: 1; }
+    .phone-icon__body_direction_horizontal {
+      height: 216px;
+      width: 458px; }
   .phone-icon__screen-image {
     position: absolute;
     top: 65px;
-    left: 13.5px;
+    left: 14.5px;
     z-index: 2; }
     .phone-icon__screen-image_direction_horizontal {
       top: 13.5px;
@@ -134,8 +140,8 @@
   flex-direction: row; }
   .service-item__icon {
     display: flex;
-    width: 60px;
-    height: 60px;
+    width: 54px;
+    height: 54px;
     justify-content: center;
     align-items: center;
     border: 3px solid #666D89;

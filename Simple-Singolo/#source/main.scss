@@ -133,28 +133,36 @@ $font-red: $base-red;
   }
 
   &__shadow {
-    width: 240px;
     height: 483px;
+    width: 240px;
     position: absolute;
     top: 0;
     left: 0;
     z-index: 0;
 
     &_direction_horizontal {
-      z-index: 9;
+      height: 240px;
+      width: 483px;
     }
   }
   &__body {
+    height: 458px;
+    width: 216px;
     position: absolute;
     top: 0;
     left: 0;
     z-index: 1;
+
+    &_direction_horizontal {
+      height: 216px;
+      width: 458px;
+    }
   }
 
   &__screen-image {
     position: absolute;
     top: 65px;
-    left: 13.5px;
+    left: 14.5px;
     z-index: 2;
 
     &_direction_horizontal {
@@ -204,8 +212,8 @@ $font-red: $base-red;
 
   &__icon {
     display: flex;
-    width: 60px;
-    height: 60px;
+    width: 54px;
+    height: 54px;
     justify-content: center;
     align-items: center;
     border: 3px solid $section-headers;
