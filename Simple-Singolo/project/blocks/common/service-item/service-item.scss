@@ -1,0 +1,36 @@
+.service-item {
+  display: flex;
+  flex-direction: row;
+
+  &__icon {
+    display: flex;
+    width: 54px;
+    height: 54px;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid $section-headers;
+    border-radius: 50%;
+  }
+
+  &__info-about {
+    margin-left: 15px;
+    max-width: 220px;
+  }
+
+  &__name {
+    color: $section-headers;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 18px;
+    margin: 0;
+  }
+
+  &__description {
+    color: $section-descriptions;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 22px;
+    text-align: justify;
+    margin: 14px 0 0 0;
+  }
+}

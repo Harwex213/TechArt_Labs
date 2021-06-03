@@ -1,0 +1,49 @@
+.phone-icon {
+  height: 483px;
+  width: 240px;
+  position: relative;
+
+  &_direction_horizontal {
+    height: 240px;
+    width: 483px;
+  }
+
+  &__shadow {
+    height: 483px;
+    width: 240px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+
+    &_direction_horizontal {
+      height: 240px;
+      width: 483px;
+    }
+  }
+  &__body {
+    height: 458px;
+    width: 216px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+
+    &_direction_horizontal {
+      height: 216px;
+      width: 458px;
+    }
+  }
+
+  &__screen-image {
+    position: absolute;
+    top: 65px;
+    left: 14.5px;
+    z-index: 2;
+
+    &_direction_horizontal {
+      top: 13.5px;
+      left: 60px;
+    }
+  }
+}

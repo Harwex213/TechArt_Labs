@@ -1,0 +1,28 @@
+.slider {
+  display: flex;
+  background: $base-red;
+
+  &__container {
+    width: 100%;
+    @include container;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__button {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &_direction_right {
+      transform: rotate(0.5turn);
+    }
+  }
+}

@@ -1,0 +1,25 @@
+.filter-list {
+  display: flex;
+  flex-direction: row;
+  color: $section-descriptions;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 12px;
+
+  &__filter-item {
+    margin: 0 10px 0 0;
+    border: 1px solid #767E9E;
+    box-sizing: border-box;
+    border-radius: 5px;
+
+    &:hover {
+      cursor: pointer;
+      border-color: $border-white;
+      color: $font-white;
+    }
+  }
+
+  &__filter-item-content {
+    margin: 5px;
+  }
+}

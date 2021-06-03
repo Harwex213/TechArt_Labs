@@ -1,0 +1,24 @@
+.portfolio {
+  background: $base-blue;
+  border-bottom: 6px solid $border-blue;
+
+  &__container {
+    @include container;
+  }
+
+
+  &__section-name {
+    margin: 60px 0 25px 0;
+  }
+
+  &__section-description {
+  }
+
+  &__filter-list {
+    margin: 18px 0;
+  }
+
+  &__portfolio-list {
+    margin: 0 0 60px 0;
+  }
+}

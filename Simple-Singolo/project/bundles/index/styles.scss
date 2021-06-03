@@ -1,0 +1,29 @@
+@import "../../blocks/mixins.scss";
+@import "../../blocks/variables.scss";
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
+
+.index {
+  font-family: 'Lato', serif;
+  font-style: normal;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+
+  &__slider {
+    min-height: calc(100vh - 95px);
+  }
+}
+
+@import "../../blocks/common/header/header.scss";
+@import "../../blocks/common/logo/logo.scss";
+@import "../../blocks/common/navbar/navbar.scss";
+@import "../../blocks/common/slider/slider.scss";
+@import "../../blocks/common/phone-icon/phone-icon.scss";
+@import "../../blocks/common/section-name/section-name.scss";
+@import "../../blocks/common/section-description/section-description.scss";
+@import "../../blocks/common/services/services.scss";
+@import "../../blocks/common/services-list/services-list.scss";
+@import "../../blocks/common/service-item/service-item.scss";
+@import "../../blocks/common/portfolio/portfolio.scss";
+@import "../../blocks/common/filter-list/filter-list.scss";
+@import "../../blocks/common/portfolio-list/portfolio-list.scss";
