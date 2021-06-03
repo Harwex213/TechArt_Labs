@@ -10,7 +10,12 @@
   margin: 0;
 
   &__slider {
+    padding: 20px 0;
     min-height: calc(100vh - 95px);
+
+    @media (max-width: $laptop+px) {
+      min-height: calc(65vh - 95px);
+    }
   }
 }
 

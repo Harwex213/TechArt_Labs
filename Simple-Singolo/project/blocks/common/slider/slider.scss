@@ -9,6 +9,14 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+
+    @media (max-width: $laptop+px) {
+      padding: 0 26px;
+    }
+
+    @media (max-width: $tablet+px) {
+      padding: 0 10px;
+    }
   }
 
   &__button {

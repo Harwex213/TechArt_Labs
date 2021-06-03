@@ -3,24 +3,50 @@
   width: 240px;
   position: relative;
 
+  @media (max-width: $laptop+px) {
+    height: 364px;
+    width: 180px;
+  }
+
+  @media (max-width: $tablet+px) {
+    height: 235px;
+    width: 116px;
+  }
+
+  @media (max-width: $mobile+px) {
+    height: 178px;
+    width: 88px;
+  }
+
   &_direction_horizontal {
     height: 240px;
     width: 483px;
+
+    @media (max-width: $laptop+px) {
+      height: 181px;
+      width: 364px;
+    }
+
+    @media (max-width: $tablet+px) {
+      height: 116px;
+      width: 235px;
+    }
+
+    @media (max-width: $mobile+px) {
+      height: 88px;
+      width: 178px;
+    }
   }
 
   &__shadow {
-    height: 483px;
-    width: 240px;
+    height: inherit;
+    width: inherit;
     position: absolute;
     top: 0;
     left: 0;
     z-index: 0;
-
-    &_direction_horizontal {
-      height: 240px;
-      width: 483px;
-    }
   }
+
   &__body {
     height: 458px;
     width: 216px;
@@ -29,9 +55,39 @@
     left: 0;
     z-index: 1;
 
+    @media (max-width: $laptop+px) {
+      height: 344px;
+      width: 162px;
+    }
+
+    @media (max-width: $tablet+px) {
+      height: 222px;
+      width: 105px;
+    }
+
+    @media (max-width: $mobile+px) {
+      height: 168px;
+      width: 79px;
+    }
+
     &_direction_horizontal {
       height: 216px;
       width: 458px;
+
+      @media (max-width: $laptop+px) {
+        height: 162px;
+        width: 344px;
+      }
+
+      @media (max-width: $tablet+px) {
+        height: 105px;
+        width: 222px;
+      }
+
+      @media (max-width: $mobile+px) {
+        height: 79px;
+        width: 168px;
+      }
     }
   }
 
@@ -41,9 +97,51 @@
     left: 14.5px;
     z-index: 2;
 
+    @media (max-width: $laptop+px) {
+      top: 49px;
+      left: 10px;
+      height: 250px;
+      width: 142px;
+    }
+
+    @media (max-width: $tablet+px) {
+      top: 32px;
+      left: 6px;
+      height: 162px;
+      width: 92px;
+    }
+
+    @media (max-width: $mobile+px) {
+      top: 24px;
+      left: 5px;
+      height: 122px;
+      width: 69px;
+    }
+
     &_direction_horizontal {
       top: 13.5px;
       left: 60px;
+
+      @media (max-width: $laptop+px) {
+        top: 10px;
+        left: 45px;
+        height: 142px;
+        width: 250px;
+      }
+
+      @media (max-width: $tablet+px) {
+        top: 7px;
+        left: 29px;
+        height: 91px;
+        width: 162px;
+      }
+
+      @media (max-width: $mobile+px) {
+        top: 5px;
+        left: 22px;
+        height: 69px;
+        width: 122px;
+      }
     }
   }
 }

@@ -6,7 +6,11 @@
   flex-direction: column;
   margin: 0; }
   .index__slider {
+    padding: 20px 0;
     min-height: calc(100vh - 95px); }
+    @media (max-width: 1024px) {
+      .index__slider {
+        min-height: calc(65vh - 95px); } }
 
 .logo {
   display: flex;
@@ -79,19 +83,40 @@
   height: 483px;
   width: 240px;
   position: relative; }
+  @media (max-width: 1024px) {
+    .phone-icon {
+      height: 364px;
+      width: 180px; } }
+  @media (max-width: 768px) {
+    .phone-icon {
+      height: 235px;
+      width: 116px; } }
+  @media (max-width: 425px) {
+    .phone-icon {
+      height: 178px;
+      width: 88px; } }
   .phone-icon_direction_horizontal {
     height: 240px;
     width: 483px; }
+    @media (max-width: 1024px) {
+      .phone-icon_direction_horizontal {
+        height: 181px;
+        width: 364px; } }
+    @media (max-width: 768px) {
+      .phone-icon_direction_horizontal {
+        height: 116px;
+        width: 235px; } }
+    @media (max-width: 425px) {
+      .phone-icon_direction_horizontal {
+        height: 88px;
+        width: 178px; } }
   .phone-icon__shadow {
-    height: 483px;
-    width: 240px;
+    height: inherit;
+    width: inherit;
     position: absolute;
     top: 0;
     left: 0;
     z-index: 0; }
-    .phone-icon__shadow_direction_horizontal {
-      height: 240px;
-      width: 483px; }
   .phone-icon__body {
     height: 458px;
     width: 216px;
@@ -99,17 +124,77 @@
     top: 0;
     left: 0;
     z-index: 1; }
+    @media (max-width: 1024px) {
+      .phone-icon__body {
+        height: 344px;
+        width: 162px; } }
+    @media (max-width: 768px) {
+      .phone-icon__body {
+        height: 222px;
+        width: 105px; } }
+    @media (max-width: 425px) {
+      .phone-icon__body {
+        height: 168px;
+        width: 79px; } }
     .phone-icon__body_direction_horizontal {
       height: 216px;
       width: 458px; }
+      @media (max-width: 1024px) {
+        .phone-icon__body_direction_horizontal {
+          height: 162px;
+          width: 344px; } }
+      @media (max-width: 768px) {
+        .phone-icon__body_direction_horizontal {
+          height: 105px;
+          width: 222px; } }
+      @media (max-width: 425px) {
+        .phone-icon__body_direction_horizontal {
+          height: 79px;
+          width: 168px; } }
   .phone-icon__screen-image {
     position: absolute;
     top: 65px;
     left: 14.5px;
     z-index: 2; }
+    @media (max-width: 1024px) {
+      .phone-icon__screen-image {
+        top: 49px;
+        left: 10px;
+        height: 250px;
+        width: 142px; } }
+    @media (max-width: 768px) {
+      .phone-icon__screen-image {
+        top: 32px;
+        left: 6px;
+        height: 162px;
+        width: 92px; } }
+    @media (max-width: 425px) {
+      .phone-icon__screen-image {
+        top: 24px;
+        left: 5px;
+        height: 122px;
+        width: 69px; } }
     .phone-icon__screen-image_direction_horizontal {
       top: 13.5px;
       left: 60px; }
+      @media (max-width: 1024px) {
+        .phone-icon__screen-image_direction_horizontal {
+          top: 10px;
+          left: 45px;
+          height: 142px;
+          width: 250px; } }
+      @media (max-width: 768px) {
+        .phone-icon__screen-image_direction_horizontal {
+          top: 7px;
+          left: 29px;
+          height: 91px;
+          width: 162px; } }
+      @media (max-width: 425px) {
+        .phone-icon__screen-image_direction_horizontal {
+          top: 5px;
+          left: 22px;
+          height: 69px;
+          width: 122px; } }
 
 .slider {
   display: flex;
@@ -123,6 +208,12 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center; }
+    @media (max-width: 1024px) {
+      .slider__container {
+        padding: 0 26px; } }
+    @media (max-width: 768px) {
+      .slider__container {
+        padding: 0 10px; } }
   .slider__button {
     display: flex;
     flex-direction: row;
