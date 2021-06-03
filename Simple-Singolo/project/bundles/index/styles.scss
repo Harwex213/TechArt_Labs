@@ -14,18 +14,19 @@
   }
 }
 
-@import "../../blocks/common/header/header.scss";
 @import "../../blocks/common/logo/logo.scss";
 @import "../../blocks/common/navbar/navbar.scss";
-@import "../../blocks/common/slider/slider.scss";
+@import "../../blocks/common/navbar-burger/navbar-burger.scss";
+@import "../../blocks/common/header/header.scss";
 @import "../../blocks/common/phone-icon/phone-icon.scss";
+@import "../../blocks/common/slider/slider.scss";
 @import "../../blocks/common/section-name/section-name.scss";
 @import "../../blocks/common/section-description/section-description.scss";
-@import "../../blocks/common/services/services.scss";
 @import "../../blocks/common/services-list/services-list.scss";
 @import "../../blocks/common/service-item/service-item.scss";
-@import "../../blocks/common/portfolio/portfolio.scss";
+@import "../../blocks/common/services/services.scss";
 @import "../../blocks/common/filter-list/filter-list.scss";
 @import "../../blocks/common/portfolio-list/portfolio-list.scss";
-@import "../../blocks/common/footer/footer.scss";
+@import "../../blocks/common/portfolio/portfolio.scss";
 @import "../../blocks/common/social-buttons/social-buttons.scss";
+@import "../../blocks/common/footer/footer.scss";

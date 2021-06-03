@@ -13,5 +13,24 @@
 
   &__logo {
     background: transparent;
+
+    @media (max-width: $tablet+px) {
+      margin: auto;
+    }
+  }
+
+  &__navbar-burger {
+    display: none;
+    align-self: center;
+
+    @media (max-width: $tablet+px) {
+      display: flex;
+    }
+  }
+
+  &__navbar {
+    @media (max-width: $tablet+px) {
+      display: none;
+    }
   }
 }
