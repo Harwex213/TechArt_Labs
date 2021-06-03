@@ -5,6 +5,18 @@
   flex-wrap: wrap;
   gap: 20px;
 
+  @media (max-width: $mobile+px) {
+    gap: 13px;
+  }
+
   &__item {
+    @media (max-width: $tablet+px) {
+      width: 217px;
+      height: 183px;
+    }
+    @media (max-width: $mobile+px) {
+      width: 151px;
+      height: 128px;
+    }
   }
 }
