@@ -1,43 +1,43 @@
 import {Index} from "../index";
 
-function HeaderNavbarBehaviorStart() {
-    function RotateBurger() {
-        let isRotated = navbarBurger.classList.contains("header__navbar-burger_rotated");
+export class Header {
+    header = document.querySelector(".header");
+    navbar = document.querySelector(".header__navbar");
+    navbarMobileBackground = document.querySelector(".header__navbar-mobile-bg");
+    navbarBurger = document.querySelector(".header__navbar-burger");
+    logo = document.querySelector(".header__logo");
+
+    RotateBurger() {
+        let isRotated = this.navbarBurger.classList.contains("header__navbar-burger_rotated");
         if (isRotated)
-            navbarBurger.classList.remove("header__navbar-burger_rotated");
+            this.navbarBurger.classList.remove("header__navbar-burger_rotated");
         else
-            navbarBurger.classList.add("header__navbar-burger_rotated");
+            this.navbarBurger.classList.add("header__navbar-burger_rotated");
         return isRotated;
     }
 
-    function ShowMobileBar() {
+    ShowMobileBar() {
         new Index().IndexOverflowHidden();
-        header.classList.add("header_overflow_hidden");
-        navbar.classList.add("header__navbar_visible");
-        navbarMobileBackground.classList.add("header__navbar-mobile-bg_visible");
-        logo.classList.add("header__logo_pos_left");
+        this.header.classList.add("header_overflow_hidden");
+        this.navbar.classList.add("header__navbar_visible");
+        this.navbarMobileBackground.classList.add("header__navbar-mobile-bg_visible");
+        this.logo.classList.add("header__logo_pos_left");
     }
 
-    function HideMobileBar() {
+    HideMobileBar() {
         new Index().IndexOverflowAuto();
-        header.classList.remove("header_overflow_hidden");
-        navbar.classList.remove("header__navbar_visible");
-        navbarMobileBackground.classList.remove("header__navbar-mobile-bg_visible");
-        logo.classList.remove("header__logo_pos_left")
+        this.header.classList.remove("header_overflow_hidden");
+        this.navbar.classList.remove("header__navbar_visible");
+        this.navbarMobileBackground.classList.remove("header__navbar-mobile-bg_visible");
+        this.logo.classList.remove("header__logo_pos_left")
     }
 
-    function Action() {
-        RotateBurger() ? HideMobileBar() : ShowMobileBar();
+    constructor() {
+        function Action(headerClass) {
+            headerClass.RotateBurger() ? headerClass.HideMobileBar() : headerClass.ShowMobileBar();
+        }
+
+        this.navbarMobileBackground.addEventListener("click", () => Action(this));
+        this.navbarBurger.addEventListener("click", () => Action(this))
     }
-
-    const header = document.querySelector(".header");
-    const navbar = document.querySelector(".header__navbar");
-    const navbarMobileBackground = document.querySelector(".header__navbar-mobile-bg");
-    const navbarBurger = document.querySelector(".header__navbar-burger");
-    const logo = document.querySelector(".header__logo");
-
-    navbarMobileBackground.addEventListener("click", () => Action());
-
-    navbarBurger.addEventListener("click", () => Action())
 }
-HeaderNavbarBehaviorStart();
