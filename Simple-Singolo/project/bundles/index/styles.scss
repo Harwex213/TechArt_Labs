@@ -2,23 +2,7 @@
 @import "../../blocks/variables.scss";
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
 
-.index {
-  font-family: 'Lato', serif;
-  font-style: normal;
-  display: flex;
-  flex-direction: column;
-  margin: 0;
-
-  &__slider {
-    padding: 20px 0;
-    min-height: calc(100vh - 95px);
-
-    @media (max-width: $tablet+px) {
-      min-height: calc(65vh - 95px);
-    }
-  }
-}
-
+@import "../../blocks/common/index/index.scss";
 @import "../../blocks/common/logo/logo.scss";
 @import "../../blocks/common/navbar/navbar.scss";
 @import "../../blocks/common/navbar-burger/navbar-burger.scss";
