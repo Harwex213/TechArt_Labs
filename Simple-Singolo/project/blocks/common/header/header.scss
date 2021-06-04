@@ -19,11 +19,11 @@
     justify-content: space-between;
     align-items: center;
     min-height: 89px;
-    width: 100vw;
 
     @media (max-width: $tablet+px) {
       justify-content: start;
       min-height: 71px;
+      width: 100vw;
     }
   }
 
@@ -47,6 +47,10 @@
     display: none;
     transition: 0.15s ease-in;
 
+    &:hover {
+      cursor: pointer;
+    }
+
     @media (max-width: $tablet+px) {
       display: flex;
     }
@@ -67,6 +71,10 @@
     opacity: 0.6;
     transition: all 0.2s ease;
 
+    &:hover {
+      cursor: pointer;
+    }
+    
     &_visible {
       left: 0;
     }
