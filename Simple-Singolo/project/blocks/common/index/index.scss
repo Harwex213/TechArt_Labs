@@ -4,13 +4,14 @@
   display: flex;
   flex-direction: column;
   margin: 0;
+  overflow-x: hidden;
 
   &__slider {
-    padding: 20px 0;
-    min-height: calc(100vh - 95px);
+    height: calc(100vh - 89px);
+    box-sizing: border-box;
 
     @media (max-width: $tablet+px) {
-      min-height: calc(65vh - 95px);
+      height: calc(65vh - 71px);
       margin-top: 71px;
     }
   }

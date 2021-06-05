@@ -1,10 +1,12 @@
 .header {
   background: $base-blue;
   border-bottom: 6px solid $border-blue;
+  box-sizing: border-box;
 
   @media (max-width: $tablet+px) {
     position: fixed;
     z-index: 5;
+    width: 100vw;
   }
 
   @media (max-width: $mobile+px) {
@@ -18,12 +20,11 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    min-height: 89px;
+    min-height: 83px;
 
     @media (max-width: $tablet+px) {
       justify-content: start;
-      min-height: 71px;
-      width: 100vw;
+      min-height: 65px;
     }
   }
 
