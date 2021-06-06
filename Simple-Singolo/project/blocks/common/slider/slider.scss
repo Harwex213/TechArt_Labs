@@ -43,7 +43,12 @@
     flex-direction: row;
     height: 100%;
     width: 100%;
-    transition: transform 500ms linear;
+    cursor: grab;
+    user-select: none;
+
+    &_isGrabbing {
+      cursor: grabbing;
+    }
   }
 
   &__content-item {

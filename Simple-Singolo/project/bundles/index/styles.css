@@ -292,7 +292,10 @@
     flex-direction: row;
     height: 100%;
     width: 100%;
-    transition: transform 500ms linear; }
+    cursor: grab;
+    user-select: none; }
+    .slider__content_isGrabbing {
+      cursor: grabbing; }
   .slider__content-item {
     display: flex;
     flex-direction: row;
