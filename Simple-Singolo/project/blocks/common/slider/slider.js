@@ -59,6 +59,19 @@ export class Slider {
     }
 
     _SliderInitialBehavior() {
+        const TransitionEnd = () => {
+            this._isTransitionOn = false;
+            this.UnmakeSlideTransition();
+
+            if (this._currentSliderItemIndex === 0) {
+                this._MoveCurrentSlideToLast();
+            }
+
+            if (this._currentSliderItemIndex === this._sliderContent.children.length - 1) {
+                this._MoveCurrentSlideToFirst();
+            }
+        }
+
         if (!this._sliderContent.children[0].classList.contains("slider__content-item_current")) {
             this._sliderContent.children[0].classList.add("slider__content-item_current");
         }
@@ -75,17 +88,11 @@ export class Slider {
         this._sliderContent.addEventListener("transitionstart", () => {
             this._isTransitionOn = true;
         });
+        this._sliderContent.addEventListener("transitioncancel", () => {
+            TransitionEnd();
+        })
         this._sliderContent.addEventListener("transitionend", () => {
-            this._isTransitionOn = false;
-            this.UnmakeSlideTransition();
-
-            if (this._currentSliderItemIndex === 0) {
-                this._MoveCurrentSlideToLast();
-            }
-
-            if (this._currentSliderItemIndex === this._sliderContent.children.length - 1) {
-                this._MoveCurrentSlideToFirst();
-            }
+            TransitionEnd();
         });
 
         this.SetSliderContentTransform(this._currentClientWidth * this._currentSliderItemIndex);
@@ -95,21 +102,29 @@ export class Slider {
     }
 
     _SliderInitialDragBehavior() {
-        let MakeDragging = () => {
-            isMouseDown = false;
-            this._sliderContent.classList.remove("slider__content_isGrabbing");
-
-            if (this._isTransitionOn) {
-                return;
+        let MakeDragging = e => {
+            const GetCurrentSlide = () => {
+                this._currentSliderItemIndex--;
+                this.GetNextSlide();
+            }
+            const DraggingOff = () => {
+                isMouseDown = false;
+                this._sliderContent.classList.remove("slider__content_isGrabbing");
             }
 
+            if (this._isTransitionOn || !isMouseDown) {
+                DraggingOff();
+                return;
+            }
+            DraggingOff();
+
+            this.SetSliderContentTransform(this._currentTranslation + offsetXInMouseDown - e.clientX);
             let draggingOffset = this._currentTranslation - (this._currentClientWidth * this._currentSliderItemIndex);
             if (Math.abs(draggingOffset) / this._currentClientWidth > 0.2) {
                 draggingOffset > 0 ? this.GetNextSlide() : this.GetPreviousSlide();
             }
             else {
-                this._currentSliderItemIndex--;
-                this.GetNextSlide();
+                GetCurrentSlide();
             }
         };
 
@@ -126,21 +141,20 @@ export class Slider {
         let offsetXInMouseDown = 0;
         this._sliderContent.addEventListener("mousedown", e => {
             if (this._isTransitionOn) {
+                isMouseDown = false;
                 return;
             }
 
-            offsetXInMouseDown = e.offsetX;
+            offsetXInMouseDown = e.clientX;
             isMouseDown = true;
             this._sliderContent.classList.add("slider__content_isGrabbing");
         })
-        this._sliderContent.addEventListener("mouseleave", _ => MakeDragging());
-        this._sliderContent.addEventListener("mouseup", _ => MakeDragging())
+        this._sliderContent.addEventListener("mouseleave", e => MakeDragging(e));
+        this._sliderContent.addEventListener("mouseup", e => MakeDragging(e))
         this._sliderContent.addEventListener("mousemove", e => {
             if (isMouseDown) {
-                console.log("OFFSETX IN MOUSE DOWN: " + offsetXInMouseDown);
-                console.log("OFFSETX: " + e.offsetX);
-                console.log(this._currentTranslation + offsetXInMouseDown - e.offsetX);
-                this.SetSliderContentTransform(this._currentTranslation + offsetXInMouseDown - e.offsetX);
+                const delta = offsetXInMouseDown - e.clientX;
+                this._sliderContent.style.transform = `translateX(-${this._currentTranslation + delta}px)`;
             }
         });
     }
