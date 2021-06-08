@@ -5,6 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <link rel="stylesheet" href="project/bundles/index/styles.css">
     <title>Simple-Singolo</title>
 </head>
@@ -35,49 +36,55 @@
         </div>
     </header>
     <section class="slider index__slider">
-        <div class="slider__button">
-            <img src="resources/slider/arrow-left-red.svg" alt="slider-button-left">
-        </div>
-        <div class="slider__content">
-            <div class="slider__content-item slider__content-item_current slider__content-item_background_red">
-                <div class="phone-icon">
-                    <img class="phone-icon__shadow" src="resources/slider/phone-vertical-shadow.png" alt="phone-icon-shadow">
-                    <img class="phone-icon__body" src="resources/slider/phone-vertical.svg" alt="phone-icon-body">
-                    <img class="phone-icon__screen-image" src="resources/slider/phone-screen-01.png" alt="phone-icon_screen">
+        <!-- Slider main container -->
+        <div class="swiper-container slider__swiper-container">
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper">
+                <!-- Slides -->
+                <div class="swiper-slide slider__swiper-slide slider__swiper-slide_bg-red">
+                    <div class="phone-icon">
+                        <img class="phone-icon__shadow" src="resources/slider/phone-vertical-shadow.png" alt="phone-icon-shadow">
+                        <img class="phone-icon__body" src="resources/slider/phone-vertical.svg" alt="phone-icon-body">
+                        <img class="phone-icon__screen-image" src="resources/slider/phone-screen-01.png" alt="phone-icon_screen">
+                    </div>
+                    <div class="phone-icon phone-icon_direction_horizontal">
+                        <img class="phone-icon__shadow phone-icon__shadow_direction_horizontal" src="resources/slider/phone-horizontal-shadow.png" alt="phone-icon-shadow">
+                        <img class="phone-icon__body phone-icon__body_direction_horizontal" src="resources/slider/phone-horizontal.svg" alt="phone-icon-body">
+                        <img class="phone-icon__screen-image phone-icon__screen-image_direction_horizontal" src="resources/slider/phone-screen-02.png" alt="phone-icon_screen">
+                    </div>
                 </div>
-                <div class="phone-icon phone-icon_direction_horizontal">
-                    <img class="phone-icon__shadow phone-icon__shadow_direction_horizontal" src="resources/slider/phone-horizontal-shadow.png" alt="phone-icon-shadow">
-                    <img class="phone-icon__body phone-icon__body_direction_horizontal" src="resources/slider/phone-horizontal.svg" alt="phone-icon-body">
-                    <img class="phone-icon__screen-image phone-icon__screen-image_direction_horizontal" src="resources/slider/phone-screen-02.png" alt="phone-icon_screen">
+                <div class="swiper-slide slider__swiper-slide slider__swiper-slide_bg-blue">
+                    <div class="phone-icon">
+                        <img class="phone-icon__shadow" src="resources/slider/phone-vertical-shadow.png" alt="phone-icon-shadow">
+                        <img class="phone-icon__body" src="resources/slider/phone-vertical.svg" alt="phone-icon-body">
+                        <img class="phone-icon__screen-image" src="resources/slider/phone-screen-01.png" alt="phone-icon_screen">
+                    </div>
+                    <div class="phone-icon phone-icon_direction_horizontal">
+                        <img class="phone-icon__shadow phone-icon__shadow_direction_horizontal" src="resources/slider/phone-horizontal-shadow.png" alt="phone-icon-shadow">
+                        <img class="phone-icon__body phone-icon__body_direction_horizontal" src="resources/slider/phone-horizontal.svg" alt="phone-icon-body">
+                        <img class="phone-icon__screen-image phone-icon__screen-image_direction_horizontal" src="resources/slider/phone-screen-02.png" alt="phone-icon_screen">
+                    </div>
+                </div>
+                <div class="swiper-slide slider__swiper-slide">
+                    <div class="phone-icon">
+                        <img class="phone-icon__shadow" src="resources/slider/phone-vertical-shadow.png" alt="phone-icon-shadow">
+                        <img class="phone-icon__body" src="resources/slider/phone-vertical.svg" alt="phone-icon-body">
+                        <img class="phone-icon__screen-image" src="resources/slider/phone-screen-01.png" alt="phone-icon_screen">
+                    </div>
+                    <div class="phone-icon phone-icon_direction_horizontal">
+                        <img class="phone-icon__shadow phone-icon__shadow_direction_horizontal" src="resources/slider/phone-horizontal-shadow.png" alt="phone-icon-shadow">
+                        <img class="phone-icon__body phone-icon__body_direction_horizontal" src="resources/slider/phone-horizontal.svg" alt="phone-icon-body">
+                        <img class="phone-icon__screen-image phone-icon__screen-image_direction_horizontal" src="resources/slider/phone-screen-02.png" alt="phone-icon_screen">
+                    </div>
                 </div>
             </div>
-            <div class="slider__content-item slider__content-item_background_black">
-                <div class="phone-icon">
-                    <img class="phone-icon__shadow" src="resources/slider/phone-vertical-shadow.png" alt="phone-icon-shadow">
-                    <img class="phone-icon__body" src="resources/slider/phone-vertical.svg" alt="phone-icon-body">
-                    <img class="phone-icon__screen-image" src="resources/slider/phone-screen-01.png" alt="phone-icon_screen">
-                </div>
-                <div class="phone-icon phone-icon_direction_horizontal">
-                    <img class="phone-icon__shadow phone-icon__shadow_direction_horizontal" src="resources/slider/phone-horizontal-shadow.png" alt="phone-icon-shadow">
-                    <img class="phone-icon__body phone-icon__body_direction_horizontal" src="resources/slider/phone-horizontal.svg" alt="phone-icon-body">
-                    <img class="phone-icon__screen-image phone-icon__screen-image_direction_horizontal" src="resources/slider/phone-screen-02.png" alt="phone-icon_screen">
-                </div>
+
+            <div class="swiper-button-prev slider__swiper-button">
+                <img src="resources/slider/arrow-left-red.svg" alt="slider-button-right">
             </div>
-            <div class="slider__content-item slider__content-item_background_blue">
-                <div class="phone-icon">
-                    <img class="phone-icon__shadow" src="resources/slider/phone-vertical-shadow.png" alt="phone-icon-shadow">
-                    <img class="phone-icon__body" src="resources/slider/phone-vertical.svg" alt="phone-icon-body">
-                    <img class="phone-icon__screen-image" src="resources/slider/phone-screen-01.png" alt="phone-icon_screen">
-                </div>
-                <div class="phone-icon phone-icon_direction_horizontal">
-                    <img class="phone-icon__shadow phone-icon__shadow_direction_horizontal" src="resources/slider/phone-horizontal-shadow.png" alt="phone-icon-shadow">
-                    <img class="phone-icon__body phone-icon__body_direction_horizontal" src="resources/slider/phone-horizontal.svg" alt="phone-icon-body">
-                    <img class="phone-icon__screen-image phone-icon__screen-image_direction_horizontal" src="resources/slider/phone-screen-02.png" alt="phone-icon_screen">
-                </div>
+            <div class="swiper-button-next slider__swiper-button slider__swiper-button_direction_right">
+                <img src="resources/slider/arrow-left-red.svg" alt="slider-button-right">
             </div>
-        </div>
-        <div class="slider__button slider__button_direction_right">
-            <img src="resources/slider/arrow-left-red.svg" alt="slider-button-right">
         </div>
     </section>
     <section class="services">
@@ -196,6 +203,7 @@
         </div>
     </footer>
 
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="project/blocks/common/slider/slider.js"></script>
     <script src="project/blocks/common/header/header.js"></script>
 </body>
