@@ -1,4 +1,4 @@
-export class Slider {
+class Slider {
     _sliderLeftButton = document.querySelector(".slider__button");
     _sliderRightButton = document.querySelector(".slider__button_direction_right");
     _sliderContent = document.querySelector(".slider__content");
@@ -168,3 +168,5 @@ export class Slider {
         this._SliderInitialDragBehavior();
     }
 }
+
+new Slider();

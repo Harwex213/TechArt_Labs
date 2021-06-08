@@ -1,6 +1,15 @@
-import {Index} from "../index";
+class Index {
 
-export class Header {
+    IndexOverflowHidden() {
+        document.querySelector(".index").classList.add("index_overflow_hidden");
+    }
+
+    IndexOverflowAuto() {
+        document.querySelector(".index").classList.remove("index_overflow_hidden");
+    }
+}
+
+class Header {
     header = document.querySelector(".header");
     navbar = document.querySelector(".header__navbar");
     navbarMobileBackground = document.querySelector(".header__navbar-mobile-bg");
@@ -41,3 +50,5 @@ export class Header {
         this.navbarBurger.addEventListener("click", () => Action(this))
     }
 }
+
+new Header();
