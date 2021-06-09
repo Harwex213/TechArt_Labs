@@ -9,4 +9,4 @@ class Index {
 }
 
 new Header(".index__header");
-new Slider(".index__slider", false);
+new Slider(".index__slider", true, true);

@@ -29,8 +29,11 @@
     flex-direction: row;
     height: 100%;
     width: 100%;
-    cursor: grab;
     user-select: none;
+
+    &_isGrabbable {
+      cursor: grab;
+    }
 
     &_isGrabbing {
       cursor: grabbing;
