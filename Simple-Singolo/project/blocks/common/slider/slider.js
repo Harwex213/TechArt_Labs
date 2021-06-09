@@ -16,7 +16,7 @@ class Slider {
     _currentTranslation
     _isTransitionOn
 
-    _isMouseOver
+    _isMouseDown
     _initialOffsetX
 
     constructor(sliderSelectorName, isInfinity, isDraggable) {
@@ -75,35 +75,48 @@ class Slider {
     }
 
     _MakeDraggable() {
-        this._isMouseOver = false;
+        this._isMouseDown = false;
         this._initialOffsetX = 0;
         this._content.classList.add(SliderContentIsGrabbableClassName);
 
         this._content.addEventListener("mousedown", e => {
             if (this._isTransitionOn) {
+                this._isMouseDown = false;
                 return;
             }
 
             this._initialOffsetX = e.clientX;
-            this._isMouseOver = true;
+            this._isMouseDown = true;
             this._content.classList.add(SliderContentIsGrabbingClassName);
         })
         this._content.addEventListener("mouseleave", e => this._DraggingFinished(e));
         this._content.addEventListener("mouseup", e => this._DraggingFinished(e))
         this._content.addEventListener("mousemove", e => {
-            if (this._isMouseOver) {
-                const delta = this._initialOffsetX - e.clientX;
+            if (this._isMouseDown) {
+                let delta = this._initialOffsetX - e.clientX;
+
+                if (!this._isSliderInfinity) {
+                    if (this._currentSlideIndex === this._lastSlideIndex && delta > 0) {
+                        delta = 0;
+                        this._initialOffsetX = e.clientX;
+                    }
+                    if (this._currentSlideIndex === 0 && delta < 0) {
+                        delta = 0;
+                        this._initialOffsetX = e.clientX;
+                    }
+                }
+
                 this._content.style.transform = `translateX(-${this._currentTranslation + delta}px)`;
             }
         });
     }
 
     _DraggingFinished(eventListener) {
-        if (!this._isMouseOver) {
+        if (!this._isMouseDown) {
             return;
         }
-        this._content.classList.remove("slider__content_isGrabbing");
-        this._isMouseOver = false;
+        this._content.classList.remove(SliderContentIsGrabbingClassName);
+        this._isMouseDown = false;
 
         this.SetContentTransform(this._currentTranslation + this._initialOffsetX - eventListener.clientX);
         let draggingOffset = this._currentTranslation - (this._currentContentWidth * this._currentSlideIndex);

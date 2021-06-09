@@ -283,8 +283,9 @@
     flex-direction: row;
     height: 100%;
     width: 100%;
-    cursor: grab;
     user-select: none; }
+    .slider__content_isGrabbable {
+      cursor: grab; }
     .slider__content_isGrabbing {
       cursor: grabbing; }
   .slider__content-item {
