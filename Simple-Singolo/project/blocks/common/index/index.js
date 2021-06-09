@@ -1,5 +1,4 @@
-export class Index {
-
+class Index {
     IndexOverflowHidden() {
         document.querySelector(".index").classList.add("index_overflow_hidden");
     }
@@ -8,3 +7,6 @@ export class Index {
         document.querySelector(".index").classList.remove("index_overflow_hidden");
     }
 }
+
+new Header(".index__header");
+new Slider(".index__slider", false);
