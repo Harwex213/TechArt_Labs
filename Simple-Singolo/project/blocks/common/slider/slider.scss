@@ -1,39 +1,25 @@
 .slider {
+  position: relative;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
   align-items: center;
 
   &__button {
     position: absolute;
-    left: 40px;
-    z-index: 10;
+    z-index: 3;
     width: 15px;
-    --buttonWidth: 15px;
-
-    @media (max-width: $laptop+px) {
-      left: 26px;
-    }
-
-    @media (max-width: $tablet+px) {
-      left: 10px;
-    }
 
     &:hover {
       cursor: pointer;
     }
 
-    &_direction_right {
-      transform: rotate(0.5turn);
-      left: calc(100% - 40px - var(--buttonWidth));
+    &_pos_right {
+      left: auto;
+      right: 40px;
+    }
 
-      @media (max-width: $laptop+px) {
-        left: calc(100% - 26px - var(--buttonWidth));
-      }
-
-      @media (max-width: $tablet+px) {
-        left: calc(100% - 10px - var(--buttonWidth));
-      }
+    &_pos_left {
+      left: 40px;
+      right: auto;
     }
   }
 

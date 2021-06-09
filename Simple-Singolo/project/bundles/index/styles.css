@@ -142,21 +142,22 @@
       display: none; } }
 
 .phone-icon {
-  height: 483px;
-  width: 240px;
   position: relative; }
-  @media (max-width: 1024px) {
-    .phone-icon {
-      height: 364px;
-      width: 180px; } }
-  @media (max-width: 768px) {
-    .phone-icon {
-      height: 235px;
-      width: 116px; } }
-  @media (max-width: 425px) {
-    .phone-icon {
-      height: 178px;
-      width: 88px; } }
+  .phone-icon_direction_vertical {
+    height: 483px;
+    width: 240px; }
+    @media (max-width: 1024px) {
+      .phone-icon_direction_vertical {
+        height: 364px;
+        width: 180px; } }
+    @media (max-width: 768px) {
+      .phone-icon_direction_vertical {
+        height: 235px;
+        width: 116px; } }
+    @media (max-width: 425px) {
+      .phone-icon_direction_vertical {
+        height: 178px;
+        width: 88px; } }
   .phone-icon_direction_horizontal {
     height: 240px;
     width: 483px; }
@@ -180,24 +181,25 @@
     left: 0;
     z-index: 0; }
   .phone-icon__body {
-    height: 458px;
-    width: 216px;
     position: absolute;
     top: 0;
     left: 0;
     z-index: 1; }
-    @media (max-width: 1024px) {
-      .phone-icon__body {
-        height: 344px;
-        width: 162px; } }
-    @media (max-width: 768px) {
-      .phone-icon__body {
-        height: 222px;
-        width: 105px; } }
-    @media (max-width: 425px) {
-      .phone-icon__body {
-        height: 168px;
-        width: 79px; } }
+    .phone-icon__body_direction_vertical {
+      height: 458px;
+      width: 216px; }
+      @media (max-width: 1024px) {
+        .phone-icon__body_direction_vertical {
+          height: 344px;
+          width: 162px; } }
+      @media (max-width: 768px) {
+        .phone-icon__body_direction_vertical {
+          height: 222px;
+          width: 105px; } }
+      @media (max-width: 425px) {
+        .phone-icon__body_direction_vertical {
+          height: 168px;
+          width: 79px; } }
     .phone-icon__body_direction_horizontal {
       height: 216px;
       width: 458px; }
@@ -215,27 +217,28 @@
           width: 168px; } }
   .phone-icon__screen-image {
     position: absolute;
-    top: 65px;
-    left: 14.5px;
     z-index: 2; }
-    @media (max-width: 1024px) {
-      .phone-icon__screen-image {
-        top: 49px;
-        left: 10px;
-        height: 250px;
-        width: 142px; } }
-    @media (max-width: 768px) {
-      .phone-icon__screen-image {
-        top: 32px;
-        left: 6px;
-        height: 162px;
-        width: 92px; } }
-    @media (max-width: 425px) {
-      .phone-icon__screen-image {
-        top: 24px;
-        left: 5px;
-        height: 122px;
-        width: 69px; } }
+    .phone-icon__screen-image_direction_vertical {
+      top: 65px;
+      left: 14.5px; }
+      @media (max-width: 1024px) {
+        .phone-icon__screen-image_direction_vertical {
+          top: 49px;
+          left: 10px;
+          height: 250px;
+          width: 142px; } }
+      @media (max-width: 768px) {
+        .phone-icon__screen-image_direction_vertical {
+          top: 32px;
+          left: 6px;
+          height: 162px;
+          width: 92px; } }
+      @media (max-width: 425px) {
+        .phone-icon__screen-image_direction_vertical {
+          top: 24px;
+          left: 5px;
+          height: 122px;
+          width: 69px; } }
     .phone-icon__screen-image_direction_horizontal {
       top: 13.5px;
       left: 60px; }
@@ -259,33 +262,21 @@
           width: 122px; } }
 
 .slider {
+  position: relative;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
   align-items: center; }
   .slider__button {
     position: absolute;
-    left: 40px;
-    z-index: 10;
-    width: 15px;
-    --buttonWidth: 15px; }
-    @media (max-width: 1024px) {
-      .slider__button {
-        left: 26px; } }
-    @media (max-width: 768px) {
-      .slider__button {
-        left: 10px; } }
+    z-index: 3;
+    width: 15px; }
     .slider__button:hover {
       cursor: pointer; }
-    .slider__button_direction_right {
-      transform: rotate(0.5turn);
-      left: calc(100% - 40px - var(--buttonWidth)); }
-      @media (max-width: 1024px) {
-        .slider__button_direction_right {
-          left: calc(100% - 26px - var(--buttonWidth)); } }
-      @media (max-width: 768px) {
-        .slider__button_direction_right {
-          left: calc(100% - 10px - var(--buttonWidth)); } }
+    .slider__button_pos_right {
+      left: auto;
+      right: 40px; }
+    .slider__button_pos_left {
+      left: 40px;
+      right: auto; }
   .slider__content {
     position: relative;
     display: flex;
