@@ -1,4 +1,6 @@
 class Header {
+    isMobileHeaderOpen
+
     _header
     _navbar
     _navbarMobileBackground
@@ -16,6 +18,8 @@ class Header {
         this._navbarBurger = this._header.querySelector(".header__navbar-burger");
         this._logo = this._header.querySelector(".header__logo");
 
+        this.isMobileHeaderOpen = false;
+
         this._Init();
     }
 
@@ -29,7 +33,7 @@ class Header {
     }
 
     RotateBurger() {
-        let isRotated = this._navbarBurger.classList.contains("header__navbar-burger_rotated");
+        const isRotated = this._navbarBurger.classList.contains("header__navbar-burger_rotated");
         if (isRotated)
             this._navbarBurger.classList.remove("header__navbar-burger_rotated");
         else
@@ -38,6 +42,7 @@ class Header {
     }
 
     ShowMobileBar() {
+        this.isMobileHeaderOpen = true;
         new Index().IndexOverflowHidden();
 
         this._header.classList.add("header_overflow_hidden");
@@ -47,6 +52,7 @@ class Header {
     }
 
     HideMobileBar() {
+        this.isMobileHeaderOpen = false;
         new Index().IndexOverflowAuto();
 
         this._header.classList.remove("header_overflow_hidden");
@@ -55,3 +61,5 @@ class Header {
         this._logo.classList.remove("header__logo_pos_left")
     }
 }
+
+new Navbar(".header__navbar")
