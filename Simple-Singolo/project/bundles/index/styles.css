@@ -82,6 +82,9 @@
       .header__container {
         justify-content: start;
         min-height: 65px; } }
+    @media (max-width: 425px) {
+      .header__container {
+        min-height: 71px; } }
   .header__logo {
     position: relative;
     z-index: 4;
