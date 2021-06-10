@@ -15,12 +15,29 @@
     &_pos_right {
       left: auto;
       right: 40px;
+
+      @media (max-width: $tablet+px) {
+        right: 26px;
+      }
+
+      @media (max-width: $mobile+px) {
+        right: 10px;
+      }
     }
 
     &_pos_left {
       left: 40px;
       right: auto;
+
+      @media (max-width: $tablet+px) {
+        left: 26px;
+      }
+
+      @media (max-width: $mobile+px) {
+        left: 10px;
+      }
     }
+
   }
 
   &__content {
