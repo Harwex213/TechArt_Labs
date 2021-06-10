@@ -18,7 +18,22 @@ class Navbar {
                     behavior: "smooth",
                     block: "start",
                 })
+
+                this.Notify();
             })
         }
     }
 }
+
+function MakeAsNavbarSubject(navbarPrototype) {
+    navbarPrototype._observers = [];
+    navbarPrototype.Attach = function (observer) { this._observers.push(observer); }
+    navbarPrototype.Detach = function (observer) { this._observers = this._observers.filter(o => o !== observer) }
+    navbarPrototype.Notify = function () {
+        for (const observer of navbarPrototype._observers) {
+            observer.UpdateFromNavbar(this);
+        }
+    }
+}
+
+MakeAsNavbarSubject(Navbar.prototype);

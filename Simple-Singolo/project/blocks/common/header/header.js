@@ -60,6 +60,8 @@ class Header {
         this._navbarMobileBackground.classList.remove("header__navbar-mobile-bg_visible");
         this._logo.classList.remove("header__logo_pos_left")
     }
-}
 
-new Navbar(".header__navbar")
+    UpdateFromNavbar(navbarSubject) {
+        this.ActionWithMobileHeader();
+    }
+}
