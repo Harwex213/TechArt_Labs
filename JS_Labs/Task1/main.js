@@ -22,15 +22,23 @@ Array.prototype.filterByOleg = function (callback) {
     return newArray;
 };
 
-Array.prototype.reduceByOleg = function (callback) {
+Array.prototype.reduceByOleg = function (callback, initialValue) {
     if (typeof callback !== "function") {
         throw new TypeError(callback + " is not a function");
     }
-    // TODO: Make accumulator = this[0] if initialValue === undefined, and currentValue = this[1]
-    let accumulator = 0;
-    for (const arrayElement of this) {
-        accumulator = callback(accumulator, arrayElement);
+
+    const isInitialValueSet = initialValue !== undefined;
+    if (this.length === 0 && !isInitialValueSet) {
+        throw new TypeError("Reduce of empty array with no initial value");
     }
+
+    let accumulator = isInitialValueSet ? initialValue : this[0];
+    let initialIndex = isInitialValueSet ? 0 : 1;
+
+    for (let index = initialIndex; index < this.length; index++) {
+        accumulator = callback(accumulator, this[index]);
+    }
+
     return accumulator;
 };
 
@@ -95,7 +103,8 @@ console.log("-----------------------------------");
 console.log("Using Reduce");
 console.log("-----------------------------------");
 const NotesPagesFromOlegReduce = notes.reduceByOleg(
-    (accumulator, element) => accumulator + element.pagesCount
+    (accumulator, element) => accumulator + element.pagesCount,
+    0
 );
 // eslint-disable-next-line unicorn/no-array-reduce
 const NotesPagesFromReduce = notes.reduce(
@@ -105,3 +114,14 @@ const NotesPagesFromReduce = notes.reduce(
 console.log(NotesPagesFromOlegReduce);
 console.log(NotesPagesFromReduce);
 console.log("-----------------------------------");
+
+function getUnique(array) {
+    for (const arrayElement of array) {
+        if (array.indexOf(arrayElement) === array.lastIndexOf(arrayElement)) {
+            return arrayElement;
+        }
+    }
+}
+
+const testArray = [1, 1, 1, 2, 2, 3, 4, 4, 5, 5, 5, 5];
+console.log(getUnique(testArray));
