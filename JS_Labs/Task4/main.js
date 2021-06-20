@@ -26,3 +26,25 @@ function makeDroids() {
 for (const droid of makeDroids()) {
     droid();
 }
+
+// Task C
+function makeSomething() {
+    return new Promise((resolve, reject) => {
+        let isCompleted = false;
+        const executionTime = Math.random() * 5001;
+        console.log("Execution time: " + executionTime);
+        setTimeout(() => {
+            isCompleted = true;
+            resolve();
+        }, executionTime);
+        setTimeout(() => {
+            if (!isCompleted) {
+                reject();
+            }
+        }, 2000);
+    });
+}
+
+makeSomething()
+    .then(() => console.log("Less than 2s"))
+    .catch(() => console.error("More than 2s"));
