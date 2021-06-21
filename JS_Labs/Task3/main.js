@@ -92,26 +92,25 @@ document.querySelector(".check-data").addEventListener("click", () => {
 // Task b.
 const firstInput = document.querySelector("#input1");
 const secondInput = document.querySelector("#input2");
-let callCount = 0;
 
-function ExecuteSynchronizing(inputText) {
-    if (callCount !== 1) {
-        console.log("Synchronizing declined!");
-        return;
-    }
+function debounce(function_, duration) {
+    let timeoutId;
 
-    console.log("Synchronizing executed!");
+    return function ExecutedFunction() {
+        clearTimeout(timeoutId);
+
+        timeoutId = setTimeout(() => {
+            function_.apply(this, arguments);
+        }, duration);
+    };
+}
+
+const ExecuteSynchronizing = (inputText) => {
     firstInput.value = inputText;
     secondInput.value = inputText;
-}
+};
 
-function RegisterSynchronizing(inputText) {
-    console.log("Synchronizing called!");
-
-    callCount++;
-    setTimeout(() => ExecuteSynchronizing(inputText), 1000);
-    setTimeout(() => callCount--, 1000);
-}
+const RegisterSynchronizing = debounce(ExecuteSynchronizing, 1000);
 
 firstInput.addEventListener("keyup", () => {
     RegisterSynchronizing(firstInput.value);
