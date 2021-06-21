@@ -63,19 +63,15 @@ CreateTable(downloads, document.querySelector(".table"));
 function CheckData() {
     console.log("Check Started");
 
-    const pendingObjects = downloads.filter((x) => x.status === "Pending");
+    const table = document.querySelector(".table").children[0];
+    const tableElements = Array.from(table.children);
+
+    const pendingObjects = tableElements.filter((child) => child.children[2].innerHTML === "Pending");
     if (pendingObjects.length === 0) {
         return false;
     }
+    pendingObjects[0].children[2].innerHTML = "Done";
 
-    pendingObjects[0].status = "Done";
-
-    const tableElement = document.querySelector(".table").children[0];
-    for (const child of tableElement.children) {
-        if (child.children[0].innerHTML === String(pendingObjects[0].id)) {
-            child.children[2].innerHTML = pendingObjects[0].status;
-        }
-    }
     return true;
 }
 
