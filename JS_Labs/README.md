@@ -4,24 +4,22 @@
 
 ## Task 1
 
----
+- Map polyfill
 
-- ###Map polyfill
 My implementation of map function and example usage.
-
 [Look here](https://codepen.io/Harwex/pen/zYZMJaP)
 
-- ###Filter polyfill
-My implementation of filter function and example usage.
+- Filter polyfill
 
+My implementation of filter function and example usage.
 [Look here](https://codepen.io/Harwex/pen/PopxdBM)
 
-- ###Reduce polyfill
-My implementation of filter function and example usage.
+- Reduce polyfill
 
+My implementation of filter function and example usage.
 [Look here](https://codepen.io/Harwex/pen/NWpELOG)
 
-- ###Unique value from Array
-Implementation of function that find first unique value in array and example usage.
+- Unique value from Array
 
+Implementation of function that find first unique value in array and example usage.
 [Look here](https://codepen.io/Harwex/pen/RwpqYEO)
