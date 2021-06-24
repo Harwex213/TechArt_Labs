@@ -123,7 +123,7 @@ document.querySelector(".check-data").addEventListener("click", () => {
 const firstInput = document.querySelector("#input1");
 const secondInput = document.querySelector("#input2");
 
-function debounce(func, duration) {
+function debounce(func, delay) {
     let timeoutId;
 
     return function ExecutedFunction() {
@@ -131,7 +131,7 @@ function debounce(func, duration) {
 
         timeoutId = setTimeout(() => {
             func.apply(this, arguments);
-        }, duration);
+        }, delay);
     };
 }
 
