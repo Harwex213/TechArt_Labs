@@ -73,25 +73,46 @@ function CreateTable(data, container) {
 
 CreateTable(downloads, document.querySelector(".table"));
 
-function CheckData() {
+const findStatusElementIndex = (tableElementsArray) => {
+    if (tableElementsArray.length === 0) {
+        throw new Error("Was received empty table.");
+    }
+
+    const titleRow = tableElementsArray[0];
+    for (let i = 0; i < titleRow.children.length; i++) {
+        if (titleRow.children[i].innerHTML === "status") {
+            return i;
+        }
+    }
+};
+
+function CheckData(checkDataParams) {
     console.log("Check Started");
 
-    const table = document.querySelector(".table").children[0];
-    const tableElements = Array.from(table.children);
+    const pendingObjects = checkDataParams.tableElements.filter(
+        (child) => child.children[checkDataParams.statusElementIndex].innerHTML === "Pending"
+    );
 
-    const pendingObjects = tableElements.filter((child) => child.children[2].innerHTML === "Pending");
     if (pendingObjects.length === 0) {
         return false;
     }
-    pendingObjects[0].children[2].innerHTML = "Done";
 
+    pendingObjects[0].children[checkDataParams.statusElementIndex].innerHTML = "Done";
     return true;
 }
 
 document.querySelector(".check-data").addEventListener("click", () => {
+    const table = document.querySelector(".table").children[0];
+    const checkDataParams = {
+        tableElements: null,
+        statusElementIndex: null,
+    };
+    checkDataParams.tableElements = Array.from(table.children);
+    checkDataParams.statusElementIndex = findStatusElementIndex(checkDataParams.tableElements);
+
     setTimeout(() => {
         let intervalId = setInterval(() => {
-            if (!CheckData()) {
+            if (!CheckData(checkDataParams)) {
                 clearInterval(intervalId);
             }
         }, 1000);
