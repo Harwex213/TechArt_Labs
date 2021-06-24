@@ -37,11 +37,23 @@ function CreateTable(data, container) {
     if (!isIterable(data)) {
         throw new Error("Was received non iterable data.");
     }
+    if (data.length === 0) {
+        throw new Error("Was received empty data.");
+    }
 
-    const tableElement = document.createElement("table");
+    const table = document.createElement("table");
+
+    const titleRow = document.createElement("tr");
+    table.append(titleRow);
+    for (const [key, _] of Object.entries(data[0])) {
+        let titleColumn = document.createElement("td");
+        titleColumn.innerHTML = String(key);
+        titleRow.append(titleColumn);
+    }
+
     for (const dataElement of data) {
         const newRow = document.createElement("tr");
-        tableElement.append(newRow);
+        table.append(newRow);
 
         let newColumn = document.createElement("td");
         if (typeof dataElement === "object") {
@@ -55,7 +67,8 @@ function CreateTable(data, container) {
             newRow.append(newColumn);
         }
     }
-    container.append(tableElement);
+
+    container.append(table);
 }
 
 CreateTable(downloads, document.querySelector(".table"));
@@ -89,14 +102,14 @@ document.querySelector(".check-data").addEventListener("click", () => {
 const firstInput = document.querySelector("#input1");
 const secondInput = document.querySelector("#input2");
 
-function debounce(function_, duration) {
+function debounce(func, duration) {
     let timeoutId;
 
     return function ExecutedFunction() {
         clearTimeout(timeoutId);
 
         timeoutId = setTimeout(() => {
-            function_.apply(this, arguments);
+            func.apply(this, arguments);
         }, duration);
     };
 }
