@@ -5,12 +5,12 @@ const testThis = function (y) {
 };
 console.log(testThis(100)); // x=1, y=100
 
-function bind(function_, context) {
-    if (typeof function_ !== "function") {
-        throw new TypeError(function_ + " is not a function");
+function bind(func, context) {
+    if (typeof func !== "function") {
+        throw new TypeError(func + " is not a function");
     }
     return function () {
-        return function_.apply(context, arguments);
+        return func.apply(context, arguments);
     };
 }
 
