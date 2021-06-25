@@ -23,3 +23,17 @@ My implementation of filter function and example usage.
 
 Implementation of function that find first unique value in array and example usage.
 [Look here](https://codepen.io/Harwex/pen/RwpqYEO)
+
+---
+
+## Task 2
+
+- Bind method
+
+My implementation of bind function and example usage.
+[Look here](https://codepen.io/Harwex/pen/KKWrYja)
+
+- Call & Apply usage
+
+Examples of using call & apply methods
+[Look here](https://codepen.io/Harwex/pen/XWMywdq)
