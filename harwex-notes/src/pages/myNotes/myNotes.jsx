@@ -9,7 +9,7 @@ import NoteInfo from "../../components/NoteInfo/NoteInfo";
 
 const { Content } = Layout;
 
-const notes = [
+const notesExample = [
     {
         id: 0,
         title: "About me",
@@ -90,7 +90,7 @@ const notes = [
 ];
 
 function MyNotes(props) {
-    const listJsxNotes = notes.map((note) => (
+    const listJsxNotes = notesExample.map((note) => (
         <Col
             xxl={{ span: 6 }}
             xl={{ span: 8 }}
