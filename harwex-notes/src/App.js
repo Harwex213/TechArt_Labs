@@ -1,24 +1,24 @@
 import React from "react";
-import logo from "./logo.svg";
+import { Layout } from "antd";
+
 import "./App.css";
 
-export default function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import MyNotes from "./pages/myNotes/myNotes";
+
+import Navbar from "./components/Navbar/Navbar";
+
+const { Header } = Layout;
+
+function App() {
+    return (
+        <Layout className="app">
+            <Header className="app__header">Header</Header>
+            <Layout>
+                <Navbar className="app__navbar" />
+                <MyNotes className="app__page" />
+            </Layout>
+        </Layout>
+    );
 }
+
+export default App;

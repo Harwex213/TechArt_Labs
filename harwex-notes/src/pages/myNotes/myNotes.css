@@ -1,0 +1,7 @@
+.noteList__note:hover {
+    cursor: pointer;
+}
+
+.noteList__noteInfo {
+    border-left: 1px solid rgb(240, 242, 245);
+}
