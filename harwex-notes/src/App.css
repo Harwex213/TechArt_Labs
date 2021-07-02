@@ -18,3 +18,7 @@
     height: 100vh;
     border-right: 1px solid rgb(240, 242, 245);
 }
+
+.app__page {
+    margin-left: 50px;
+}

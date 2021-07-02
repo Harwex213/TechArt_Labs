@@ -2,11 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import { Menu } from "antd";
-import {
-    FileOutlined,
-    ShareAltOutlined,
-    InfoCircleOutlined,
-} from "@ant-design/icons";
+import { FileOutlined, ShareAltOutlined, InfoCircleOutlined } from "@ant-design/icons";
 
 function Navbar(props) {
     let menuItemId = 0;
