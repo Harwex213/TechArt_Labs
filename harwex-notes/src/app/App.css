@@ -1,3 +1,7 @@
+.app {
+    background: #fff;
+}
+
 .app__header {
     position: fixed;
     z-index: 1;

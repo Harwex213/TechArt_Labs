@@ -8,8 +8,7 @@ const notesExample = [
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean rhoncus ex ligula, sed molestie urna ultrices id." +
             " Vivamus vel varius augue. Nullam gravida est imperdiet lobortis laoreet. Cras quis sem eu libero fringilla malesuada" +
             " at eget dui. Ut volutpat odio eu felis lobortis, non molestie tellus gravida. Integer malesuada consectetur augue," +
-            " malesuada vestibulum nisi posuere a. Ut elit turpis, ornare et pharetra placerat, molestie sed arcu. In sapien lectus," +
-            " venenatis ut leo at, vestibulum facilisis nibh",
+            " malesuada vestibulum nisi posuere ",
         dateCreation: new Date(2010, 10, 10),
     },
     {
@@ -19,8 +18,7 @@ const notesExample = [
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean rhoncus ex ligula, sed molestie urna ultrices id." +
             " Vivamus vel varius augue. Nullam gravida est imperdiet lobortis laoreet. Cras quis sem eu libero fringilla malesuada" +
             " at eget dui. Ut volutpat odio eu felis lobortis, non molestie tellus gravida. Integer malesuada consectetur augue," +
-            " malesuada vestibulum nisi posuere a. Ut elit turpis, ornare et pharetra placerat, molestie sed arcu. In sapien lectus," +
-            " venenatis ut leo at, vestibulum facilisis nibh",
+            " malesuada vestibulum nisi posuere a. Ut elit",
         dateCreation: new Date(2012, 12, 27),
     },
     {
@@ -30,8 +28,7 @@ const notesExample = [
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean rhoncus ex ligula, sed molestie urna ultrices id." +
             " Vivamus vel varius augue. Nullam gravida est imperdiet lobortis laoreet. Cras quis sem eu libero fringilla malesuada" +
             " at eget dui. Ut volutpat odio eu felis lobortis, non molestie tellus gravida. Integer malesuada consectetur augue," +
-            " malesuada vestibulum nisi posuere a. Ut elit turpis, ornare et pharetra placerat, molestie sed arcu. In sapien lectus," +
-            " venenatis ut leo at, vestibulum facilisis nibh",
+            " malesuada vestibulum nisi p",
         dateCreation: new Date(2020, 5, 2),
     },
     {
@@ -41,8 +38,7 @@ const notesExample = [
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean rhoncus ex ligula, sed molestie urna ultrices id." +
             " Vivamus vel varius augue. Nullam gravida est imperdiet lobortis laoreet. Cras quis sem eu libero fringilla malesuada" +
             " at eget dui. Ut volutpat odio eu felis lobortis, non molestie tellus gravida. Integer malesuada consectetur augue," +
-            " malesuada vestibulum nisi posuere a. Ut elit turpis, ornare et pharetra placerat, molestie sed arcu. In sapien lectus," +
-            " venenatis ut leo at, vestibulum facilisis nibh",
+            " malesuada vestibulum nisi posuere a. Ut elit t",
         dateCreation: new Date(2017, 2, 11),
     },
     {
@@ -447,9 +443,7 @@ const notesExample = [
         description:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean rhoncus ex ligula, sed molestie urna ultrices id." +
             " Vivamus vel varius augue. Nullam gravida est imperdiet lobortis laoreet. Cras quis sem eu libero fringilla malesuada" +
-            " at eget dui. Ut volutpat odio eu felis lobortis, non molestie tellus gravida. Integer malesuada consectetur augue," +
-            " malesuada vestibulum nisi posuere a. Ut elit turpis, ornare et pharetra placerat, molestie sed arcu. In sapien lectus," +
-            " venenatis ut leo at, vestibulum facilisis nibh",
+            " at eget dui. Ut volutpat odio eu felis lobo",
         dateCreation: new Date(2017, 2, 11),
     },
     {
@@ -459,8 +453,7 @@ const notesExample = [
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean rhoncus ex ligula, sed molestie urna ultrices id." +
             " Vivamus vel varius augue. Nullam gravida est imperdiet lobortis laoreet. Cras quis sem eu libero fringilla malesuada" +
             " at eget dui. Ut volutpat odio eu felis lobortis, non molestie tellus gravida. Integer malesuada consectetur augue," +
-            " malesuada vestibulum nisi posuere a. Ut elit turpis, ornare et pharetra placerat, molestie sed arcu. In sapien lectus," +
-            " venenatis ut leo at, vestibulum facilisis nibh",
+            " malesuada vestibulum nisi posuere",
         dateCreation: new Date(2017, 2, 11),
     },
     {

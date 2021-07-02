@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Layout } from "antd";
 
-import Navbar from "./components/Navbar/Navbar";
+import Navbar from "../components/Navbar/Navbar";
+import ExpandButton from "../components/ExpandButton/ExpandButton";
 
-import MyNotesPage from "./pages/myNotes/myNotesPage";
+import MyNotesPage from "../pages/myNotes/myNotesPage";
 
 import "./App.css";
-import ExpandButton from "./components/ExpandButton/ExpandButton";
 
 const { Header, Sider } = Layout;
 

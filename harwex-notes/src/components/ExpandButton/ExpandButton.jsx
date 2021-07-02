@@ -5,8 +5,6 @@ import { Button } from "antd";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 
 function ExpandButton(props) {
-    console.log(props.toLeft);
-    console.log(props.toRight);
     const left = props.toLeft ? "-16px" : "auto";
     const right = props.toRight ? "-16px" : "auto";
 

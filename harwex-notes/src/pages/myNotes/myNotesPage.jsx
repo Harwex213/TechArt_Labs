@@ -5,14 +5,15 @@ import { Layout } from "antd";
 
 import NoteInfo from "../../components/NoteInfo/NoteInfo";
 import NoteList from "../../components/NoteList/NoteList";
+import ExpandButton from "../../components/ExpandButton/ExpandButton";
 
 import "./myNotes.css";
-import ExpandButton from "../../components/ExpandButton/ExpandButton";
 
 const { Content, Sider } = Layout;
 
 function MyNotesPage(props) {
     const [isSiderCollapsed, setIsSiderCollapsed] = useState(true);
+    const [chosenNote, setChosenNote] = useState(null);
 
     const noteListClassName =
         "myNotes__noteList " + (isSiderCollapsed ? "myNotes__noteList_small" : "myNotes__noteList_large");
@@ -21,6 +22,7 @@ function MyNotesPage(props) {
         <Layout className={props.className.concat(" myNotes")}>
             <Content className={noteListClassName}>
                 <NoteList
+                    onNoteChoose={(note) => setChosenNote(note)}
                     rowStyle={{
                         padding: "20px",
                     }}
@@ -32,13 +34,16 @@ function MyNotesPage(props) {
                 width={350}
                 collapsed={isSiderCollapsed}
                 collapsedWidth={0}
+                style={{
+                    paddingRight: isSiderCollapsed ? "0" : "10px",
+                }}
             >
                 <ExpandButton
                     direction={isSiderCollapsed ? "left" : "right"}
                     toLeft
                     onClick={() => setIsSiderCollapsed(!isSiderCollapsed)}
                 />
-                <NoteInfo />
+                <NoteInfo note={chosenNote} />
             </Sider>
         </Layout>
     );
