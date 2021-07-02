@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import { Button, Col, Layout, Row } from "antd";
+import { LeftOutlined } from "@ant-design/icons";
 
 import Note from "../../components/Note/Note";
 import NoteInfo from "../../components/NoteInfo/NoteInfo";
@@ -9,48 +10,44 @@ import NoteInfo from "../../components/NoteInfo/NoteInfo";
 import "./myNotes.css";
 
 import notesExample from "./notes";
-import { LeftOutlined } from "@ant-design/icons";
 
 const { Content, Sider } = Layout;
 
 function MyNotes(props) {
     const listJsxNotes = notesExample.map((note) => (
-        <Col
-            xxl={{ span: 6 }}
-            xl={{ span: 8 }}
-            md={{ span: 12 }}
-            xs={{ span: 24 }}
-            key={note.id}
-        >
+        <Col span={6} key={note.id}>
             <Note
-                className="noteList__note"
+                className="myNotes__note"
                 title={note.title}
                 description={note.description}
                 dateCreation={note.dateCreation}
             />
         </Col>
     ));
+
     return (
-        <Layout>
-            <Content className={props.className}>
+        <Layout className="myNotes">
+            <Content className="myNotes__noteList">
                 <>
-                    <Row gutter={[20, 20]} justify="start">
+                    <Row
+                        gutter={[20, 20]}
+                        justify="start"
+                        style={{
+                            padding: "20px",
+                        }}
+                    >
                         {listJsxNotes}
                     </Row>
                 </>
             </Content>
-            <Sider
-                className="noteList__noteInfo"
-                theme="light"
-                collapsedWidth={0}
-            >
+            <Sider className="myNotes__noteInfo" theme="light" collapsedWidth={0}>
                 <Button
                     shape="circle"
                     icon={<LeftOutlined />}
                     style={{
                         display: "flex",
                         position: "absolute",
-                        top: "50%",
+                        top: "calc(50% - 32px)",
                         left: "-16px",
                         justifyContent: "center",
                         alignItems: "center",

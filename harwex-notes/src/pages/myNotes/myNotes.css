@@ -1,8 +1,21 @@
-.noteList__note:hover {
+.myNotes__note:hover {
     cursor: pointer;
 }
 
-.noteList__noteInfo {
+.myNotes__noteList {
+    box-sizing: border-box;
+    position: relative;
+    height: 100%;
+    background: #fff;
+    margin-left: 50px;
+    margin-right: 200px;
+}
+
+.myNotes__noteInfo {
+    position: fixed;
+    z-index: 1;
+    right: 0;
+    height: 100vh;
     border-left: 1px solid rgb(240, 242, 245);
     padding: 10px 0 0 20px;
 }
