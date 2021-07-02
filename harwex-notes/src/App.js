@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { Layout } from "antd";
 
 import Navbar from "./components/Navbar/Navbar";
 
-import MyNotes from "./pages/myNotes/myNotes";
+import MyNotesPage from "./pages/myNotes/myNotesPage";
 
 import "./App.css";
 import ExpandButton from "./components/ExpandButton/ExpandButton";
@@ -11,21 +11,29 @@ import ExpandButton from "./components/ExpandButton/ExpandButton";
 const { Header, Sider } = Layout;
 
 function App() {
+    const [isSiderCollapsed, setIsSiderCollapsed] = useState(true);
+
+    const appPageClassName = "app__page " + (isSiderCollapsed ? "app__page_small" : "app__page_large");
+
     return (
         <Layout className="app">
             <Header tit className="app__header">
                 <h1>Harwex Notes</h1>
             </Header>
             <Layout className="app__content">
-                <Sider className="app__navbar" theme="light" collapsed collapsedWidth={50}>
-                    <ExpandButton direction="right" toRight />
+                <Sider className="app__navbar" theme="light" collapsed={isSiderCollapsed} collapsedWidth={50}>
+                    <ExpandButton
+                        direction={isSiderCollapsed ? "right" : "left"}
+                        toRight
+                        onClick={() => setIsSiderCollapsed(!isSiderCollapsed)}
+                    />
                     <Navbar
                         style={{
                             borderRight: "none",
                         }}
                     />
                 </Sider>
-                <MyNotes className="app__page" />
+                <MyNotesPage className={appPageClassName} />
             </Layout>
         </Layout>
     );

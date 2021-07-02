@@ -23,6 +23,7 @@ function ExpandButton(props) {
                 justifyContent: "center",
                 alignItems: "center",
             }}
+            onClick={props.onClick}
         />
     );
 }
@@ -31,6 +32,7 @@ ExpandButton.propTypes = {
     direction: PropTypes.string,
     toRight: PropTypes.bool,
     toLeft: PropTypes.bool,
+    onClick: PropTypes.func,
 };
 
 export default ExpandButton;

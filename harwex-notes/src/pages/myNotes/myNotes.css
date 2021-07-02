@@ -1,11 +1,18 @@
-.myNotes__note:hover {
-    cursor: pointer;
+.myNotes {
+    background: #fff;
 }
 
 .myNotes__noteList {
     height: 100%;
-    background: #fff;
-    margin-right: 200px;
+    transition: all 0.2s;
+}
+
+.myNotes__noteList_large {
+    margin-right: 350px;
+}
+
+.myNotes__noteList_small {
+    margin-right: 20px;
 }
 
 .myNotes__noteInfo {

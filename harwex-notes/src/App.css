@@ -20,5 +20,13 @@
 }
 
 .app__page {
+    transition: all 0.2s;
+}
+
+.app__page_small {
     margin-left: 50px;
+}
+
+.app__page_large {
+    margin-left: 200px;
 }

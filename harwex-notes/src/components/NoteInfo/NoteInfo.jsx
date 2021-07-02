@@ -13,7 +13,6 @@ function NoteInfo(props) {
 }
 
 NoteInfo.propTypes = {
-    className: PropTypes.string,
     note: PropTypes.object,
 };
 
