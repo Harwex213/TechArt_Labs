@@ -1,93 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { Col, Layout, Row } from "antd";
+import { Button, Col, Layout, Row } from "antd";
 
-import "./myNotes.css";
 import Note from "../../components/Note/Note";
 import NoteInfo from "../../components/NoteInfo/NoteInfo";
 
-const { Content } = Layout;
+import "./myNotes.css";
 
-const notesExample = [
-    {
-        id: 0,
-        title: "About me",
-        description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean rhoncus ex ligula, sed molestie urna ultrices id." +
-            " Vivamus vel varius augue. Nullam gravida est imperdiet lobortis laoreet. Cras quis sem eu libero fringilla malesuada" +
-            " at eget dui. Ut volutpat odio eu felis lobortis, non molestie tellus gravida. Integer malesuada consectetur augue," +
-            " malesuada vestibulum nisi posuere a. Ut elit turpis, ornare et pharetra placerat, molestie sed arcu. In sapien lectus," +
-            " venenatis ut leo at, vestibulum facilisis nibh",
-        dateCreation: new Date(2010, 10, 10),
-    },
-    {
-        id: 1,
-        title: "About my dog",
-        description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean rhoncus ex ligula, sed molestie urna ultrices id." +
-            " Vivamus vel varius augue. Nullam gravida est imperdiet lobortis laoreet. Cras quis sem eu libero fringilla malesuada" +
-            " at eget dui. Ut volutpat odio eu felis lobortis, non molestie tellus gravida. Integer malesuada consectetur augue," +
-            " malesuada vestibulum nisi posuere a. Ut elit turpis, ornare et pharetra placerat, molestie sed arcu. In sapien lectus," +
-            " venenatis ut leo at, vestibulum facilisis nibh",
-        dateCreation: new Date(2012, 12, 27),
-    },
-    {
-        id: 2,
-        title: "About my cat",
-        description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean rhoncus ex ligula, sed molestie urna ultrices id." +
-            " Vivamus vel varius augue. Nullam gravida est imperdiet lobortis laoreet. Cras quis sem eu libero fringilla malesuada" +
-            " at eget dui. Ut volutpat odio eu felis lobortis, non molestie tellus gravida. Integer malesuada consectetur augue," +
-            " malesuada vestibulum nisi posuere a. Ut elit turpis, ornare et pharetra placerat, molestie sed arcu. In sapien lectus," +
-            " venenatis ut leo at, vestibulum facilisis nibh",
-        dateCreation: new Date(2020, 5, 2),
-    },
-    {
-        id: 3,
-        title: "About iTechArt",
-        description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean rhoncus ex ligula, sed molestie urna ultrices id." +
-            " Vivamus vel varius augue. Nullam gravida est imperdiet lobortis laoreet. Cras quis sem eu libero fringilla malesuada" +
-            " at eget dui. Ut volutpat odio eu felis lobortis, non molestie tellus gravida. Integer malesuada consectetur augue," +
-            " malesuada vestibulum nisi posuere a. Ut elit turpis, ornare et pharetra placerat, molestie sed arcu. In sapien lectus," +
-            " venenatis ut leo at, vestibulum facilisis nibh",
-        dateCreation: new Date(2017, 2, 11),
-    },
-    {
-        id: 4,
-        title: "About iTechArt",
-        description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean rhoncus ex ligula, sed molestie urna ultrices id." +
-            " Vivamus vel varius augue. Nullam gravida est imperdiet lobortis laoreet. Cras quis sem eu libero fringilla malesuada" +
-            " at eget dui. Ut volutpat odio eu felis lobortis, non molestie tellus gravida. Integer malesuada consectetur augue," +
-            " malesuada vestibulum nisi posuere a. Ut elit turpis, ornare et pharetra placerat, molestie sed arcu. In sapien lectus," +
-            " venenatis ut leo at, vestibulum facilisis nibh",
-        dateCreation: new Date(2017, 2, 11),
-    },
-    {
-        id: 5,
-        title: "About iTechArt",
-        description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean rhoncus ex ligula, sed molestie urna ultrices id." +
-            " Vivamus vel varius augue. Nullam gravida est imperdiet lobortis laoreet. Cras quis sem eu libero fringilla malesuada" +
-            " at eget dui. Ut volutpat odio eu felis lobortis, non molestie tellus gravida. Integer malesuada consectetur augue," +
-            " malesuada vestibulum nisi posuere a. Ut elit turpis, ornare et pharetra placerat, molestie sed arcu. In sapien lectus," +
-            " venenatis ut leo at, vestibulum facilisis nibh",
-        dateCreation: new Date(2017, 2, 11),
-    },
-    {
-        id: 6,
-        title: "About iTechArt fasdfasdfasdf sadfasdfas dfasd fasdfas",
-        description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean rhoncus ex ligula, sed molestie urna ultrices id." +
-            " Vivamus vel varius augue. Nullam gravida est imperdiet lobortis laoreet. Cras quis sem eu libero fringilla malesuada" +
-            " at eget dui. Ut volutpat odio eu felis lobortis, non molestie tellus gravida. Integer malesuada consectetur augue," +
-            " malesuada vestibulum nisi posuere a. Ut elit turpis, ornare et pharetra placerat, molestie sed arcu. In sapien lectus," +
-            " venenatis ut leo at, vestibulum facilisis nibh",
-        dateCreation: new Date(2017, 2, 11),
-    },
-];
+import notesExample from "./notes";
+import { LeftOutlined } from "@ant-design/icons";
+
+const { Content, Sider } = Layout;
 
 function MyNotes(props) {
     const listJsxNotes = notesExample.map((note) => (
@@ -115,7 +39,25 @@ function MyNotes(props) {
                     </Row>
                 </>
             </Content>
-            <NoteInfo className="noteList__noteInfo" />
+            <Sider
+                className="noteList__noteInfo"
+                theme="light"
+                collapsedWidth={0}
+            >
+                <Button
+                    shape="circle"
+                    icon={<LeftOutlined />}
+                    style={{
+                        display: "flex",
+                        position: "absolute",
+                        top: "50%",
+                        left: "-16px",
+                        justifyContent: "center",
+                        alignItems: "center",
+                    }}
+                />
+                <NoteInfo />
+            </Sider>
         </Layout>
     );
 }
