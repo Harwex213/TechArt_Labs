@@ -1,11 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { Layout, Menu } from "antd";
+import { Layout, Menu, Button } from "antd";
 import {
     FileOutlined,
     ShareAltOutlined,
     InfoCircleOutlined,
+    LeftOutlined,
 } from "@ant-design/icons";
 
 const { Sider } = Layout;
@@ -19,7 +20,23 @@ function Navbar(props) {
             collapsed
             collapsedWidth={50}
         >
-            <Menu mode="inline" defaultSelectedKeys={["0"]}>
+            <Button
+                shape="circle"
+                icon={<LeftOutlined />}
+                style={{
+                    display: "flex",
+                    margin: "8px auto",
+                    justifyContent: "center",
+                    alignItems: "center",
+                }}
+            />
+            <Menu
+                mode="inline"
+                defaultSelectedKeys={["0"]}
+                style={{
+                    borderRight: "none",
+                }}
+            >
                 <Menu.Item key={menuItemId} icon={<FileOutlined />}>
                     My Notes
                 </Menu.Item>

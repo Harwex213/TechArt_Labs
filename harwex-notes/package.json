@@ -38,7 +38,11 @@
       "plugin:prettier/recommended"
     ],
     "rules": {
-      "linebreak-style": ["error", "windows"],
+      "linebreak-style": [
+        "error",
+        "windows"
+      ],
+      "no-unused-vars": "warn",
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn"
     }
