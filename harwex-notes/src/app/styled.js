@@ -1,4 +1,4 @@
-const AppStyle = {
+const Styles = {
     app: {
         background: "#fff",
     },
@@ -20,7 +20,7 @@ const AppStyle = {
         height: "100vh",
         borderRight: "1px solid rgb(240, 242, 245)",
     },
-    navbar_expanderButton: {
+    navbar_expander: {
         display: "flex",
         position: "absolute",
         top: "calc(50% - 32px)",
@@ -34,4 +34,4 @@ const AppStyle = {
     app__page_marginLeftLarge: { marginLeft: "200px" },
 };
 
-export default AppStyle;
+export default Styles;

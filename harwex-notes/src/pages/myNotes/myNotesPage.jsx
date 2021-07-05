@@ -1,56 +1,67 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-import { Layout } from "antd";
+import { Button, Layout } from "antd";
 
-import NoteInfo from "../../components/NoteInfo/NoteInfo";
+import NoteAdditionalInfo from "../../components/NoteAdditionalInfo/NoteAdditionalInfo";
 import NoteList from "../../components/NoteList/NoteList";
-import ExpandButton from "../../components/ExpandButton/ExpandButton";
 
-import "./myNotes.css";
+import Styles from "./styled";
+import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 
 const { Content, Sider } = Layout;
 
 function MyNotesPage(props) {
-    const [isSiderCollapsed, setIsSiderCollapsed] = useState(true);
+    const [isMyNotesPageSiderCollapsed, setIsMyNotesPageSiderCollapsed] = useState(true);
     const [chosenNote, setChosenNote] = useState(null);
+    const [noteListRightMargin, setNoteListRightMargin] = useState(Styles.myNotes__noteList_rightMarginSmall);
 
-    const noteListClassName =
-        "myNotes__noteList " + (isSiderCollapsed ? "myNotes__noteList_small" : "myNotes__noteList_large");
+    const handleNoteClick = (note) => {
+        setChosenNote(note);
+    };
+
+    const handleSiderExpanderClick = () => {
+        setIsMyNotesPageSiderCollapsed(!isMyNotesPageSiderCollapsed);
+        setNoteListRightMargin(
+            !isMyNotesPageSiderCollapsed
+                ? Styles.myNotes__noteList_rightMarginSmall
+                : Styles.myNotes__noteList_rightMarginLarge
+        );
+    };
+
+    const myNotesStyle = { ...Styles.myNotes, ...props.style };
+    const noteListStyle = { ...Styles.myNotes__noteList, ...noteListRightMargin };
+    const siderStyle = {
+        ...Styles.myNotes__sider,
+        paddingRight: isMyNotesPageSiderCollapsed ? "0" : "10px",
+    };
 
     return (
-        <Layout className={props.className.concat(" myNotes")}>
-            <Content className={noteListClassName}>
-                <NoteList
-                    onNoteChoose={(note) => setChosenNote(note)}
-                    rowStyle={{
-                        padding: "20px",
-                    }}
-                />
+        <Layout style={myNotesStyle}>
+            <Content style={noteListStyle}>
+                <NoteList rowStyle={Styles.noteList__row} onNoteChoose={handleNoteClick} />
             </Content>
             <Sider
-                className="myNotes__noteInfo"
+                style={siderStyle}
                 theme="light"
                 width={350}
-                collapsed={isSiderCollapsed}
+                collapsed={isMyNotesPageSiderCollapsed}
                 collapsedWidth={0}
-                style={{
-                    paddingRight: isSiderCollapsed ? "0" : "10px",
-                }}
             >
-                <ExpandButton
-                    direction={isSiderCollapsed ? "left" : "right"}
-                    toLeft
-                    onClick={() => setIsSiderCollapsed(!isSiderCollapsed)}
+                <Button
+                    style={Styles.sider__expander}
+                    shape="circle"
+                    icon={isMyNotesPageSiderCollapsed ? <LeftOutlined /> : <RightOutlined />}
+                    onClick={handleSiderExpanderClick}
                 />
-                <NoteInfo note={chosenNote} />
+                <NoteAdditionalInfo note={chosenNote} />
             </Sider>
         </Layout>
     );
 }
 
 MyNotesPage.propTypes = {
-    className: PropTypes.string,
+    style: PropTypes.object,
 };
 
 export default MyNotesPage;

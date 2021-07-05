@@ -5,11 +5,11 @@ import { Typography } from "antd";
 
 import DateFormat from "../../utils/DateFormat";
 
-import "./NoteInfo.css";
+import Styles from "./styled";
 
 const { Title, Paragraph } = Typography;
 
-function NoteInfo(props) {
+function NoteAdditionalInfo(props) {
     const note = props.note;
     let info;
     if (!note) {
@@ -17,13 +17,7 @@ function NoteInfo(props) {
     } else {
         info = (
             <Typography>
-                <div
-                    style={{
-                        display: "flex",
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                    }}
-                >
+                <div style={Styles.info__title}>
                     <Title>Note: {note.id}</Title>
                     <Title level={5}>{DateFormat(note.dateCreation)}</Title>
                 </div>
@@ -35,8 +29,8 @@ function NoteInfo(props) {
     return <div>{info}</div>;
 }
 
-NoteInfo.propTypes = {
+NoteAdditionalInfo.propTypes = {
     note: PropTypes.object,
 };
 
-export default NoteInfo;
+export default NoteAdditionalInfo;

@@ -2,31 +2,25 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import { Button, Col, Row } from "antd";
-import notesExample from "./notes";
-import Note from "../Note/Note";
 
-import "./NoteList.css";
+import Note from "../Note/Note";
+import notesExample from "./notes";
+
+import Styles from "./styled";
 
 function NoteList(props) {
-    const listJsxNotes = notesExample.map((note) => (
-        <Col span={6} key={note.id} style={props.colStyle}>
-            <Button
-                onClick={() => props.onNoteChoose(note)}
-                style={{
-                    width: "100%",
-                    height: "100%",
-                    padding: "0",
-                    whiteSpace: "normal",
-                    textAlign: "start",
-                }}
-            >
+    const handleNoteChoose = (note) => {
+        props.onNoteChoose(note);
+    };
+
+    const jsxNotes = notesExample.map((note) => (
+        <Col style={props.colStyle} span={6} key={note.id}>
+            <Button style={Styles.noteList__noteWrapper} onClick={handleNoteChoose}>
                 <Note
+                    style={Styles.noteList__note}
                     title={note.title}
                     description={note.description}
                     dateCreation={note.dateCreation}
-                    cardStyle={{
-                        border: "0",
-                    }}
                 />
             </Button>
         </Col>
@@ -34,8 +28,8 @@ function NoteList(props) {
 
     return (
         <>
-            <Row gutter={[20, 20]} justify="start" style={props.rowStyle}>
-                {listJsxNotes}
+            <Row style={props.rowStyle} justify="start" gutter={[20, 20]}>
+                {jsxNotes}
             </Row>
         </>
     );

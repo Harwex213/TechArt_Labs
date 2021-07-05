@@ -5,32 +5,32 @@ import Navbar from "../components/Navbar/Navbar";
 
 import MyNotesPage from "../pages/myNotes/myNotesPage";
 
-import AppStyle from "./styled";
+import Styles from "./styled";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 
 const { Header, Sider } = Layout;
 
 const App = () => {
     const [isNavbarCollapsed, setIsNavbarCollapsed] = useState(true);
-    const [pageLeftMargin, setPageLeftMargin] = useState(AppStyle.app__page_marginLeftSmall);
+    const [pageLeftMargin, setPageLeftMargin] = useState(Styles.app__page_marginLeftSmall);
 
-    const handleNavbarExpanderButtonClick = () => {
+    const handleNavbarExpanderClick = () => {
         setIsNavbarCollapsed(!isNavbarCollapsed);
         setPageLeftMargin(
-            !isNavbarCollapsed ? AppStyle.app__page_marginLeftSmall : AppStyle.app__page_marginLeftLarge
+            !isNavbarCollapsed ? Styles.app__page_marginLeftSmall : Styles.app__page_marginLeftLarge
         );
     };
 
-    const appPageStyle = Object.assign({}, AppStyle.app__page, pageLeftMargin);
+    const appPageStyle = { ...Styles.app__page, ...pageLeftMargin };
 
     return (
-        <Layout style={AppStyle.app}>
-            <Header style={AppStyle.app__header}>
+        <Layout style={Styles.app}>
+            <Header style={Styles.app__header}>
                 <h1>Harwex Notes</h1>
             </Header>
-            <Layout style={AppStyle.app__content}>
+            <Layout style={Styles.app__content}>
                 <Sider
-                    style={AppStyle.app__navbar}
+                    style={Styles.app__navbar}
                     theme="light"
                     collapsed={isNavbarCollapsed}
                     collapsedWidth={50}
@@ -38,10 +38,10 @@ const App = () => {
                     <Button
                         shape="circle"
                         icon={isNavbarCollapsed ? <RightOutlined /> : <LeftOutlined />}
-                        style={AppStyle.navbar_expanderButton}
-                        onClick={handleNavbarExpanderButtonClick}
+                        style={Styles.navbar_expander}
+                        onClick={handleNavbarExpanderClick}
                     />
-                    <Navbar style={AppStyle.navbar__content} />
+                    <Navbar style={Styles.navbar__content} />
                 </Sider>
                 <MyNotesPage style={appPageStyle} />
             </Layout>
