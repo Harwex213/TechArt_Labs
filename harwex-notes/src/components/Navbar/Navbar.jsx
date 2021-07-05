@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { Menu } from "antd";
 import { FileOutlined, ShareAltOutlined, InfoCircleOutlined } from "@ant-design/icons";
 
-function Navbar(props) {
+const Navbar = (props) => {
     return (
         <Menu mode="inline" defaultSelectedKeys={["0"]} style={props.style}>
             <Menu.Item key={0} icon={<FileOutlined />}>
@@ -18,7 +18,7 @@ function Navbar(props) {
             </Menu.Item>
         </Menu>
     );
-}
+};
 
 Navbar.propTypes = {
     style: PropTypes.object,

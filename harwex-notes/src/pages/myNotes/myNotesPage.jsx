@@ -11,7 +11,7 @@ import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 
 const { Content, Sider } = Layout;
 
-function MyNotesPage(props) {
+const MyNotesPage = (props) => {
     const [isMyNotesPageSiderCollapsed, setIsMyNotesPageSiderCollapsed] = useState(true);
     const [chosenNote, setChosenNote] = useState(null);
     const [noteListRightMargin, setNoteListRightMargin] = useState(Styles.myNotes__noteList_rightMarginSmall);
@@ -58,7 +58,7 @@ function MyNotesPage(props) {
             </Sider>
         </Layout>
     );
-}
+};
 
 MyNotesPage.propTypes = {
     style: PropTypes.object,

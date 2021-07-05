@@ -9,7 +9,7 @@ import Styles from "./styled";
 
 const { Title, Paragraph } = Typography;
 
-function NoteAdditionalInfo(props) {
+const NoteAdditionalInfo = (props) => {
     const note = props.note;
     let info;
     if (!note) {
@@ -27,7 +27,7 @@ function NoteAdditionalInfo(props) {
         );
     }
     return <div>{info}</div>;
-}
+};
 
 NoteAdditionalInfo.propTypes = {
     note: PropTypes.object,

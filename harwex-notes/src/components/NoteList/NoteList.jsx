@@ -8,23 +8,25 @@ import notesExample from "./notes";
 
 import Styles from "./styled";
 
-function NoteList(props) {
-    const handleNoteChoose = (note) => {
-        props.onNoteChoose(note);
-    };
+const NoteList = (props) => {
+    const jsxNotes = notesExample.map((note) => {
+        const handleNoteChoose = () => {
+            props.onNoteChoose(note);
+        };
 
-    const jsxNotes = notesExample.map((note) => (
-        <Col style={props.colStyle} span={6} key={note.id}>
-            <Button style={Styles.noteList__noteWrapper} onClick={handleNoteChoose}>
-                <Note
-                    style={Styles.noteList__note}
-                    title={note.title}
-                    description={note.description}
-                    dateCreation={note.dateCreation}
-                />
-            </Button>
-        </Col>
-    ));
+        return (
+            <Col style={props.colStyle} span={6} key={note.id}>
+                <Button style={Styles.noteList__noteWrapper} onClick={handleNoteChoose}>
+                    <Note
+                        style={Styles.noteList__note}
+                        title={note.title}
+                        description={note.description}
+                        dateCreation={note.dateCreation}
+                    />
+                </Button>
+            </Col>
+        );
+    });
 
     return (
         <>
@@ -33,7 +35,7 @@ function NoteList(props) {
             </Row>
         </>
     );
-}
+};
 
 NoteList.propTypes = {
     chosenNote: PropTypes.object,

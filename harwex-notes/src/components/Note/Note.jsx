@@ -7,7 +7,7 @@ import DateFormat from "../../utils/DateFormat";
 
 import Styles from "./styled";
 
-function Note(props) {
+const Note = (props) => {
     return (
         <Card style={props.style}>
             <>
@@ -25,7 +25,7 @@ function Note(props) {
             </>
         </Card>
     );
-}
+};
 
 Note.propTypes = {
     style: PropTypes.object,
