@@ -14,7 +14,7 @@ const App = () => {
     const [isNavbarCollapsed, setIsNavbarCollapsed] = useState(true);
     const [pageLeftMargin, setPageLeftMargin] = useState(AppStyle.app__page_marginLeftSmall);
 
-    const onNavbarExpanderButtonClick = () => {
+    const handleNavbarExpanderButtonClick = () => {
         setIsNavbarCollapsed(!isNavbarCollapsed);
         setPageLeftMargin(
             !isNavbarCollapsed ? AppStyle.app__page_marginLeftSmall : AppStyle.app__page_marginLeftLarge
@@ -39,7 +39,7 @@ const App = () => {
                         shape="circle"
                         icon={isNavbarCollapsed ? <RightOutlined /> : <LeftOutlined />}
                         style={AppStyle.navbar_expanderButton}
-                        onClick={onNavbarExpanderButtonClick}
+                        onClick={handleNavbarExpanderButtonClick}
                     />
                     <Navbar style={AppStyle.navbar__content} />
                 </Sider>
