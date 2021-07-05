@@ -5,16 +5,15 @@ import { Menu } from "antd";
 import { FileOutlined, ShareAltOutlined, InfoCircleOutlined } from "@ant-design/icons";
 
 function Navbar(props) {
-    let menuItemId = 0;
     return (
         <Menu mode="inline" defaultSelectedKeys={["0"]} style={props.style}>
-            <Menu.Item key={menuItemId} icon={<FileOutlined />}>
+            <Menu.Item key={0} icon={<FileOutlined />}>
                 My Notes
             </Menu.Item>
-            <Menu.Item key={++menuItemId} icon={<ShareAltOutlined />}>
+            <Menu.Item key={1} icon={<ShareAltOutlined />}>
                 Shared Notes
             </Menu.Item>
-            <Menu.Item key={++menuItemId} icon={<InfoCircleOutlined />}>
+            <Menu.Item key={2} icon={<InfoCircleOutlined />}>
                 About
             </Menu.Item>
         </Menu>
@@ -22,7 +21,6 @@ function Navbar(props) {
 }
 
 Navbar.propTypes = {
-    className: PropTypes.string,
     style: PropTypes.object,
 };
 
