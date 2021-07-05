@@ -1,42 +1,52 @@
 import React, { useState } from "react";
-import { Layout } from "antd";
+import { Button, Layout } from "antd";
 
 import Navbar from "../components/Navbar/Navbar";
-import ExpandButton from "../components/ExpandButton/ExpandButton";
 
 import MyNotesPage from "../pages/myNotes/myNotesPage";
 
-import "./App.css";
+import AppStyle from "./styled";
+import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 
 const { Header, Sider } = Layout;
 
-function App() {
-    const [isSiderCollapsed, setIsSiderCollapsed] = useState(true);
+const App = () => {
+    const [isNavbarCollapsed, setIsNavbarCollapsed] = useState(true);
+    const [pageLeftMargin, setPageLeftMargin] = useState(AppStyle.app__page_marginLeftSmall);
 
-    const appPageClassName = "app__page " + (isSiderCollapsed ? "app__page_small" : "app__page_large");
+    const onNavbarExpanderButtonClick = () => {
+        setIsNavbarCollapsed(!isNavbarCollapsed);
+        setPageLeftMargin(
+            !isNavbarCollapsed ? AppStyle.app__page_marginLeftSmall : AppStyle.app__page_marginLeftLarge
+        );
+    };
+
+    const appPageStyle = Object.assign({}, AppStyle.app__page, pageLeftMargin);
 
     return (
-        <Layout className="app">
-            <Header tit className="app__header">
+        <Layout style={AppStyle.app}>
+            <Header style={AppStyle.app__header}>
                 <h1>Harwex Notes</h1>
             </Header>
-            <Layout className="app__content">
-                <Sider className="app__navbar" theme="light" collapsed={isSiderCollapsed} collapsedWidth={50}>
-                    <ExpandButton
-                        direction={isSiderCollapsed ? "right" : "left"}
-                        toRight
-                        onClick={() => setIsSiderCollapsed(!isSiderCollapsed)}
+            <Layout style={AppStyle.app__content}>
+                <Sider
+                    style={AppStyle.app__navbar}
+                    theme="light"
+                    collapsed={isNavbarCollapsed}
+                    collapsedWidth={50}
+                >
+                    <Button
+                        shape="circle"
+                        icon={isNavbarCollapsed ? <RightOutlined /> : <LeftOutlined />}
+                        style={AppStyle.navbar_expanderButton}
+                        onClick={onNavbarExpanderButtonClick}
                     />
-                    <Navbar
-                        style={{
-                            borderRight: "none",
-                        }}
-                    />
+                    <Navbar style={AppStyle.navbar__content} />
                 </Sider>
-                <MyNotesPage className={appPageClassName} />
+                <MyNotesPage style={appPageStyle} />
             </Layout>
         </Layout>
     );
-}
+};
 
 export default App;
