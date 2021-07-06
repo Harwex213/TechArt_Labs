@@ -23,13 +23,12 @@ const MyNotesPage = (props) => {
     const handleSiderExpanderClick = () => {
         setIsMyNotesPageSiderCollapsed(!isMyNotesPageSiderCollapsed);
         setNoteListRightMargin(
-            !isMyNotesPageSiderCollapsed
-                ? Styles.myNotes__noteList_rightMarginSmall
-                : Styles.myNotes__noteList_rightMarginLarge
+            isMyNotesPageSiderCollapsed
+                ? Styles.myNotes__noteList_rightMarginLarge
+                : Styles.myNotes__noteList_rightMarginSmall
         );
     };
 
-    const myNotesStyle = { ...Styles.myNotes, ...props.style };
     const noteListStyle = { ...Styles.myNotes__noteList, ...noteListRightMargin };
     const siderStyle = {
         ...Styles.myNotes__sider,
@@ -37,7 +36,7 @@ const MyNotesPage = (props) => {
     };
 
     return (
-        <Layout style={myNotesStyle}>
+        <Layout style={Styles.myNotes}>
             <Content style={noteListStyle}>
                 <NoteList rowStyle={Styles.noteList__row} onNoteChoose={handleNoteClick} />
             </Content>
@@ -60,8 +59,6 @@ const MyNotesPage = (props) => {
     );
 };
 
-MyNotesPage.propTypes = {
-    style: PropTypes.object,
-};
+MyNotesPage.propTypes = {};
 
 export default MyNotesPage;
