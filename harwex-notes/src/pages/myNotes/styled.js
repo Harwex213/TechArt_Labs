@@ -4,8 +4,6 @@ const Styles = {
     noteList__row: {
         padding: "20px",
     },
-    myNotes__noteList_rightMarginSmall: { marginRight: "20px" },
-    myNotes__noteList_rightMarginLarge: { marginRight: "350px" },
     myNotes__sider: {
         position: "fixed",
         zIndex: 1,

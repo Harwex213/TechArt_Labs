@@ -4,12 +4,11 @@ import PropTypes from "prop-types";
 import { Button, Col, Row } from "antd";
 
 import Note from "../Note/Note";
-import notesExample from "./notes";
 
 import Styles from "./styled";
 
-const NoteList = (props) => {
-    const jsxNotes = notesExample.map((note) => {
+const NotesList = (props) => {
+    const jsxNotes = props.notes.map((note) => {
         const handleNoteChoose = () => {
             props.onNoteChoose(note);
         };
@@ -37,11 +36,11 @@ const NoteList = (props) => {
     );
 };
 
-NoteList.propTypes = {
-    chosenNote: PropTypes.object,
+NotesList.propTypes = {
+    notes: PropTypes.array,
     colStyle: PropTypes.object,
     rowStyle: PropTypes.object,
     onNoteChoose: PropTypes.func,
 };
 
-export default NoteList;
+export default NotesList;

@@ -3,33 +3,41 @@ import PropTypes from "prop-types";
 
 import { Button, Layout } from "antd";
 
-import NoteAdditionalInfo from "../../components/NoteAdditionalInfo/NoteAdditionalInfo";
-import NoteList from "../../components/NoteList/NoteList";
+import NoteEditor from "../../components/NoteEditor/NoteEditor";
+import NotesList from "../../components/NotesList/NotesList";
 
 import Styles from "./styled";
+
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 
 const { Content, Sider } = Layout;
 
 const MyNotesPage = (props) => {
-    const [isMyNotesPageSiderCollapsed, setIsMyNotesPageSiderCollapsed] = useState(true);
-    const [chosenNote, setChosenNote] = useState(null);
-    const [noteListRightMargin, setNoteListRightMargin] = useState(Styles.myNotes__noteList_rightMarginSmall);
+    const [notes, setNotes] = useState(JSON.parse(localStorage.getItem("notes") ?? []));
 
-    const handleNoteClick = (note) => {
+    const [chosenNote, setChosenNote] = useState(null);
+    const handleNoteChoose = (note) => {
         setChosenNote(note);
     };
+    const handleNoteChanged = (newNote) => {
+        const noteIndex = notes.findIndex((note) => note.id === newNote.id);
+        const notesCopy = [...notes];
+        notesCopy[noteIndex] = newNote;
 
-    const handleSiderExpanderClick = () => {
-        setIsMyNotesPageSiderCollapsed(!isMyNotesPageSiderCollapsed);
-        setNoteListRightMargin(
-            isMyNotesPageSiderCollapsed
-                ? Styles.myNotes__noteList_rightMarginLarge
-                : Styles.myNotes__noteList_rightMarginSmall
-        );
+        setNotes(notesCopy);
+        localStorage.setItem("notes", JSON.stringify(notesCopy));
     };
 
-    const noteListStyle = { ...Styles.myNotes__noteList, ...noteListRightMargin };
+    const [isMyNotesPageSiderCollapsed, setIsMyNotesPageSiderCollapsed] = useState(false);
+    const handleSiderExpanderClick = () => {
+        setIsMyNotesPageSiderCollapsed(!isMyNotesPageSiderCollapsed);
+    };
+
+    // Todo: remove "magic" styles
+    const noteListStyle = {
+        ...Styles.myNotes__noteList,
+        marginRight: isMyNotesPageSiderCollapsed ? "20px" : "500px",
+    };
     const siderStyle = {
         ...Styles.myNotes__sider,
         paddingRight: isMyNotesPageSiderCollapsed ? "0" : "10px",
@@ -38,12 +46,12 @@ const MyNotesPage = (props) => {
     return (
         <Layout style={Styles.myNotes}>
             <Content style={noteListStyle}>
-                <NoteList rowStyle={Styles.noteList__row} onNoteChoose={handleNoteClick} />
+                <NotesList rowStyle={Styles.noteList__row} notes={notes} onNoteChoose={handleNoteChoose} />
             </Content>
             <Sider
                 style={siderStyle}
                 theme="light"
-                width={350}
+                width={500}
                 collapsed={isMyNotesPageSiderCollapsed}
                 collapsedWidth={0}
             >
@@ -53,7 +61,7 @@ const MyNotesPage = (props) => {
                     icon={isMyNotesPageSiderCollapsed ? <LeftOutlined /> : <RightOutlined />}
                     onClick={handleSiderExpanderClick}
                 />
-                <NoteAdditionalInfo note={chosenNote} />
+                <NoteEditor note={chosenNote} onNoteChanged={handleNoteChanged} />
             </Sider>
         </Layout>
     );
