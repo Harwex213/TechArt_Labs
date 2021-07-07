@@ -1,19 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 import { Button, Layout } from "antd";
+import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 
 import NoteEditor from "../../components/NoteEditor/NoteEditor";
 import NotesList from "../../components/NotesList/NotesList";
 
 import Styles from "./styled";
 
-import { LeftOutlined, RightOutlined } from "@ant-design/icons";
-
 const { Content, Sider } = Layout;
 
 const MyNotesPage = (props) => {
-    const [notes, setNotes] = useState(JSON.parse(localStorage.getItem("notes") ?? []));
+    const [notes, setNotes] = useState([]);
+
+    useEffect(() => {
+        setNotes(JSON.parse(localStorage.getItem("notes")));
+    }, []);
 
     const [chosenNote, setChosenNote] = useState(null);
     const handleNoteChoose = (note) => {
@@ -33,23 +36,21 @@ const MyNotesPage = (props) => {
         setIsMyNotesPageSiderCollapsed(!isMyNotesPageSiderCollapsed);
     };
 
-    // Todo: remove "magic" styles
-    const noteListStyle = {
-        ...Styles.myNotes__noteList,
-        marginRight: isMyNotesPageSiderCollapsed ? "20px" : "500px",
-    };
-    const siderStyle = {
-        ...Styles.myNotes__sider,
-        paddingRight: isMyNotesPageSiderCollapsed ? "0" : "10px",
-    };
-
     return (
         <Layout style={Styles.myNotes}>
-            <Content style={noteListStyle}>
+            <Content
+                style={{
+                    ...Styles.noteList,
+                    marginRight: isMyNotesPageSiderCollapsed ? "20px" : "500px",
+                }}
+            >
                 <NotesList rowStyle={Styles.noteList__row} notes={notes} onNoteChoose={handleNoteChoose} />
             </Content>
             <Sider
-                style={siderStyle}
+                style={{
+                    ...Styles.sider,
+                    paddingRight: isMyNotesPageSiderCollapsed ? "0" : "10px",
+                }}
                 theme="light"
                 width={500}
                 collapsed={isMyNotesPageSiderCollapsed}

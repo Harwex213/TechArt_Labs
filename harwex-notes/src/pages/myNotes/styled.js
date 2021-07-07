@@ -1,10 +1,10 @@
 const Styles = {
     myNotes: { background: "#fff" },
-    myNotes__noteList: { height: "100%", transition: "all 0.2s" },
+    noteList: { height: "100%", transition: "all 0.2s" },
     noteList__row: {
         padding: "20px",
     },
-    myNotes__sider: {
+    sider: {
         position: "fixed",
         zIndex: 1,
         right: "0",
