@@ -8,23 +8,23 @@ import Styles from "./styled";
 const { Title, Text, Paragraph } = Typography;
 
 const NoteEditor = (props) => {
-    const note = props.note;
-
     const [editableTitle, setEditableTitle] = useState(null);
     const [editableContent, setEditableContent] = useState(null);
 
     useEffect(() => {
-        setEditableTitle(note?.title);
-        setEditableContent(note?.description);
-    }, [note?.title, note?.description]);
+        setEditableTitle(props.note?.title ?? null);
+        setEditableContent(props.note?.description ?? null);
+    }, [props.note?.title, props.note?.description]);
 
     useEffect(() => {
-        const newNote = { ...note, ...{ title: editableTitle, description: editableContent } };
-        props.onNoteChanged(newNote);
+        const newNote = { ...props.note, ...{ title: editableTitle, description: editableContent } };
+        if (props.note) {
+            props.onNoteChanged(newNote);
+        }
     }, [editableTitle, editableContent]);
 
     let info;
-    if (!note) {
+    if (!props.note) {
         info = "Select note to display...";
     } else {
         info = (
@@ -44,7 +44,7 @@ const NoteEditor = (props) => {
                 >
                     {editableContent}
                 </Paragraph>
-                <Text style={Styles.dateCreation}>{note.dateCreation.substring(0, 10)}</Text>
+                <Text style={Styles.dateCreation}>{props.note.dateCreation.substring(0, 10)}</Text>
             </Typography>
         );
     }
