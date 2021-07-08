@@ -8,6 +8,7 @@ import NoteEditor from "../../components/NoteEditor/NoteEditor";
 import NotesList from "../../components/NotesList/NotesList";
 
 import Styles from "./styled";
+import notesExample from "./notes";
 
 const { Content, Sider } = Layout;
 
@@ -15,7 +16,13 @@ const MyNotesPage = (props) => {
     const [notes, setNotes] = useState([]);
 
     useEffect(() => {
-        setNotes(JSON.parse(localStorage.getItem("notes")));
+        if (!localStorage.getItem("notes")) {
+            localStorage.setItem("notes", JSON.stringify(notesExample));
+        }
+    });
+
+    useEffect(() => {
+        setNotes(JSON.parse(localStorage.getItem("notes")) ?? []);
     }, []);
 
     const [chosenNote, setChosenNote] = useState(null);
