@@ -53,7 +53,7 @@ const App = () => {
                     <Route path="/not-found">
                         <NotFoundPage />
                     </Route>
-                    <Route path="/">
+                    <Route exact path="/">
                         <Redirect to="/about" />
                     </Route>
                     <Route path="*">
