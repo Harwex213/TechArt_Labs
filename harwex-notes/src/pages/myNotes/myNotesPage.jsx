@@ -8,7 +8,7 @@ import NoteEditor from "../../components/NoteEditor/NoteEditor";
 import NotesList from "../../components/NotesList/NotesList";
 
 import Styles from "./styled";
-import notesExample from "./notes";
+import notesExample from "../../config/constants/notes";
 
 const { Content, Sider } = Layout;
 

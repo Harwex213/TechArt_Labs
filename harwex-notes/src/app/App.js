@@ -9,16 +9,10 @@ import SharedNotesPage from "../pages/sharedNotes/sharedNotesPage";
 import AboutPage from "../pages/about/aboutPage";
 import NotFoundPage from "../pages/notFound/notFoundPage";
 
+import { menuLinks } from "../config/constants/menu";
 import Styles from "./styled";
 
 const { Header, Content } = Layout;
-
-const menuLinks = new Map([
-    ["/notes", "0"],
-    ["/shared-notes", "1"],
-    ["/about", "2"],
-    ["/not-found", "3"],
-]);
 
 const App = () => {
     let location = useLocation();
