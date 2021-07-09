@@ -19,7 +19,6 @@ const menuLinks = new Map([
     ["/about", "2"],
     ["/not-found", "3"],
 ]);
-const menuLinkPaths = [...menuLinks.keys()];
 
 const App = () => {
     let location = useLocation();
@@ -36,32 +35,35 @@ const App = () => {
                     selectedKeys={[selectedKey]}
                 >
                     <Menu.Item key={0} icon={<FileOutlined />}>
-                        <Link to={menuLinkPaths[0]}>My Notes</Link>
+                        <Link to="/notes">My Notes</Link>
                     </Menu.Item>
                     <Menu.Item key={1} icon={<ShareAltOutlined />}>
-                        <Link to={menuLinkPaths[1]}>Shared Notes</Link>
+                        <Link to="/shared-notes">Shared Notes</Link>
                     </Menu.Item>
                     <Menu.Item key={2} icon={<InfoCircleOutlined />}>
-                        <Link to={menuLinkPaths[2]}>About</Link>
+                        <Link to="/about">About</Link>
                     </Menu.Item>
                 </Menu>
             </Header>
             <Content style={Styles.app__content}>
                 <Switch>
-                    <Route path={menuLinkPaths[0]}>
+                    <Route path="/notes">
                         <MyNotesPage />
                     </Route>
-                    <Route path={menuLinkPaths[1]}>
+                    <Route path="/shared-notes">
                         <SharedNotesPage />
                     </Route>
-                    <Route path={menuLinkPaths[2]}>
+                    <Route path="/about">
                         <AboutPage />
                     </Route>
-                    <Route path={menuLinkPaths[3]}>
+                    <Route path="/not-found">
                         <NotFoundPage />
                     </Route>
+                    <Route path="/">
+                        <Redirect to="/about" />
+                    </Route>
                     <Route path="*">
-                        <Redirect to={menuLinkPaths[3]} />
+                        <Redirect to="/not-found" />
                     </Route>
                 </Switch>
             </Content>
