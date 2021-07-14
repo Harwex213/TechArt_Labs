@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 
 import { Layout } from "antd";
 
@@ -10,7 +9,5 @@ const NotFoundPage = () => {
         </Layout>
     );
 };
-
-NotFoundPage.propTypes = {};
 
 export default NotFoundPage;

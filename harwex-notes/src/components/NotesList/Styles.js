@@ -1,8 +1,8 @@
 const Styles = {
-    noteList__note: {
+    note: {
         border: "0",
     },
-    noteList__noteWrapper: {
+    noteWrapper: {
         width: "100%",
         height: "100%",
         padding: "0",

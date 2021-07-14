@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
 
 import { Button, Layout } from "antd";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
@@ -7,29 +6,22 @@ import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import NoteEditor from "../../components/NoteEditor/NoteEditor";
 import NotesList from "../../components/NotesList/NotesList";
 
-import Styles from "./styled";
-import notesExample from "../../config/constants/notes";
+import Styles from "./Styles";
 
 const { Content, Sider } = Layout;
 
-const MyNotesPage = (props) => {
+const MyNotesPage = () => {
     const [notes, setNotes] = useState([]);
-
-    useEffect(() => {
-        if (!localStorage.getItem("notes")) {
-            localStorage.setItem("notes", JSON.stringify(notesExample));
-        }
-    });
 
     useEffect(() => {
         setNotes(JSON.parse(localStorage.getItem("notes")) ?? []);
     }, []);
 
-    const [chosenNote, setChosenNote] = useState(null);
-    const handleNoteChoose = (note) => {
-        setChosenNote(note);
+    const [chosenNoteId, setChosenNoteId] = useState(null);
+    const handleNoteChoose = (noteId) => {
+        setChosenNoteId(noteId);
     };
-    const handleNoteChanged = (newNote) => {
+    const handleNoteChange = (newNote) => {
         const noteIndex = notes.findIndex((note) => note.id === newNote.id);
         const notesCopy = [...notes];
         notesCopy[noteIndex] = newNote;
@@ -44,14 +36,14 @@ const MyNotesPage = (props) => {
     };
 
     return (
-        <Layout style={Styles.myNotes}>
+        <Layout style={Styles.layout}>
             <Content
                 style={{
                     ...Styles.noteList,
                     marginRight: isMyNotesPageSiderCollapsed ? "20px" : "500px",
                 }}
             >
-                <NotesList rowStyle={Styles.noteList__row} notes={notes} onNoteChoose={handleNoteChoose} />
+                <NotesList rowStyle={Styles.noteListRow} notes={notes} onNoteChoose={handleNoteChoose} />
             </Content>
             <Sider
                 style={{
@@ -64,17 +56,15 @@ const MyNotesPage = (props) => {
                 collapsedWidth={0}
             >
                 <Button
-                    style={Styles.sider__expander}
+                    style={Styles.siderExpander}
                     shape="circle"
                     icon={isMyNotesPageSiderCollapsed ? <LeftOutlined /> : <RightOutlined />}
                     onClick={handleSiderExpanderClick}
                 />
-                <NoteEditor note={chosenNote} onNoteChanged={handleNoteChanged} />
+                <NoteEditor note={notes[chosenNoteId]} onNoteChange={handleNoteChange} />
             </Sider>
         </Layout>
     );
 };
-
-MyNotesPage.propTypes = {};
 
 export default MyNotesPage;
