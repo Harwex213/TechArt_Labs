@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import { Typography } from "antd";
 
-import Styles from "./styled";
+import Styles from "./Styles";
 
 const { Title, Text, Paragraph } = Typography;
 
@@ -16,12 +16,17 @@ const NoteEditor = (props) => {
         setEditableContent(props.note?.description ?? null);
     }, [props.note?.title, props.note?.description]);
 
-    useEffect(() => {
-        const newNote = { ...props.note, ...{ title: editableTitle, description: editableContent } };
-        if (props.note) {
-            props.onNoteChanged(newNote);
-        }
-    }, [editableTitle, editableContent]);
+    const handleTitleChange = (newTitle) => {
+        setEditableTitle(newTitle);
+        const newNote = { ...props.note, ...{ title: newTitle } };
+        props.onNoteChange(newNote);
+    };
+
+    const handleContentChange = (newContent) => {
+        setEditableContent(newContent);
+        const newNote = { ...props.note, ...{ description: newContent } };
+        props.onNoteChange(newNote);
+    };
 
     let info;
     if (!props.note) {
@@ -31,7 +36,7 @@ const NoteEditor = (props) => {
             <Typography>
                 <Title
                     editable={{
-                        onChange: setEditableTitle,
+                        onChange: handleTitleChange,
                     }}
                 >
                     {editableTitle}
@@ -39,7 +44,7 @@ const NoteEditor = (props) => {
 
                 <Paragraph
                     editable={{
-                        onChange: setEditableContent,
+                        onChange: handleContentChange,
                     }}
                 >
                     {editableContent}
@@ -53,7 +58,7 @@ const NoteEditor = (props) => {
 
 NoteEditor.propTypes = {
     note: PropTypes.object,
-    onNoteChanged: PropTypes.func,
+    onNoteChange: PropTypes.func,
 };
 
 export default NoteEditor;

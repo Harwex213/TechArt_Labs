@@ -1,7 +1,12 @@
 const Styles = {
-    myNotes: { background: "#fff" },
-    noteList: { height: "100%", transition: "all 0.2s" },
-    noteList__row: {
+    layout: {
+        background: "#fff",
+    },
+    noteList: {
+        height: "100%",
+        transition: "all 0.2s",
+    },
+    noteListRow: {
         padding: "20px",
     },
     sider: {
@@ -12,7 +17,7 @@ const Styles = {
         borderLeft: "1px solid rgb(240, 242, 245)",
         padding: "10px 0 0 20px",
     },
-    sider__expander: {
+    siderExpander: {
         display: "flex",
         position: "absolute",
         top: "calc(50% - 32px)",
