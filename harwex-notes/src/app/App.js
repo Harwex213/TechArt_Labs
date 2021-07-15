@@ -9,13 +9,13 @@ import SharedNotesPage from "../pages/sharedNotes/SharedNotesPage";
 import AboutPage from "../pages/about/AboutPage";
 import NotFoundPage from "../pages/notFound/NotFoundPage";
 
-import { devCheckMyNotes } from "../dev/notesConfig";
+import { InitMyNotesPageDev } from "../dev/notesConfig";
 import { menuLinks } from "../config/constants/menu";
 import Styles from "./Styles";
 
 const App = () => {
     useEffect(() => {
-        devCheckMyNotes();
+        InitMyNotesPageDev();
     }, []);
 
     let location = useLocation();
