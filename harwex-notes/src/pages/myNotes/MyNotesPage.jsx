@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
 
-import { Button, Layout } from "antd";
-import { LeftOutlined, RightOutlined } from "@ant-design/icons";
+import { Drawer, Layout } from "antd";
 
 import NoteEditor from "../../components/NoteEditor/NoteEditor";
 import NotesList from "../../components/NotesList/NotesList";
 
+import { useWindowWidth } from "../../utils/useWindowWidth";
 import Styles from "./Styles";
 
-const { Content, Sider } = Layout;
-
 const MyNotesPage = () => {
-    const [notes, setNotes] = useState([]);
+    const windowWidth = useWindowWidth();
 
+    const [notes, setNotes] = useState([]);
     useEffect(() => {
         setNotes(JSON.parse(localStorage.getItem("notes")) ?? []);
     }, []);
@@ -20,6 +19,7 @@ const MyNotesPage = () => {
     const [chosenNoteId, setChosenNoteId] = useState(null);
     const handleNoteChoose = (noteId) => {
         setChosenNoteId(noteId);
+        setIsMyNotesPageDrawerVisible(true);
     };
     const handleNoteChange = (newNote) => {
         const noteIndex = notes.findIndex((note) => note.id === newNote.id);
@@ -30,39 +30,23 @@ const MyNotesPage = () => {
         localStorage.setItem("notes", JSON.stringify(notesCopy));
     };
 
-    const [isMyNotesPageSiderCollapsed, setIsMyNotesPageSiderCollapsed] = useState(false);
-    const handleSiderExpanderClick = () => {
-        setIsMyNotesPageSiderCollapsed(!isMyNotesPageSiderCollapsed);
+    const [isMyNotesPageDrawerVisible, setIsMyNotesPageDrawerVisible] = useState(false);
+    const handleDrawerClose = () => {
+        setIsMyNotesPageDrawerVisible(false);
     };
 
     return (
         <Layout style={Styles.layout}>
-            <Content
-                style={{
-                    ...Styles.noteList,
-                    marginRight: isMyNotesPageSiderCollapsed ? "20px" : "500px",
-                }}
-            >
+            <Layout.Content style={Styles.noteList}>
                 <NotesList rowStyle={Styles.noteListRow} notes={notes} onNoteChoose={handleNoteChoose} />
-            </Content>
-            <Sider
-                style={{
-                    ...Styles.sider,
-                    paddingRight: isMyNotesPageSiderCollapsed ? "0" : "10px",
-                }}
-                theme="light"
-                width={500}
-                collapsed={isMyNotesPageSiderCollapsed}
-                collapsedWidth={0}
+            </Layout.Content>
+            <Drawer
+                width={windowWidth * 0.75}
+                visible={isMyNotesPageDrawerVisible}
+                onClose={handleDrawerClose}
             >
-                <Button
-                    style={Styles.siderExpander}
-                    shape="circle"
-                    icon={isMyNotesPageSiderCollapsed ? <LeftOutlined /> : <RightOutlined />}
-                    onClick={handleSiderExpanderClick}
-                />
                 <NoteEditor note={notes[chosenNoteId]} onNoteChange={handleNoteChange} />
-            </Sider>
+            </Drawer>
         </Layout>
     );
 };

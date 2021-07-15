@@ -1,10 +1,10 @@
 const Styles = {
     app: {
         background: "#fff",
+        overflowX: "hidden",
     },
     appHeader: {
         display: "flex",
-        position: "fixed",
         zIndex: 1,
         width: "100%",
         background: "#fff",
@@ -16,9 +16,7 @@ const Styles = {
     headerMenu: {
         borderBottom: "none",
     },
-    appContent: {
-        marginTop: "64px",
-    },
+    appContent: {},
 };
 
 export default Styles;
