@@ -41,6 +41,7 @@ const MyNotesPage = () => {
                 <NotesList rowStyle={Styles.noteListRow} notes={notes} onNoteChoose={handleNoteChoose} />
             </Layout.Content>
             <Drawer
+                style={Styles.drawer}
                 width={windowWidth * 0.75}
                 visible={isMyNotesPageDrawerVisible}
                 onClose={handleDrawerClose}

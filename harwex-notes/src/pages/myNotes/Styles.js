@@ -8,6 +8,7 @@ const Styles = {
     noteListRow: {
         padding: "20px",
     },
+    drawer: {},
 };
 
 export default Styles;

@@ -4,6 +4,7 @@ const Styles = {
         overflowX: "hidden",
     },
     appHeader: {
+        position: "fixed",
         display: "flex",
         zIndex: 1,
         width: "100%",
@@ -16,7 +17,9 @@ const Styles = {
     headerMenu: {
         borderBottom: "none",
     },
-    appContent: {},
+    appContent: {
+        marginTop: "64px",
+    },
 };
 
 export default Styles;
