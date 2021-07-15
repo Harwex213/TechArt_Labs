@@ -9,7 +9,7 @@ import { useWindowWidth } from "../../utils/useWindowWidth";
 import Styles from "./Styles";
 
 const MyNotesPage = () => {
-    const windowWidth = useWindowWidth();
+    const windowWidth = useWindowWidth()
 
     const [notes, setNotes] = useState([]);
     useEffect(() => {
