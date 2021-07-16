@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route, Redirect, Link, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 
-import { Layout, Menu } from "antd";
-import { FileOutlined, InfoCircleOutlined, ShareAltOutlined } from "@ant-design/icons";
+import { Layout } from "antd";
+
+import Header from "../components/Header/Header";
 
 import MyNotesPage from "../pages/myNotes/MyNotesPage";
 import SharedNotesPage from "../pages/sharedNotes/SharedNotesPage";
@@ -10,35 +11,21 @@ import AboutPage from "../pages/about/AboutPage";
 import NotFoundPage from "../pages/notFound/NotFoundPage";
 
 import { InitMyNotesPageDev } from "../dev/notesConfig";
-import { menuLinks } from "../config/constants/menu";
 import Styles from "./Styles";
 
 const App = () => {
     useEffect(() => {
         InitMyNotesPageDev();
     }, []);
-
-    let location = useLocation();
-    let selectedKey = menuLinks.get(location.pathname);
+    // Todo: set route paths to constants
 
     return (
         <Router>
-            <Layout style={Styles.app}>
-                <Layout.Header style={Styles.appHeader}>
-                    <h1 style={Styles.headerTitle}>Harwex Notes</h1>
-                    <Menu style={Styles.headerMenu} mode="horizontal" defaultSelectedKeys={[selectedKey]}>
-                        <Menu.Item key={0} icon={<FileOutlined />}>
-                            <Link to="/notes">My Notes</Link>
-                        </Menu.Item>
-                        <Menu.Item key={1} icon={<ShareAltOutlined />}>
-                            <Link to="/shared-notes">Shared Notes</Link>
-                        </Menu.Item>
-                        <Menu.Item key={2} icon={<InfoCircleOutlined />}>
-                            <Link to="/about">About</Link>
-                        </Menu.Item>
-                    </Menu>
+            <Layout style={Styles.layout}>
+                <Layout.Header style={Styles.header}>
+                    <Header />
                 </Layout.Header>
-                <Layout.Content style={Styles.appContent}>
+                <Layout.Content style={Styles.content}>
                     <Switch>
                         <Route path="/notes">
                             <MyNotesPage />

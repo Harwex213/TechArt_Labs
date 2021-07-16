@@ -1,9 +1,9 @@
 const Styles = {
-    app: {
+    layout: {
         background: "#fff",
         overflowX: "hidden",
     },
-    appHeader: {
+    header: {
         position: "fixed",
         display: "flex",
         zIndex: 1,
@@ -11,13 +11,7 @@ const Styles = {
         background: "#fff",
         borderBottom: "2px solid rgb(240, 242, 245)",
     },
-    headerTitle: {
-        marginRight: "40px",
-    },
-    headerMenu: {
-        borderBottom: "none",
-    },
-    appContent: {
+    content: {
         marginTop: "64px",
     },
 };
