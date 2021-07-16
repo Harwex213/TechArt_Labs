@@ -18,7 +18,11 @@ const Note = (props) => {
                         ? props.note.title
                         : props.note.title.substring(0, 20).concat("...")}
                 </Col>
+            </Row>
+            <Row>
                 <Col>{props.note.description.substring(0, 50).concat("...")}</Col>
+            </Row>
+            <Row>
                 <Col style={Styles.dateCreation}>{props.note.dateCreation.substring(0, 10)}</Col>
             </Row>
         </Card>
