@@ -1,21 +1,26 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import PropTypes from "prop-types";
 
 import { Popover } from "antd";
 
 import UserActionsMenu from "../UserActionsMenu/UserActionsMenu";
-import PropTypes from "prop-types";
+
+import { selectUserName } from "../../app/userSlice";
 
 const UserActionsMenuPopover = (props) => {
     const [isPopoverVisible, setIsPopoverVisible] = useState(false);
     const handleProfileMenuOptionClick = () => setIsPopoverVisible(false);
     const handleVisibleChange = (visible) => setIsPopoverVisible(visible);
 
+    const greetingToUser = "Hello, " + useSelector(selectUserName);
+
     return (
         <Popover
             trigger="click"
             visible={isPopoverVisible}
             onVisibleChange={handleVisibleChange}
-            title="User 1"
+            title={greetingToUser}
             placement="bottomRight"
             content={<UserActionsMenu onClick={handleProfileMenuOptionClick} />}
         >
