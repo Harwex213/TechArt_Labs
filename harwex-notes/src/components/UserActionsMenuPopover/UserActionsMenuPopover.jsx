@@ -6,7 +6,7 @@ import { Popover } from "antd";
 
 import UserActionsMenu from "../UserActionsMenu/UserActionsMenu";
 
-import { selectUserName } from "../../app/userSlice";
+import { selectUserName } from "../../slices/userSlice";
 
 const UserActionsMenuPopover = (props) => {
     const [isPopoverVisible, setIsPopoverVisible] = useState(false);
