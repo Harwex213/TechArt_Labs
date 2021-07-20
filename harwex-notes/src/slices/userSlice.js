@@ -10,8 +10,8 @@ export const userSlice = createSlice({
     reducers: {
         logIn: (state, action) => {
             state.isGuest = false;
-            state.username = action.username;
-            state.password = action.password;
+            state.username = action.payload.username;
+            state.password = action.payload.password;
         },
         logOut: (state) => {
             state.isGuest = true;

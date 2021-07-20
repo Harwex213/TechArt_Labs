@@ -3,8 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { Drawer } from "antd";
 
-import { userActions } from "../../config/constants/userActions";
+import AuthorizationDrawer from "./Drawers/AuthorizationDrawer";
+
 import { none, selectCurrentAction } from "../../slices/userActionsSlice";
+
+import { userActions } from "../../config/constants/userActions";
+import { useWindowWidth } from "../../utils/useWindowWidth";
 
 const UserActionsDrawers = () => {
     const currentAction = useSelector(selectCurrentAction);
@@ -36,13 +40,15 @@ const UserActionsDrawers = () => {
         }
     }, [currentAction]);
 
+    const windowWidth = useWindowWidth();
+
     return (
         <>
             <Drawer visible={isProfileVisible} onClose={handleUserActionDrawerClose}>
                 <h1>Profile</h1>
             </Drawer>
-            <Drawer visible={isAuthVisible} onClose={handleUserActionDrawerClose}>
-                <h1>Auth</h1>
+            <Drawer width={windowWidth * 0.45} visible={isAuthVisible} onClose={handleUserActionDrawerClose}>
+                <AuthorizationDrawer onSubmit={handleUserActionDrawerClose} />
             </Drawer>
             <Drawer visible={isRegistrationVisible} onClose={handleUserActionDrawerClose}>
                 <h1>Registration</h1>
