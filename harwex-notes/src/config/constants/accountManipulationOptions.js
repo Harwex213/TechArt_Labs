@@ -1,8 +1,8 @@
-const userActions = {
+const AccountManipulationOptions = {
     none: "none",
     profile: "profile",
     authorization: "authorization",
     registration: "registration",
 };
 
-export { userActions };
+export { AccountManipulationOptions };

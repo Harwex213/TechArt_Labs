@@ -17,6 +17,7 @@ const AuthorizationDrawer = (props) => {
         dispatch(logIn({ username, password }));
         formikBag.setSubmitting(false);
         props.onSubmit();
+        formikBag.resetForm();
     };
 
     return (

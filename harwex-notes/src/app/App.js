@@ -14,7 +14,6 @@ import NotFoundPage from "../pages/notFound/NotFoundPage";
 import store from "./store";
 import { InitMyNotesPageDev } from "../dev/notesConfig";
 import Styles from "./Styles";
-import UserActionsDrawers from "../components/UserActionsDrawers/UserActionsDrawers";
 
 const App = () => {
     useEffect(() => {
@@ -30,8 +29,6 @@ const App = () => {
                         <Header />
                     </Layout.Header>
                     <Layout.Content style={Styles.content}>
-                        <UserActionsDrawers />
-
                         <Switch>
                             <Route path="/notes">
                                 <MyNotesPage />

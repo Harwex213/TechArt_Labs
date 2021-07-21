@@ -1,60 +1,60 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import PropTypes from "prop-types";
 
 import { Drawer } from "antd";
 
 import AuthorizationDrawer from "./Drawers/AuthorizationDrawer";
 
-import { none, selectCurrentAction } from "../../slices/userActionsSlice";
-
-import { userActions } from "../../config/constants/userActions";
 import { useWindowWidth } from "../../utils/useWindowWidth";
+import { AccountManipulationOptions } from "../../config/constants/accountManipulationOptions";
 
-const UserActionsDrawers = () => {
-    const currentAction = useSelector(selectCurrentAction);
-    const dispatch = useDispatch();
-
+const AccountManipulationDrawers = (props) => {
     const [isProfileVisible, setIsProfileVisible] = useState(false);
     const [isAuthVisible, setIsAuthVisible] = useState(false);
     const [isRegistrationVisible, setIsRegistrationVisible] = useState(false);
-    const handleUserActionDrawerClose = () => {
+    const handleDrawerClose = () => {
         setIsProfileVisible(false);
         setIsAuthVisible(false);
         setIsRegistrationVisible(false);
-        dispatch(none());
+        props.onDrawerClose();
     };
 
     useEffect(() => {
-        switch (currentAction) {
-            case userActions.profile:
+        switch (props.currentOption) {
+            case AccountManipulationOptions.profile:
                 setIsProfileVisible(true);
                 break;
-            case userActions.authorization:
+            case AccountManipulationOptions.authorization:
                 setIsAuthVisible(true);
                 break;
-            case userActions.registration:
+            case AccountManipulationOptions.registration:
                 setIsRegistrationVisible(true);
                 break;
             default:
                 break;
         }
-    }, [currentAction]);
+    }, [props.currentOption]);
 
     const windowWidth = useWindowWidth();
 
     return (
         <>
-            <Drawer visible={isProfileVisible} onClose={handleUserActionDrawerClose}>
+            <Drawer visible={isProfileVisible} onClose={handleDrawerClose}>
                 <h1>Profile</h1>
             </Drawer>
-            <Drawer width={windowWidth * 0.45} visible={isAuthVisible} onClose={handleUserActionDrawerClose}>
-                <AuthorizationDrawer onSubmit={handleUserActionDrawerClose} />
+            <Drawer width={windowWidth * 0.45} visible={isAuthVisible} onClose={handleDrawerClose}>
+                <AuthorizationDrawer onSubmit={handleDrawerClose} />
             </Drawer>
-            <Drawer visible={isRegistrationVisible} onClose={handleUserActionDrawerClose}>
+            <Drawer visible={isRegistrationVisible} onClose={handleDrawerClose}>
                 <h1>Registration</h1>
             </Drawer>
         </>
     );
 };
 
-export default UserActionsDrawers;
+AccountManipulationDrawers.propTypes = {
+    currentOption: PropTypes.string,
+    onDrawerClose: PropTypes.func,
+};
+
+export default AccountManipulationDrawers;

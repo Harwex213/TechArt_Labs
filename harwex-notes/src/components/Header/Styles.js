@@ -2,7 +2,7 @@ const Styles = {
     title: {
         marginRight: "40px",
     },
-    avatar: {
+    account: {
         cursor: "pointer",
         margin: "auto 0 auto auto",
     },
