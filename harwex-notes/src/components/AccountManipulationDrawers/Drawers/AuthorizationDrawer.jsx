@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { useQuery } from "react-query";
 import PropTypes from "prop-types";
 
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
@@ -12,6 +13,15 @@ import { logIn } from "../../../slices/userSlice";
 
 const AuthorizationDrawer = (props) => {
     const dispatch = useDispatch();
+    const { isLoading, error, data } = useQuery("repoData", () =>
+        fetch("http://localhost:3001/posts").then((res) => res.json())
+    );
+
+    useEffect(() => {
+        console.log(isLoading);
+        console.log(error);
+        console.log(data);
+    }, [isLoading, error, data]);
 
     const handleSubmit = (values, formikBag) => {
         dispatch(logIn(values.username));

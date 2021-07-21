@@ -1,15 +1,21 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter as Router } from "react-router-dom";
+import { Provider } from "react-redux";
+import { QueryClient, QueryClientProvider } from "react-query";
+
+import App from "./app/App";
+import store from "./app/store";
 
 import "antd/dist/antd.css";
 import "./index.css";
 
-import App from "./app/App";
+const queryClient = new QueryClient();
 
 ReactDOM.render(
-    <Router>
-        <App />
-    </Router>,
+    <QueryClientProvider client={queryClient}>
+        <Provider store={store}>
+            <App />
+        </Provider>
+    </QueryClientProvider>,
     document.getElementById("root")
 );
