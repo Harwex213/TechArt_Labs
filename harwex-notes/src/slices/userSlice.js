@@ -5,18 +5,15 @@ export const userSlice = createSlice({
     initialState: {
         isGuest: true,
         username: "guest",
-        password: null,
     },
     reducers: {
         logIn: (state, action) => {
             state.isGuest = false;
-            state.username = action.payload.username;
-            state.password = action.payload.password;
+            state.username = action.payload;
         },
         logOut: (state) => {
             state.isGuest = true;
             state.username = "guest";
-            state.password = null;
         },
     },
 });

@@ -7,6 +7,7 @@ import AuthorizationDrawer from "./Drawers/AuthorizationDrawer";
 
 import { useWindowWidth } from "../../utils/useWindowWidth";
 import { AccountManipulationOptions } from "../../config/constants/accountManipulationOptions";
+import RegistrationDrawer from "./Drawers/RegistrationDrawer";
 
 const AccountManipulationDrawers = (props) => {
     const [isProfileVisible, setIsProfileVisible] = useState(false);
@@ -39,14 +40,14 @@ const AccountManipulationDrawers = (props) => {
 
     return (
         <>
-            <Drawer visible={isProfileVisible} onClose={handleDrawerClose}>
+            <Drawer width={windowWidth * 0.45} visible={isProfileVisible} onClose={handleDrawerClose}>
                 <h1>Profile</h1>
             </Drawer>
-            <Drawer width={windowWidth * 0.45} visible={isAuthVisible} onClose={handleDrawerClose}>
+            <Drawer width={windowWidth * 0.3} visible={isAuthVisible} onClose={handleDrawerClose}>
                 <AuthorizationDrawer onSubmit={handleDrawerClose} />
             </Drawer>
-            <Drawer visible={isRegistrationVisible} onClose={handleDrawerClose}>
-                <h1>Registration</h1>
+            <Drawer width={windowWidth * 0.45} visible={isRegistrationVisible} onClose={handleDrawerClose}>
+                <RegistrationDrawer />
             </Drawer>
         </>
     );

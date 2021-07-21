@@ -7,14 +7,14 @@ import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { Form, Input, SubmitButton } from "formik-antd";
 import { Formik } from "formik";
 import * as Yup from "yup";
+
 import { logIn } from "../../../slices/userSlice";
 
 const AuthorizationDrawer = (props) => {
     const dispatch = useDispatch();
 
     const handleSubmit = (values, formikBag) => {
-        const { username, password } = values;
-        dispatch(logIn({ username, password }));
+        dispatch(logIn(values.username));
         formikBag.setSubmitting(false);
         props.onSubmit();
         formikBag.resetForm();
@@ -22,7 +22,7 @@ const AuthorizationDrawer = (props) => {
 
     return (
         <>
-            <h1>Auth</h1>
+            <h1>Authorization</h1>
             <Formik
                 initialValues={{
                     username: "",
@@ -38,7 +38,14 @@ const AuthorizationDrawer = (props) => {
                 })}
                 onSubmit={handleSubmit}
             >
-                <Form>
+                <Form
+                    wrapperCol={{
+                        xxl: { span: 8 },
+                        xl: { span: 10 },
+                        lg: { span: 14 },
+                        sm: { span: 24 },
+                    }}
+                >
                     <Form.Item name="username">
                         <Input
                             name="username"
