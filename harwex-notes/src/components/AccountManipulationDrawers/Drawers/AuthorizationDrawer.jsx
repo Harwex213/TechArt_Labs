@@ -22,6 +22,7 @@ const AuthorizationDrawer = (props) => {
             dispatch(logIn(values.username));
             props.onSubmit();
             formikBag.resetForm();
+            localStorage.setItem("user", JSON.stringify({ username: values.username }));
         } else {
             formikBag.setFieldError("username", "Invalid data");
         }

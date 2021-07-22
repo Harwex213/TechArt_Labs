@@ -1,11 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const getUserInitialState = () => {
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    return user
+        ? {
+              isGuest: false,
+              username: user.username,
+          }
+        : {
+              isGuest: true,
+              username: "guest",
+          };
+};
+
 export const userSlice = createSlice({
     name: "user",
-    initialState: {
-        isGuest: true,
-        username: "guest",
-    },
+    initialState: getUserInitialState(),
     reducers: {
         logIn: (state, action) => {
             state.isGuest = false;
