@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
-import { useQuery } from "react-query";
 import PropTypes from "prop-types";
 
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
@@ -11,23 +10,21 @@ import * as Yup from "yup";
 
 import { logIn } from "../../../slices/userSlice";
 
+import { TryFindUser } from "../../../api/auth";
+
 const AuthorizationDrawer = (props) => {
     const dispatch = useDispatch();
-    const { isLoading, error, data } = useQuery("repoData", () =>
-        fetch("http://localhost:3001/posts").then((res) => res.json())
-    );
 
-    useEffect(() => {
-        console.log(isLoading);
-        console.log(error);
-        console.log(data);
-    }, [isLoading, error, data]);
+    const handleSubmit = async (values, formikBag) => {
+        const isUserExist = await TryFindUser(values);
 
-    const handleSubmit = (values, formikBag) => {
-        dispatch(logIn(values.username));
-        formikBag.setSubmitting(false);
-        props.onSubmit();
-        formikBag.resetForm();
+        if (isUserExist) {
+            dispatch(logIn(values.username));
+            props.onSubmit();
+            formikBag.resetForm();
+        } else {
+            formikBag.setFieldError("username", "Invalid data");
+        }
     };
 
     return (
