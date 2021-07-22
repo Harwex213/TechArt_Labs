@@ -1,5 +1,26 @@
 {
   "users": [
-    { "username":  "harwex", "password":  "12345678"}
+    {
+      "username": "harwex",
+      "password": "12345678"
+    },
+    {
+      "id": 1626986874279,
+      "username": "student",
+      "firstname": "rqwerqwerqw",
+      "lastname": "rqwerqwerqwer",
+      "dateOfBirth": "2021-05-31T20:46:46.914Z",
+      "email": "harwex213@mail.ru",
+      "password": "1231231ewrqwerq"
+    },
+    {
+      "id": 1626987019364,
+      "username": "student2",
+      "firstname": "rtqwetq",
+      "lastname": "qwetqwewqetq",
+      "dateOfBirth": "2021-06-28T20:50:09.823Z",
+      "email": "harwex213@mail.ru",
+      "password": "qwetqwetqwetqwerq"
+    }
   ]
 }

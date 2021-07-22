@@ -1,5 +1,15 @@
-const TryFindUser = async ({ username, password }) => {
-    const response = await fetch(`http://localhost:3001/users?username=${username}&password=${password}`);
+const TryFindUser = async ({ username = null, password = null }) => {
+    if (!username) {
+        return false;
+    }
+
+    let urlQuery = `?username=${username}`;
+    if (password) {
+        urlQuery += `&password=${password}`;
+    }
+
+    console.log(urlQuery);
+    const response = await fetch("http://localhost:3001/users" + urlQuery);
     return (await response.json()).length !== 0;
 };
 

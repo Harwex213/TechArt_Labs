@@ -47,7 +47,7 @@ const AccountManipulationDrawers = (props) => {
                 <AuthorizationDrawer onSubmit={handleDrawerClose} />
             </Drawer>
             <Drawer width={windowWidth * 0.45} visible={isRegistrationVisible} onClose={handleDrawerClose}>
-                <RegistrationDrawer />
+                <RegistrationDrawer onSubmit={handleDrawerClose} />
             </Drawer>
         </>
     );
