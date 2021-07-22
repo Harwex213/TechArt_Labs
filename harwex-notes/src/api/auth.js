@@ -8,7 +8,6 @@ const TryFindUser = async ({ username = null, password = null }) => {
         urlQuery += `&password=${password}`;
     }
 
-    console.log(urlQuery);
     const response = await fetch("http://localhost:3001/users" + urlQuery);
     return (await response.json()).length !== 0;
 };

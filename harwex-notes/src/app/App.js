@@ -12,6 +12,7 @@ import NotFoundPage from "../pages/notFound/NotFoundPage";
 
 import { InitMyNotesPageDev } from "../dev/notesConfig";
 import Styles from "./Styles";
+import PrivateRoute from "../route/PrivateRoute";
 
 const App = () => {
     useEffect(() => {
@@ -27,12 +28,12 @@ const App = () => {
                 </Layout.Header>
                 <Layout.Content style={Styles.content}>
                     <Switch>
-                        <Route path="/notes">
+                        <PrivateRoute path="/notes">
                             <MyNotesPage />
-                        </Route>
-                        <Route path="/shared-notes">
+                        </PrivateRoute>
+                        <PrivateRoute path="/shared-notes">
                             <SharedNotesPage />
-                        </Route>
+                        </PrivateRoute>
                         <Route path="/about">
                             <AboutPage />
                         </Route>
