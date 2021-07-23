@@ -21,6 +21,24 @@
       "dateOfBirth": "2021-06-28T20:50:09.823Z",
       "email": "harwex213@mail.ru",
       "password": "qwetqwetqwetqwerq"
+    },
+    {
+      "id": 1627028834021,
+      "username": "student2222",
+      "firstname": "adfasdfad",
+      "lastname": "adfadfasdf",
+      "dateOfBirth": "2021-06-28T08:26:58.621Z",
+      "email": "harwex213@mail.ru",
+      "password": "asdfasdasdfasdfasd"
+    },
+    {
+      "id": 1627028967696,
+      "username": "Harwex213",
+      "firstname": "rqwe",
+      "lastname": "qwerqwerqwer",
+      "dateOfBirth": "2021-06-28T08:29:16.816Z",
+      "email": "harwex213@mail.ru",
+      "password": "twetqwetqtqwetqwe"
     }
   ]
 }

@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-d
 import { Layout } from "antd";
 
 import Header from "../components/Header/Header";
+import PrivateRoute from "../route/PrivateRoute";
 
 import MyNotesPage from "../pages/myNotes/MyNotesPage";
 import SharedNotesPage from "../pages/sharedNotes/SharedNotesPage";
@@ -11,14 +12,13 @@ import AboutPage from "../pages/about/AboutPage";
 import NotFoundPage from "../pages/notFound/NotFoundPage";
 
 import { InitMyNotesPageDev } from "../dev/notesConfig";
+import { RoutePaths } from "../config/constants/routePaths";
 import Styles from "./Styles";
-import PrivateRoute from "../route/PrivateRoute";
 
 const App = () => {
     useEffect(() => {
         InitMyNotesPageDev();
     }, []);
-    // Todo: set route paths to constants
 
     return (
         <Router>
@@ -28,22 +28,22 @@ const App = () => {
                 </Layout.Header>
                 <Layout.Content style={Styles.content}>
                     <Switch>
-                        <PrivateRoute path="/notes">
+                        <PrivateRoute path={RoutePaths.notes}>
                             <MyNotesPage />
                         </PrivateRoute>
-                        <PrivateRoute path="/shared-notes">
+                        <PrivateRoute path={RoutePaths.sharedNotes}>
                             <SharedNotesPage />
                         </PrivateRoute>
-                        <Route path="/about">
+                        <Route path={RoutePaths.about}>
                             <AboutPage />
                         </Route>
-                        <Route path="/not-found">
+                        <Route path={RoutePaths.notFound}>
                             <NotFoundPage />
                         </Route>
-                        <Route exact path="/">
+                        <Route exact path={RoutePaths.empty}>
                             <Redirect to="/about" />
                         </Route>
-                        <Route path="*">
+                        <Route path={RoutePaths.any}>
                             <Redirect to="/not-found" />
                         </Route>
                     </Switch>
