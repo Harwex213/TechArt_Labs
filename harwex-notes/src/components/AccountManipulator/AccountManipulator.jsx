@@ -12,7 +12,7 @@ import { AccountManipulationOptions } from "../../config/constants/accountManipu
 import Styles from "./Styles";
 
 const AccountManipulator = (props) => {
-    const [currentOption, setCurrentOption] = useState("");
+    const [currentOption, setCurrentOption] = useState(AccountManipulationOptions.none);
     const handleSelectOption = (optionName) => {
         setCurrentOption(optionName);
     };

@@ -12,6 +12,11 @@ import { logIn } from "../../../slices/userSlice";
 
 import { TryFindUser } from "../../../api/auth";
 
+const authorizationValidationSchema = Yup.object().shape({
+    username: Yup.string().min(4, "Too Short!").max(50, "Too Long!").required("Required"),
+    password: Yup.string().min(8, "Too Short!").max(50, "Too Long!").required("Required"),
+});
+
 const AuthorizationDrawer = (props) => {
     const dispatch = useDispatch();
 
@@ -20,11 +25,11 @@ const AuthorizationDrawer = (props) => {
 
         if (isUserExist) {
             dispatch(logIn(values.username));
-            props.onSubmit();
+            props.onAuth();
             formikBag.resetForm();
             localStorage.setItem("user", JSON.stringify({ username: values.username }));
         } else {
-            formikBag.setFieldError("username", "Invalid data");
+            formikBag.setFieldError("username", "User not exist or wrong password");
         }
     };
 
@@ -36,14 +41,7 @@ const AuthorizationDrawer = (props) => {
                     username: "",
                     password: "",
                 }}
-                validationSchema={Yup.object().shape({
-                    username: Yup.string()
-                        .min(4, "Too Short!")
-                        .max(50, "Too Long!")
-                        .required("Required")
-                        .notOneOf(["oleg"], "Username taken"),
-                    password: Yup.string().min(8, "Too Short!").max(50, "Too Long!").required("Required"),
-                })}
+                validationSchema={authorizationValidationSchema}
                 onSubmit={handleSubmit}
             >
                 <Form
@@ -77,7 +75,7 @@ const AuthorizationDrawer = (props) => {
 };
 
 AuthorizationDrawer.propTypes = {
-    onSubmit: PropTypes.func,
+    onAuth: PropTypes.func,
 };
 
 export default AuthorizationDrawer;

@@ -45,7 +45,7 @@ const RegistrationDrawer = (props) => {
             });
             dispatch(logIn(values.username));
             formikBag.setSubmitting(false);
-            props.onSubmit();
+            props.onReg();
             formikBag.resetForm();
         }
     };
@@ -104,7 +104,7 @@ const RegistrationDrawer = (props) => {
 };
 
 RegistrationDrawer.propTypes = {
-    onSubmit: PropTypes.func,
+    onReg: PropTypes.func,
 };
 
 export default RegistrationDrawer;
