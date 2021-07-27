@@ -1,13 +1,6 @@
 import { useMutation } from "react-query";
+import { CreateNewUser } from "../api/regUser";
 
 export default function useRegUser() {
-    return useMutation((values) =>
-        fetch("http://localhost:3001/users", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json;charset=utf-8",
-            },
-            body: JSON.stringify(values),
-        }).then((res) => res.json())
-    );
+    return useMutation(CreateNewUser);
 }

@@ -7,9 +7,9 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 
 import { logIn } from "../../../slices/userSlice";
-
-import { CreateNewUser } from "../../../api/reg";
-import { TryFindUser } from "../../../api/auth";
+import useFindUser from "../../../hooks/useFindUser";
+import useLogInUser from "../../../hooks/useLogInUser";
+import useRegUser from "../../../hooks/useRegUser";
 
 const registrationValidationSchema = Yup.object().shape({
     username: Yup.string().min(4, "Too Short!").max(50, "Too Long!").required("Required"),
@@ -24,30 +24,59 @@ const registrationValidationSchema = Yup.object().shape({
 });
 
 const RegistrationDrawer = (props) => {
+    const { mutateAsync: tryFindUser } = useFindUser();
+    const { mutateAsync: fetchLogIn } = useLogInUser();
+    const { mutateAsync: fetchReg } = useRegUser();
     const dispatch = useDispatch();
 
     const handleSubmit = async (values, formikBag) => {
-        const isUserExist = await TryFindUser({
-            username: values.username,
-        });
+        const handleRequestError = () => {
+            formikBag.setFieldError("username", "Server doesn't response");
+        };
 
-        if (isUserExist) {
-            formikBag.setFieldError("username", "Username taken");
-        } else {
-            await CreateNewUser({
-                id: Math.round(Date.now() + Math.random()),
-                username: values.username,
-                firstname: values.firstname,
-                lastname: values.lastname,
-                dateOfBirth: values.dateOfBirth,
-                email: values.email,
-                password: values.password,
-            });
-            dispatch(logIn(values.username));
-            formikBag.setSubmitting(false);
+        const handleReg = () => {
             props.onReg();
             formikBag.resetForm();
-        }
+        };
+
+        const handleLogIn = () => {
+            dispatch(logIn(values.username));
+        };
+
+        const handleIsUserExist = async (isUserExist) => {
+            if (!isUserExist) {
+                await fetchReg(
+                    {
+                        id: Math.round(Date.now() + Math.random()),
+                        username: values.username,
+                        firstname: values.firstname,
+                        lastname: values.lastname,
+                        dateOfBirth: values.dateOfBirth,
+                        email: values.email,
+                        password: values.password,
+                    },
+                    {
+                        onSuccess: handleReg,
+                        onError: handleRequestError,
+                    }
+                );
+
+                await fetchLogIn(
+                    { username: values.username },
+                    {
+                        onSuccess: handleLogIn,
+                        onError: handleRequestError,
+                    }
+                );
+            } else {
+                formikBag.setFieldError("username", "Username taken.");
+            }
+        };
+
+        await tryFindUser(values, {
+            onSuccess: handleIsUserExist,
+            onError: handleRequestError,
+        });
     };
 
     return (
