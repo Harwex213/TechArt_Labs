@@ -6,6 +6,8 @@ import { Menu } from "antd";
 
 import { selectUserName, selectIsGuest, logOut } from "../../slices/userSlice";
 
+import useLogOutUser from "../../hooks/useLogOutUser";
+
 import { AccountManipulationOptions } from "../../config/constants/accountManipulationOptions";
 
 import Styles from "./Styles";
@@ -31,10 +33,14 @@ GuestMenu.propTypes = {
 };
 
 const LoggedUserMenu = (props) => {
+    const { mutateAsync: fetchLogOut } = useLogOutUser();
     const dispatch = useDispatch();
 
     const handleOpenProfile = () => props.onSelectOption(AccountManipulationOptions.profile);
-    const handleLogOutAction = () => dispatch(logOut());
+    const handleLogOutAction = async () => {
+        dispatch(logOut());
+        await fetchLogOut();
+    };
 
     return (
         <>

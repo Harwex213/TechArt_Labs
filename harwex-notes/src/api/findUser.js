@@ -1,4 +1,4 @@
-const TryFindUser = async ({ username = null, password = null }) => {
+const FindUser = async ({ username = null, password = null }) => {
     if (!username) {
         return false;
     }
@@ -12,4 +12,4 @@ const TryFindUser = async ({ username = null, password = null }) => {
     return (await response.json()).length !== 0;
 };
 
-export { TryFindUser };
+export default FindUser;
