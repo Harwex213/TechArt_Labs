@@ -1,0 +1,53 @@
+{
+  "users": [
+    {
+      "username": "harwex",
+      "password": "12345678"
+    },
+    {
+      "id": 1626986874279,
+      "username": "student",
+      "firstname": "rqwerqwerqw",
+      "lastname": "rqwerqwerqwer",
+      "dateOfBirth": "2021-05-31T20:46:46.914Z",
+      "email": "harwex213@mail.ru",
+      "password": "1231231ewrqwerq"
+    },
+    {
+      "id": 1626987019364,
+      "username": "student2",
+      "firstname": "rtqwetq",
+      "lastname": "qwetqwewqetq",
+      "dateOfBirth": "2021-06-28T20:50:09.823Z",
+      "email": "harwex213@mail.ru",
+      "password": "qwetqwetqwetqwerq"
+    },
+    {
+      "id": 1627028834021,
+      "username": "student2222",
+      "firstname": "adfasdfad",
+      "lastname": "adfadfasdf",
+      "dateOfBirth": "2021-06-28T08:26:58.621Z",
+      "email": "harwex213@mail.ru",
+      "password": "asdfasdasdfasdfasd"
+    },
+    {
+      "id": 1627028967696,
+      "username": "Harwex213",
+      "firstname": "rqwe",
+      "lastname": "qwerqwerqwer",
+      "dateOfBirth": "2021-06-28T08:29:16.816Z",
+      "email": "harwex213@mail.ru",
+      "password": "twetqwetqtqwetqwe"
+    },
+    {
+      "id": 1627303942465,
+      "username": "Harwex214",
+      "firstname": "Олег",
+      "lastname": "Капорцев",
+      "dateOfBirth": "2021-07-02T12:51:39.720Z",
+      "email": "harwex213@mail.ru",
+      "password": "326215123262512"
+    }
+  ]
+}
