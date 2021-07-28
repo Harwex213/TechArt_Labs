@@ -8,8 +8,7 @@ const TryFindUser = async ({ username = null, password = null }) => {
         urlQuery += `&password=${password}`;
     }
 
-    const response = await fetch("http://localhost:3001/users" + urlQuery);
-    return (await response.json()).length !== 0;
+    return fetch("http://localhost:3001/users" + urlQuery);
 };
 
-export { TryFindUser };
+export default TryFindUser;

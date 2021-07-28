@@ -1,5 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import { unwrapResult } from "@reduxjs/toolkit";
 import PropTypes from "prop-types";
 
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
@@ -10,8 +11,6 @@ import * as Yup from "yup";
 
 import { logIn } from "../../../slices/userSlice";
 
-import { TryFindUser } from "../../../api/auth";
-
 const authorizationValidationSchema = Yup.object().shape({
     username: Yup.string().min(4, "Too Short!").max(50, "Too Long!").required("Required"),
     password: Yup.string().min(8, "Too Short!").max(50, "Too Long!").required("Required"),
@@ -21,15 +20,13 @@ const AuthorizationDrawer = (props) => {
     const dispatch = useDispatch();
 
     const handleSubmit = async (values, formikBag) => {
-        const isUserExist = await TryFindUser(values);
-
-        if (isUserExist) {
-            dispatch(logIn(values.username));
+        try {
+            const result = await dispatch(logIn({ username: values.username, password: values.password }));
+            unwrapResult(result);
             props.onAuth();
             formikBag.resetForm();
-            localStorage.setItem("user", JSON.stringify({ username: values.username }));
-        } else {
-            formikBag.setFieldError("username", "User not exist or wrong password");
+        } catch (e) {
+            formikBag.setFieldError("username", e.message);
         }
     };
 

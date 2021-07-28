@@ -2,16 +2,18 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import TryFindUser from "../api/tryFindUser";
 import emptyRequest from "../api/emptyRequest";
 
-// export const logIn = createAsyncThunk("user/logIn", async ({ username, password }) => {
-//     const isUserExist = await TryFindUser({ username, password });
-//
-//     if (isUserExist) {
-//         localStorage.setItem("user", JSON.stringify({ username }));
-//         return await emptyRequest();
-//     } else {
-//         throw new Error("User not exist or wrong password");
-//     }
-// });
+export const logIn = createAsyncThunk("user/logIn", async ({ username, password }) => {
+    const response = await TryFindUser({ username, password });
+    const isUserExist = (await response.json()).length !== 0;
+
+    if (isUserExist) {
+        localStorage.setItem("user", JSON.stringify({ username }));
+    } else {
+        throw new Error("User not exist or wrong password");
+    }
+
+    return username;
+});
 
 export const logOut = createAsyncThunk("user/logOut", async ({ username }) => {
     const response = await emptyRequest();
@@ -39,11 +41,11 @@ export const userSlice = createSlice({
     name: "user",
     initialState: getUserInitialState(),
     extraReducers: {
-        // [logIn.fulfilled]: (state, action) => {
-        //     state.isGuest = false;
-        //     state.username = action.payload;
-        // },
-        [logOut.fulfilled]: (state, action) => {
+        [logIn.fulfilled]: (state, action) => {
+            state.isGuest = false;
+            state.username = action.payload;
+        },
+        [logOut.fulfilled]: (state, _) => {
             state.isGuest = true;
             state.username = "guest";
         },
