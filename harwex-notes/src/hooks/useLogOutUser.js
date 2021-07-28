@@ -6,5 +6,6 @@ export default function useLogOutUser() {
         onSuccess: () => {
             localStorage.removeItem("user");
         },
+        onError: (error) => alert(error.message),
     });
 }

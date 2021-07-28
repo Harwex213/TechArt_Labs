@@ -11,7 +11,6 @@ import * as Yup from "yup";
 import { logIn } from "../../../slices/userSlice";
 
 import useLogInUser from "../../../hooks/useLogInUser";
-import useFindUser from "../../../hooks/useFindUser";
 
 const authorizationValidationSchema = Yup.object().shape({
     username: Yup.string().min(4, "Too Short!").max(50, "Too Long!").required("Required"),
@@ -19,35 +18,17 @@ const authorizationValidationSchema = Yup.object().shape({
 });
 
 const AuthorizationDrawer = (props) => {
-    const { mutateAsync: tryFindUser } = useFindUser();
     const { mutateAsync: fetchLogIn } = useLogInUser();
     const dispatch = useDispatch();
 
     const handleSubmit = async (values, formikBag) => {
-        const handleRequestError = () => {
-            formikBag.setFieldError("username", "Server doesn't response");
-        };
-
-        const handleLogIn = () => {
-            dispatch(logIn(values.username));
-            props.onAuth();
-            formikBag.resetForm();
-        };
-
-        const handleIsUserExist = async (isUserExist) => {
-            if (isUserExist) {
-                await fetchLogIn(values, {
-                    onSuccess: handleLogIn,
-                    onError: handleRequestError,
-                });
-            } else {
-                formikBag.setFieldError("username", "User not exist or wrong password");
-            }
-        };
-
-        await tryFindUser(values, {
-            onSuccess: handleIsUserExist,
-            onError: handleRequestError,
+        await fetchLogIn(values, {
+            onSuccess: () => {
+                dispatch(logIn(values.username));
+                props.onAuth();
+                formikBag.resetForm();
+            },
+            onError: (error) => formikBag.setFieldError("username", error.message),
         });
     };
 

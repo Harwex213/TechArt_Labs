@@ -7,7 +7,6 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 
 import { logIn } from "../../../slices/userSlice";
-import useFindUser from "../../../hooks/useFindUser";
 import useLogInUser from "../../../hooks/useLogInUser";
 import useRegUser from "../../../hooks/useRegUser";
 
@@ -24,59 +23,39 @@ const registrationValidationSchema = Yup.object().shape({
 });
 
 const RegistrationDrawer = (props) => {
-    const { mutateAsync: tryFindUser } = useFindUser();
     const { mutateAsync: fetchLogIn } = useLogInUser();
     const { mutateAsync: fetchReg } = useRegUser();
     const dispatch = useDispatch();
 
     const handleSubmit = async (values, formikBag) => {
-        const handleRequestError = () => {
-            formikBag.setFieldError("username", "Server doesn't response");
-        };
-
-        const handleReg = () => {
+        const handleReg = async () => {
             props.onReg();
             formikBag.resetForm();
+
+            await fetchLogIn(
+                { username: values.username },
+                {
+                    onSuccess: () => dispatch(logIn(values.username)),
+                    onError: (error) => alert(error.message),
+                }
+            );
         };
 
-        const handleLogIn = () => {
-            dispatch(logIn(values.username));
-        };
-
-        const handleIsUserExist = async (isUserExist) => {
-            if (!isUserExist) {
-                await fetchReg(
-                    {
-                        id: Math.round(Date.now() + Math.random()),
-                        username: values.username,
-                        firstname: values.firstname,
-                        lastname: values.lastname,
-                        dateOfBirth: values.dateOfBirth,
-                        email: values.email,
-                        password: values.password,
-                    },
-                    {
-                        onSuccess: handleReg,
-                        onError: handleRequestError,
-                    }
-                );
-
-                await fetchLogIn(
-                    { username: values.username },
-                    {
-                        onSuccess: handleLogIn,
-                        onError: handleRequestError,
-                    }
-                );
-            } else {
-                formikBag.setFieldError("username", "Username taken.");
+        await fetchReg(
+            {
+                id: Math.round(Date.now() + Math.random()),
+                username: values.username,
+                firstname: values.firstname,
+                lastname: values.lastname,
+                dateOfBirth: values.dateOfBirth,
+                email: values.email,
+                password: values.password,
+            },
+            {
+                onSuccess: handleReg,
+                onError: (error) => formikBag.setFieldError("username", error.message),
             }
-        };
-
-        await tryFindUser(values, {
-            onSuccess: handleIsUserExist,
-            onError: handleRequestError,
-        });
+        );
     };
 
     return (

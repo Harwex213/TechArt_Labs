@@ -57,6 +57,15 @@
       "dateOfBirth": "2021-06-29T14:36:06.245Z",
       "email": "harwex213@mail.ru",
       "password": "12312421341234123"
+    },
+    {
+      "id": 1627469156246,
+      "username": "53462346",
+      "firstname": "2346234623",
+      "lastname": "4623462346",
+      "dateOfBirth": "2021-06-28T10:45:51.156Z",
+      "email": "harwexworld@gmail.com",
+      "password": "426234623462346"
     }
   ]
 }

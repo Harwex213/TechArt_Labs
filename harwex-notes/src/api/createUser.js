@@ -1,4 +1,4 @@
-const CreateNewUser = async (user) => {
+const createUser = async (user) => {
     const response = await fetch("http://localhost:3001/users", {
         method: "POST",
         headers: {
@@ -9,4 +9,4 @@ const CreateNewUser = async (user) => {
     return response.ok;
 };
 
-export { CreateNewUser };
+export default createUser;
