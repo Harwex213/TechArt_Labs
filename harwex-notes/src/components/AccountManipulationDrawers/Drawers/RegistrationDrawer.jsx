@@ -1,15 +1,14 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import { unwrapResult } from "@reduxjs/toolkit";
 import PropTypes from "prop-types";
 
 import { Form, Input, SubmitButton, DatePicker } from "formik-antd";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
+import { registerUser } from "../../../slices/profileSlice";
 import { logIn } from "../../../slices/userSlice";
-
-import { CreateNewUser } from "../../../api/reg";
-import { TryFindUser } from "../../../api/auth";
 
 const registrationValidationSchema = Yup.object().shape({
     username: Yup.string().min(4, "Too Short!").max(50, "Too Long!").required("Required"),
@@ -27,26 +26,33 @@ const RegistrationDrawer = (props) => {
     const dispatch = useDispatch();
 
     const handleSubmit = async (values, formikBag) => {
-        const isUserExist = await TryFindUser({
-            username: values.username,
-        });
+        try {
+            const regResult = await dispatch(
+                registerUser({
+                    id: Math.round(Date.now() + Math.random()),
+                    username: values.username,
+                    firstname: values.firstname,
+                    lastname: values.lastname,
+                    dateOfBirth: values.dateOfBirth,
+                    email: values.email,
+                    password: values.password,
+                })
+            );
+            unwrapResult(regResult);
 
-        if (isUserExist) {
-            formikBag.setFieldError("username", "Username taken");
-        } else {
-            await CreateNewUser({
-                id: Math.round(Date.now() + Math.random()),
-                username: values.username,
-                firstname: values.firstname,
-                lastname: values.lastname,
-                dateOfBirth: values.dateOfBirth,
-                email: values.email,
-                password: values.password,
-            });
-            dispatch(logIn(values.username));
-            formikBag.setSubmitting(false);
             props.onReg();
             formikBag.resetForm();
+
+            try {
+                const authResult = await dispatch(
+                    logIn({ username: values.username, password: values.password })
+                );
+                unwrapResult(authResult);
+            } catch (e) {
+                alert("Authorization: " + e.message);
+            }
+        } catch (e) {
+            formikBag.setFieldError("username", "Registration: " + e.message);
         }
     };
 

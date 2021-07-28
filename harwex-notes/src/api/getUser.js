@@ -1,4 +1,4 @@
-const TryFindUser = async ({ username = null, password = null }) => {
+const getUser = async ({ username = null, password = null }) => {
     if (!username) {
         return false;
     }
@@ -11,4 +11,4 @@ const TryFindUser = async ({ username = null, password = null }) => {
     return fetch("http://localhost:3001/users" + urlQuery);
 };
 
-export default TryFindUser;
+export default getUser;

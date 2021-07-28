@@ -48,6 +48,24 @@
       "dateOfBirth": "2021-07-02T12:51:39.720Z",
       "email": "harwex213@mail.ru",
       "password": "326215123262512"
+    },
+    {
+      "id": 1627464953420,
+      "username": "31561513",
+      "firstname": "5131531",
+      "lastname": "51351351",
+      "dateOfBirth": "2021-07-14T09:35:30.146Z",
+      "email": "harwex213@mail.ru",
+      "password": "2456519853632159/"
+    },
+    {
+      "id": 1627465230259,
+      "username": "938492304",
+      "firstname": "42304-234",
+      "lastname": "340293492034",
+      "dateOfBirth": "2021-07-14T09:40:17.848Z",
+      "email": "harwexworld@gmail.com",
+      "password": "4923402349230423"
     }
   ]
 }

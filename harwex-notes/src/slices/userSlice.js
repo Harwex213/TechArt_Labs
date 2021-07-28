@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import TryFindUser from "../api/tryFindUser";
+import getUser from "../api/getUser";
 import emptyRequest from "../api/emptyRequest";
 
 export const logIn = createAsyncThunk("user/logIn", async ({ username, password }) => {
-    const response = await TryFindUser({ username, password });
+    const response = await getUser({ username, password });
     const isUserExist = (await response.json()).length !== 0;
 
     if (isUserExist) {
@@ -54,6 +54,5 @@ export const userSlice = createSlice({
 
 export const selectIsGuest = (state) => state.user.isGuest;
 export const selectUserName = (state) => state.user.username;
-export const selectPassword = (state) => state.user.password;
 
 export default userSlice.reducer;
