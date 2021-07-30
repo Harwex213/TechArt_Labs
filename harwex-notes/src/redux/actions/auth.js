@@ -17,8 +17,7 @@ export const logIn = createAsyncThunk("logIn", async ({ username, password }) =>
 
 export const logOut = createAsyncThunk("logOut", async ({ username }) => {
     const response = await emptyRequest();
-    if (response.ok) {
-        localStorage.removeItem("user");
-    }
+    localStorage.removeItem("user");
+
     return await response.json();
 });

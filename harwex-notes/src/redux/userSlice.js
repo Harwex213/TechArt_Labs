@@ -39,7 +39,7 @@ export const userSlice = createSlice({
         },
         [logIn.rejected]: (state, action) => {
             state.logInAction.status = "rejected";
-            state.logInAction.error = action.payload;
+            state.logInAction.error = action.payload ?? action.error.message;
         },
         [logIn.fulfilled]: (state, action) => {
             state.logInAction.status = "fulfilled";
@@ -53,7 +53,7 @@ export const userSlice = createSlice({
         },
         [logOut.rejected]: (state, action) => {
             state.logOutAction.status = "rejected";
-            state.logOutAction.error = action.payload;
+            state.logOutAction.error = action.payload ?? action.error.message;
         },
         [logOut.fulfilled]: (state, _) => {
             state.logOutAction.status = "fulfilled";
@@ -67,7 +67,7 @@ export const userSlice = createSlice({
         },
         [registerUser.rejected]: (state, action) => {
             state.registerAction.status = "rejected";
-            state.registerAction.error = action.payload;
+            state.registerAction.error = action.payload ?? action.error.message;
         },
         [registerUser.fulfilled]: (state, action) => {
             state.registerAction.status = "fulfilled";

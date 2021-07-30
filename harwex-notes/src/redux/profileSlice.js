@@ -26,7 +26,7 @@ export const profileSlice = createSlice({
         },
         [fetchUserProfile.rejected]: (state, action) => {
             state.fetchProfileAction.status = "rejected";
-            state.fetchProfileAction.error = action.payload;
+            state.fetchProfileAction.error = action.payload ?? action.error.message;
         },
         [fetchUserProfile.fulfilled]: (state, action) => {
             state.fetchProfileAction.status = "fulfilled";
