@@ -9,7 +9,7 @@ import { Form, Input, SubmitButton } from "formik-antd";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
-import { logIn } from "../../../slices/userSlice";
+import { logIn } from "../../../redux/actions/auth";
 
 const authorizationValidationSchema = Yup.object().shape({
     username: Yup.string().min(4, "Too Short!").max(50, "Too Long!").required("Required"),

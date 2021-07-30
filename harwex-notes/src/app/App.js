@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 
 import { Layout } from "antd";
 
@@ -15,22 +14,11 @@ import NotFoundPage from "../pages/notFound/NotFoundPage";
 import { InitMyNotesPageDev } from "../dev/notesConfig";
 import { RoutePaths } from "../config/constants/routePaths";
 import Styles from "./Styles";
-import { selectUserName } from "../slices/userSlice";
-import { fetchUserProfile } from "../slices/profileSlice";
 
 const App = () => {
-    const dispatch = useDispatch();
-    const username = useSelector(selectUserName);
-
     useEffect(() => {
         InitMyNotesPageDev();
     }, []);
-
-    useEffect(() => {
-        if (username !== "guest") {
-            dispatch(fetchUserProfile({ username }));
-        }
-    }, [dispatch, username]);
 
     return (
         <Router>

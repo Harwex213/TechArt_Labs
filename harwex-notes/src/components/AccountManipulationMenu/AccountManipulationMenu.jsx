@@ -5,7 +5,8 @@ import PropTypes from "prop-types";
 
 import { Menu } from "antd";
 
-import { selectUserName, selectIsGuest, logOut } from "../../slices/userSlice";
+import { selectUserName, selectIsGuest, selectLogOutStatus } from "../../redux/userSlice";
+import { logOut } from "../../redux/actions/auth";
 
 import { AccountManipulationOptions } from "../../config/constants/accountManipulationOptions";
 
@@ -34,14 +35,17 @@ GuestMenu.propTypes = {
 const LoggedUserMenu = (props) => {
     const dispatch = useDispatch();
     const username = useSelector(selectUserName);
+    const { status } = useSelector(selectLogOutStatus);
 
     const handleOpenProfile = () => props.onSelectOption(AccountManipulationOptions.profile);
     const handleLogOutAction = async () => {
         try {
-            const resultAction = await dispatch(logOut({ username }));
-            unwrapResult(resultAction);
+            if (status === "idle" || status === "fulfilled") {
+                const result = await dispatch(logOut({ username }));
+                unwrapResult(result);
+            }
         } catch (e) {
-            alert(e.message);
+            alert("Log out failed: " + e.message);
         }
     };
 

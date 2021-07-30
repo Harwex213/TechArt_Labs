@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 import { Drawer } from "antd";
 
+import ProfileDrawer from "./Drawers/ProfileDrawer";
 import AuthorizationDrawer from "./Drawers/AuthorizationDrawer";
 import RegistrationDrawer from "./Drawers/RegistrationDrawer";
 
@@ -23,7 +24,7 @@ const AccountManipulationDrawers = (props) => {
                 visible={props.currentOption === AccountManipulationOptions.profile}
                 onClose={handleDrawerClose}
             >
-                <h1>Profile</h1>
+                <ProfileDrawer />
             </Drawer>
             <Drawer
                 width={windowWidth * 0.3}

@@ -7,8 +7,7 @@ import { Form, Input, SubmitButton, DatePicker } from "formik-antd";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
-import { registerUser } from "../../../slices/profileSlice";
-import { logIn } from "../../../slices/userSlice";
+import { registerUser } from "../../../redux/actions/reg";
 
 const registrationValidationSchema = Yup.object().shape({
     username: Yup.string().min(4, "Too Short!").max(50, "Too Long!").required("Required"),
@@ -39,18 +38,8 @@ const RegistrationDrawer = (props) => {
                 })
             );
             unwrapResult(regResult);
-
             props.onReg();
             formikBag.resetForm();
-
-            try {
-                const authResult = await dispatch(
-                    logIn({ username: values.username, password: values.password })
-                );
-                unwrapResult(authResult);
-            } catch (e) {
-                alert("Authorization: " + e.message);
-            }
         } catch (e) {
             formikBag.setFieldError("username", "Registration: " + e.message);
         }

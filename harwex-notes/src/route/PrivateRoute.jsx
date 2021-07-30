@@ -3,7 +3,7 @@ import { Redirect, Route } from "react-router-dom";
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 
-import { selectIsGuest } from "../slices/userSlice";
+import { selectIsGuest } from "../redux/userSlice";
 
 const PrivateRoute = ({ children, ...rest }) => {
     const isUserGuest = useSelector(selectIsGuest);
