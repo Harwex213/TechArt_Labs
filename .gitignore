@@ -7,3 +7,6 @@
 .idea/
 .sass-cache/
 node_modules/
+
+obj/
+bin/
