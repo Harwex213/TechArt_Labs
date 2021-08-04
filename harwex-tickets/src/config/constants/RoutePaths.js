@@ -1,7 +1,9 @@
 const RoutePaths = {
     any: "*",
     empty: "/",
-    movies: "/notes",
+    auth: "/authorization",
+    reg: "/registration",
+    movies: "/movies",
     about: "/about",
     notFound: "/not-found",
 };
