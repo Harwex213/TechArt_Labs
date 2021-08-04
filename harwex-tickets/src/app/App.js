@@ -13,11 +13,11 @@ import styles from "./styles";
 function App() {
     return (
         <Router>
-            <Layout>
+            <Layout style={styles.layout}>
                 <Layout.Header style={styles.header}>
                     <Header />
                 </Layout.Header>
-                <Layout.Content>
+                <Layout.Content style={styles.content}>
                     <Switch>
                         <Route path={RoutePaths.auth}>
                             <AuthorizationPage />
