@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const logIn = createAsyncThunk("logIn", async ({ username, password }) => {
-    const response = await getUser({ username, password });
+    const response = await getUser();
     const isUserExist = (await response.json()).length !== 0;
 
     if (isUserExist) {
@@ -11,11 +11,4 @@ export const logIn = createAsyncThunk("logIn", async ({ username, password }) =>
     }
 
     return username;
-});
-
-export const logOut = createAsyncThunk("logOut", async ({ username }) => {
-    const response = await emptyRequest();
-    localStorage.removeItem("user");
-
-    return await response.json();
 });
