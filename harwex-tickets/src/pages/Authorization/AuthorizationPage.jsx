@@ -1,10 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 
-import { Form, Input, SubmitButton } from "formik-antd";
 import { Formik } from "formik";
+import { Form, Input, SubmitButton } from "formik-antd";
 import * as Yup from "yup";
+
+import { RoutePaths } from "../../config/constants/RoutePaths";
 import styles from "./styles";
 
 const authValidationSchema = Yup.object().shape({
@@ -19,7 +22,6 @@ const AuthorizationPage = () => {
 
     return (
         <div style={styles.layout}>
-            <h1>Authorization</h1>
             <Formik
                 initialValues={{
                     username: "",
@@ -43,8 +45,10 @@ const AuthorizationPage = () => {
                             placeholder="Password"
                         />
                     </Form.Item>
-
                     <SubmitButton>Log in</SubmitButton>
+                    <Link style={styles.registrationLink} to={RoutePaths.reg}>
+                        Registration?
+                    </Link>
                 </Form>
             </Formik>
         </div>

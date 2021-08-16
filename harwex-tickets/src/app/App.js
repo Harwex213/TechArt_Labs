@@ -22,25 +22,27 @@ function App() {
                     <Layout.Header style={styles.header}>
                         <AppHeader />
                     </Layout.Header>
-                    <Layout.Content style={styles.content}>
-                        <Switch>
-                            <Route path={RoutePaths.auth}>
-                                <AuthorizationPage />
-                            </Route>
-                            <Route path={RoutePaths.reg}>
-                                <RegistrationPage />
-                            </Route>
+                    <Layout.Content style={styles.contentWrapper}>
+                        <div style={styles.content}>
+                            <Switch>
+                                <Route path={RoutePaths.auth}>
+                                    <AuthorizationPage />
+                                </Route>
+                                <Route path={RoutePaths.reg}>
+                                    <RegistrationPage />
+                                </Route>
 
-                            <Route path={RoutePaths.movies}>{/*<MyNotesPage />*/}</Route>
-                            <Route path={RoutePaths.about}>{/*<AboutPage />*/}</Route>
-                            <Route path={RoutePaths.notFound}>{/*<NotFoundPage />*/}</Route>
-                            <Route exact path={RoutePaths.empty}>
-                                <Redirect to={RoutePaths.about} />
-                            </Route>
-                            <Route path={RoutePaths.any}>
-                                <Redirect to={RoutePaths.notFound} />
-                            </Route>
-                        </Switch>
+                                <Route path={RoutePaths.movies}>{/*<MyNotesPage />*/}</Route>
+                                <Route path={RoutePaths.about}>{/*<AboutPage />*/}</Route>
+                                <Route path={RoutePaths.notFound}>{/*<NotFoundPage />*/}</Route>
+                                <Route exact path={RoutePaths.empty}>
+                                    <Redirect to={RoutePaths.about} />
+                                </Route>
+                                <Route path={RoutePaths.any}>
+                                    <Redirect to={RoutePaths.notFound} />
+                                </Route>
+                            </Switch>
+                        </div>
                     </Layout.Content>
                 </Layout>
             </Layout>

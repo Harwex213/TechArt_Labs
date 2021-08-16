@@ -4,7 +4,7 @@ const styles = {
         height: "100%",
         background: "#fff",
         padding: "0 50px",
-        boxShadow: "0 1px 4px #00152914",
+        boxShadow: "0 1px 5px #00152914",
     },
     location: {},
     avatar: {

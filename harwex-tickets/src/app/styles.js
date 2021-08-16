@@ -7,10 +7,17 @@ const styles = {
     },
     header: {
         padding: "0",
+        height: "72px",
+    },
+    contentWrapper: {
+        overflow: "auto",
+        display: "flex",
+        flexDirection: "column",
     },
     content: {
-        overflow: "auto",
-        paddingTop: "20px",
+        background: "#fff",
+        marginTop: "20px",
+        height: "100%",
     },
 };
 

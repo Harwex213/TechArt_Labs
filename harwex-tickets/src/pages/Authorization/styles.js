@@ -4,7 +4,10 @@ const styles = {
         flexDirection: "column",
         flexWrap: "wrap",
         alignContent: "center",
-        marginTop: "13vh",
+        marginTop: "100px",
+    },
+    registrationLink: {
+        marginLeft: "10px",
     },
 };
 
