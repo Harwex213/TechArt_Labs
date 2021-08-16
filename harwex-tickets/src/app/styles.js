@@ -2,11 +2,15 @@ const styles = {
     layout: {
         height: "100vh",
     },
+    sider: {
+        boxShadow: "2px 0 6px #00152959",
+    },
     header: {
-        display: "flex",
+        padding: "0",
     },
     content: {
-        height: "100%",
+        overflow: "auto",
+        paddingTop: "20px",
     },
 };
 

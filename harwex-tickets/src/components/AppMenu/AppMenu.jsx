@@ -7,12 +7,12 @@ import { VideoCameraOutlined, InfoCircleOutlined } from "@ant-design/icons";
 
 import { RoutePaths, RoutePathsId } from "../../config/constants/RoutePaths";
 
-const AppNavbar = () => {
+const AppMenu = () => {
     const location = useLocation();
     let selectedLink = RoutePathsId[location.pathname];
 
     return (
-        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={[selectedLink]}>
+        <Menu theme="dark" mode="inline" defaultSelectedKeys={[selectedLink]}>
             <Menu.Item key={0} icon={<VideoCameraOutlined />}>
                 <Link to={RoutePaths.movies}>Movies</Link>
             </Menu.Item>
@@ -23,4 +23,4 @@ const AppNavbar = () => {
     );
 };
 
-export default AppNavbar;
+export default AppMenu;

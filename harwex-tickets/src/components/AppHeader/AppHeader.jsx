@@ -1,24 +1,23 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import { Avatar } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 
-import AppNavbar from "../Navbar/AppNavbar";
-
 import { RoutePaths } from "../../config/constants/RoutePaths";
 import styles from "./styles";
 
-const Header = () => {
+const AppHeader = () => {
+    const location = useLocation();
+
     return (
-        <>
-            <h1>Harwex Tickets</h1>
-            <AppNavbar />
+        <div style={styles.layout}>
+            <h1 style={styles.location}>{location.pathname}</h1>
             <Link style={styles.avatar} to={RoutePaths.auth}>
                 <Avatar size="large" icon={<UserOutlined />} />
             </Link>
-        </>
+        </div>
     );
 };
 
-export default Header;
+export default AppHeader;
