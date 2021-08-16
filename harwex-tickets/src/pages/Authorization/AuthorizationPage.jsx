@@ -1,5 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { unwrapResult } from "@reduxjs/toolkit";
+import { logIn } from "../../redux/actions/auth";
 
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 
@@ -16,8 +19,16 @@ const authValidationSchema = Yup.object().shape({
 });
 
 const AuthorizationPage = () => {
-    const handleSubmit = async (values, _) => {
-        console.log("submit");
+    const dispatch = useDispatch();
+
+    const handleSubmit = async (values, formikBag) => {
+        try {
+            const result = await dispatch(logIn(values));
+            unwrapResult(result);
+            formikBag.resetForm();
+        } catch (e) {
+            formikBag.setFieldError("username", e.message);
+        }
     };
 
     return (

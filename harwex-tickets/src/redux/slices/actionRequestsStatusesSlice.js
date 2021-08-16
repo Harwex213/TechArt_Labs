@@ -2,29 +2,29 @@ import { createSlice } from "@reduxjs/toolkit";
 import { logIn } from "../actions/auth";
 
 const initialState = {
-    logInAction: {
+    logIn: {
         status: "idle",
         error: null,
     },
 };
 
-export const requestsSlice = createSlice({
-    name: "requests",
+export const actionRequestsStatusesSlice = createSlice({
+    name: "actionRequestsStatuses",
     initialState: initialState,
     extraReducers: {
         [logIn.pending]: (state, _) => {
-            state.logInAction.status = "pending";
+            state.logIn.status = "pending";
         },
         [logIn.rejected]: (state, action) => {
-            state.logInAction.status = "rejected";
-            state.logInAction.error = action.payload ?? action.error.message;
+            state.logIn.status = "rejected";
+            state.logIn.error = action.payload ?? action.error.message;
         },
         [logIn.fulfilled]: (state, _) => {
-            state.logInAction.status = "fulfilled";
+            state.logIn.status = "fulfilled";
         },
     },
 });
 
 export const selectLogInRequest = (state) => state.requests.logInAction;
 
-export default requestsSlice.reducer;
+export default actionRequestsStatusesSlice.reducer;

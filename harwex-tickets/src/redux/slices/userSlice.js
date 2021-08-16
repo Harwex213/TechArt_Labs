@@ -1,26 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-const getUserInitialState = () => {
-    const user = JSON.parse(localStorage.getItem("user"));
-
-    return user
-        ? {
-              isGuest: false,
-              username: user.username,
-          }
-        : {
-              isGuest: true,
-              username: "guest",
-          };
-};
+import UserRoles from "../../config/constants/UserRoles";
+import { logIn } from "../actions/auth";
 
 export const userSlice = createSlice({
     name: "user",
-    initialState: getUserInitialState(),
-    extraReducers: {},
+    initialState: {
+        role: UserRoles.guest,
+        username: "",
+        firstname: "",
+        lastname: "",
+        dateOfBirth: "",
+        phoneNumber: "",
+    },
+    extraReducers: {
+        [logIn.fulfilled]: (state, action) => {
+            state.role = action.payload;
+        },
+    },
 });
 
-export const selectIsGuest = (state) => state.user.isGuest;
-export const selectUserName = (state) => state.user.username;
+export const selectUser = (state) => state.user;
 
 export default userSlice.reducer;
