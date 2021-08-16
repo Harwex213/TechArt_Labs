@@ -1,7 +1,7 @@
-import apiHost from "../config/constants/apiHost";
+import ApiEndPoint from "../config/constants/ApiEndPoint";
 
 const getUsers = () => {
-    return fetch(`${apiHost}/api/user`);
+    return fetch(`${ApiEndPoint}/api/user`);
 };
 
 const getUser = (id = null) => {
@@ -9,7 +9,7 @@ const getUser = (id = null) => {
         throw new Error("User GET request: id must be set.");
     }
 
-    return fetch(`${apiHost}/api/user/${id}`);
+    return fetch(`${ApiEndPoint}/api/user/${id}`);
 };
 
 const postUser = (user) => {
@@ -17,7 +17,7 @@ const postUser = (user) => {
         throw new Error("User POST request: user must be set.");
     }
 
-    return fetch(`${apiHost}/api/user`, {
+    return fetch(`${ApiEndPoint}/api/user`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json;charset=utf-8",
@@ -31,7 +31,7 @@ const putUser = (user) => {
         throw new Error("User PUT request: user must be set.");
     }
 
-    return fetch(`${apiHost}/api/user/${user.id}`, {
+    return fetch(`${ApiEndPoint}/api/user/${user.id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json;charset=utf-8",
@@ -45,7 +45,7 @@ const deleteUser = (id) => {
         throw new Error("User DELETE request: id must be set.");
     }
 
-    return fetch(`${apiHost}/api/user/${id}`, {
+    return fetch(`${ApiEndPoint}/api/user/${id}`, {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json;charset=utf-8",
