@@ -10,11 +10,11 @@ const login = ({ username, password }) => {
     });
 };
 
-const logout = () => {
+const logout = ({ accessToken }) => {
     return fetch(`${ApiEndPoint}/auth/logout`, {
         method: "POST",
         headers: {
-            Authorization: localStorage.getItem("accessToken"),
+            Authorization: accessToken,
         },
         body: null,
     });
@@ -30,15 +30,13 @@ const register = ({ username, phoneNumber, password, confirmPassword }) => {
     });
 };
 
-const refresh = () => {
+const refresh = ({ refreshToken }) => {
     return fetch(`${ApiEndPoint}/auth/refresh`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json;charset=utf-8",
         },
-        body: JSON.stringify({
-            refreshToken: localStorage.getItem("refreshToken"),
-        }),
+        body: JSON.stringify(refreshToken),
     });
 };
 

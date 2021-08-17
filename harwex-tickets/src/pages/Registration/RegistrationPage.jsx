@@ -1,4 +1,7 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { unwrapResult } from "@reduxjs/toolkit";
+import { register } from "../../redux/actions/auth";
 
 import { Formik } from "formik";
 import { Form, Input, SubmitButton, DatePicker } from "formik-antd";
@@ -19,8 +22,23 @@ const registrationSchema = Yup.object().shape({
 });
 
 const RegistrationPage = () => {
-    const handleSubmit = async (values, _) => {
-        console.log("submit");
+    const dispatch = useDispatch();
+
+    const handleSubmit = async (values, formikBag) => {
+        try {
+            const result = await dispatch(
+                register({
+                    username: values.username,
+                    phoneNumber: values.phoneNumber,
+                    password: values.password,
+                    confirmPassword: values.confirmPassword,
+                })
+            );
+            unwrapResult(result);
+            formikBag.resetForm();
+        } catch (e) {
+            formikBag.setFieldError("username", e.message);
+        }
     };
 
     return (
