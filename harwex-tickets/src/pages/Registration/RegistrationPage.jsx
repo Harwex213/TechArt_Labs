@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { register } from "../../redux/actions/auth";
@@ -7,6 +8,7 @@ import { Formik } from "formik";
 import { Form, Input, SubmitButton, DatePicker } from "formik-antd";
 import * as Yup from "yup";
 
+import { RoutePaths } from "../../config/constants/RoutePaths";
 import styles from "./styles";
 
 const registrationSchema = Yup.object().shape({
@@ -15,7 +17,7 @@ const registrationSchema = Yup.object().shape({
     lastname: Yup.string().min(4, "Too Short!").max(50, "Too Long!").required("Required"),
     phoneNumber: Yup.string().required("Required"),
     dateOfBirth: Yup.date().required("Required"),
-    password: Yup.string().min(8, "Too Short!").max(50, "Too Long!").required("Required"),
+    password: Yup.string().min(4, "Too Short!").max(50, "Too Long!").required("Required"),
     confirmPassword: Yup.string()
         .oneOf([Yup.ref("password")], "Passwords must match")
         .required("Please, repeat your password"),
@@ -80,6 +82,9 @@ const RegistrationPage = () => {
                     </Form.Item>
 
                     <SubmitButton>Register</SubmitButton>
+                    <Link style={styles.loginLink} to={RoutePaths.auth}>
+                        Login?
+                    </Link>
                 </Form>
             </Formik>
         </div>

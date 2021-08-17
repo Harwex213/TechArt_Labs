@@ -7,7 +7,6 @@ const styles = {
     },
     header: {
         padding: "0",
-        height: "72px",
     },
     contentWrapper: {
         overflow: "auto",
