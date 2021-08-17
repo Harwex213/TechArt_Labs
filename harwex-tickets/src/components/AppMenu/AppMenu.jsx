@@ -4,7 +4,12 @@ import { useSelector } from "react-redux";
 import { selectUser } from "../../redux/slices/userSlice";
 
 import { Menu } from "antd";
-import { VideoCameraOutlined, VideoCameraAddOutlined, InfoCircleOutlined } from "@ant-design/icons";
+import {
+    VideoCameraOutlined,
+    VideoCameraAddOutlined,
+    InfoCircleOutlined,
+    UserOutlined,
+} from "@ant-design/icons";
 
 import UserRoles from "../../config/constants/UserRoles";
 import { RoutePaths } from "../../config/constants/RoutePaths";
@@ -29,14 +34,18 @@ const UserMenu = () => (
         <Menu.Item key={0} icon={<VideoCameraOutlined />}>
             <Link to={RoutePaths.movies}>Movies</Link>
         </Menu.Item>
-        <Menu.Item key={1} icon={<InfoCircleOutlined />}>
+        <Menu.Item key={1} icon={<UserOutlined />}>
+            <Link to={RoutePaths.account}>Account</Link>
+        </Menu.Item>
+        <Menu.Item key={2} icon={<InfoCircleOutlined />}>
             <Link to={RoutePaths.about}>About</Link>
         </Menu.Item>
     </>
 );
 const UserMenuRouteId = {
     [RoutePaths.movies]: "0",
-    [RoutePaths.about]: "1",
+    [RoutePaths.account]: "1",
+    [RoutePaths.about]: "2",
 };
 
 const AdminMenu = () => (
@@ -44,14 +53,18 @@ const AdminMenu = () => (
         <Menu.Item key={0} icon={<VideoCameraAddOutlined />}>
             <Link to={RoutePaths.cinemas}>Cinemas</Link>
         </Menu.Item>
-        <Menu.Item key={1} icon={<InfoCircleOutlined />}>
+        <Menu.Item key={1} icon={<UserOutlined />}>
+            <Link to={RoutePaths.account}>Account</Link>
+        </Menu.Item>
+        <Menu.Item key={2} icon={<InfoCircleOutlined />}>
             <Link to={RoutePaths.about}>About</Link>
         </Menu.Item>
     </>
 );
 const AdminMenuRouteId = {
     [RoutePaths.cinemas]: "0",
-    [RoutePaths.about]: "1",
+    [RoutePaths.account]: "1",
+    [RoutePaths.about]: "2",
 };
 
 const AppMenu = () => {

@@ -5,6 +5,7 @@ import { Layout } from "antd";
 
 import AuthorizationPage from "../pages/Authorization/AuthorizationPage";
 import RegistrationPage from "../pages/Registration/RegistrationPage";
+import AccountPage from "../pages/Account/AccountPage";
 import AppNavbar from "../components/AppNavbar/AppNavbar";
 import AppHeader from "../components/AppHeader/AppHeader";
 
@@ -33,6 +34,10 @@ function App() {
                                 </Route>
 
                                 <Route path={RoutePaths.movies}>{/*<MyNotesPage />*/}</Route>
+                                <Route path={RoutePaths.cinemas}>{/*<MyNotesPage />*/}</Route>
+                                <Route path={RoutePaths.account}>
+                                    <AccountPage />
+                                </Route>
                                 <Route path={RoutePaths.about}>{/*<AboutPage />*/}</Route>
                                 <Route path={RoutePaths.notFound}>{/*<NotFoundPage />*/}</Route>
                                 <Route exact path={RoutePaths.empty}>

@@ -16,6 +16,7 @@ const styles = {
     content: {
         background: "#fff",
         marginTop: "20px",
+        padding: "50px 30px",
         height: "100%",
     },
 };
