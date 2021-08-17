@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { logIn, logOut, refresh, register } from "../../actions/auth";
+import { login, logout, refresh, register } from "../../actions/auth";
 
 const initialState = {
     logIn: {
@@ -24,25 +24,25 @@ export const authRequestsSlice = createSlice({
     name: "authRequests",
     initialState: initialState,
     extraReducers: {
-        [logIn.pending]: (state, _) => {
+        [login.pending]: (state, _) => {
             state.logIn.status = "pending";
         },
-        [logIn.rejected]: (state, action) => {
+        [login.rejected]: (state, action) => {
             state.logIn.status = "rejected";
             state.logIn.error = action.payload ?? action.error.message;
         },
-        [logIn.fulfilled]: (state, _) => {
+        [login.fulfilled]: (state, _) => {
             state.logIn.status = "fulfilled";
         },
 
-        [logOut.pending]: (state, _) => {
+        [logout.pending]: (state, _) => {
             state.logOut.status = "pending";
         },
-        [logOut.rejected]: (state, action) => {
+        [logout.rejected]: (state, action) => {
             state.logOut.status = "rejected";
             state.logOut.error = action.payload ?? action.error.message;
         },
-        [logOut.fulfilled]: (state, _) => {
+        [logout.fulfilled]: (state, _) => {
             state.logOut.status = "fulfilled";
         },
 

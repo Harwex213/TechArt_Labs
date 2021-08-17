@@ -1,20 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 import UserRoles from "../../config/constants/UserRoles";
-import { logIn, register } from "../actions/auth";
+import { login, register } from "../actions/auth";
+
+export const userInitialState = {
+    role: UserRoles.guest,
+    username: "",
+    firstname: "",
+    lastname: "",
+    dateOfBirth: "",
+    phoneNumber: "",
+};
 
 export const userSlice = createSlice({
     name: "user",
-    initialState: {
-        role: UserRoles.guest,
-        username: "",
-        firstname: "",
-        lastname: "",
-        dateOfBirth: "",
-        phoneNumber: "",
-    },
+    initialState: userInitialState,
     extraReducers: {
-        [logIn.fulfilled]: (state, action) => {
-            state.role = action.payload;
+        [login.fulfilled]: (state, action) => {
+            state.role = action.payload.role;
+            state.username = action.payload.username;
         },
         [register.fulfilled]: (state, action) => {
             state.role = action.payload.role;

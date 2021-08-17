@@ -1,36 +1,49 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk, unwrapResult } from "@reduxjs/toolkit";
 import authApi from "../../api/auth";
 import jwtDecode from "jwt-decode";
 import { deleteTokens, getAccessToken, getRefreshToken, saveTokens } from "../../utils/tokens";
 
-export const logIn = createAsyncThunk("logIn", async ({ username, password }) => {
+export const login = createAsyncThunk("login", async ({ username, password }) => {
     const response = await authApi.login({ username, password });
-    const tokens = await response.json();
+    const data = await response.json();
+    if (!response.ok) {
+        throw new Error(data["errorMessages"]);
+    }
 
-    saveTokens(tokens.accessToken, tokens.refreshToken);
+    saveTokens(data.accessToken, data.refreshToken);
 
-    const accessTokenDecoded = jwtDecode(tokens.accessToken);
-    return accessTokenDecoded["Role"];
+    const accessTokenDecoded = jwtDecode(data.accessToken);
+    return {
+        username: accessTokenDecoded["Name"],
+        role: accessTokenDecoded["Role"],
+    };
 });
 
-export const logOut = createAsyncThunk("logOut", async () => {
+export const logout = createAsyncThunk("logout", async (_, thunkAPI) => {
     const accessToken = getAccessToken();
-    await authApi.logout({ accessToken });
+    const response = await authApi.logout({ accessToken });
+    if (!response.ok) {
+        const result = await thunkAPI.dispatch(refresh());
+        unwrapResult(result);
+        await authApi.logout({ accessToken });
+    }
     deleteTokens();
 });
 
 export const register = createAsyncThunk(
     "register",
-    async ({ username, phoneNumber, password, confirmPassword }) => {
-        await authApi.register({ username, phoneNumber, password, confirmPassword });
-        const response = await authApi.login({ username, password });
-        const tokens = await response.json();
+    async ({ username, phoneNumber, password, confirmPassword }, thunkAPI) => {
+        const regResponse = await authApi.register({ username, phoneNumber, password, confirmPassword });
+        if (!regResponse.ok) {
+            const error = await regResponse.json();
+            throw new Error(error["errorMessages"]);
+        }
 
-        saveTokens(tokens.accessToken, tokens.refreshToken);
+        const result = await thunkAPI.dispatch(login({ username, password }));
+        unwrapResult(result);
 
-        const accessTokenDecoded = jwtDecode(tokens.accessToken);
         return {
-            role: accessTokenDecoded["Role"],
+            role: result.payload.role,
             username,
             firstname: "",
             lastname: "",
@@ -43,10 +56,28 @@ export const register = createAsyncThunk(
 export const refresh = createAsyncThunk("refresh", async () => {
     const refreshToken = getRefreshToken();
     const response = await authApi.refresh({ refreshToken });
+    if (!response.ok) {
+        throw new Error("Unauthorized");
+    }
+
     const tokens = await response.json();
 
     saveTokens(tokens.accessToken, tokens.refreshToken);
 
     const accessTokenDecoded = jwtDecode(tokens.accessToken);
     return accessTokenDecoded["Role"];
+});
+
+export const persistUser = createAsyncThunk("persistUser", async () => {
+    // const accessToken = getAccessToken();
+    // const isTokenExpired = checkAccessTokenOnExp(accessToken);
+    //
+    // if (isTokenExpired) {
+    //     return userInitialState;
+    // } else {
+    //     const refreshToken = getRefreshToken();
+    // }
+    //
+    // const accessTokenDecoded = jwtDecode(tokens.accessToken);
+    // return accessTokenDecoded["Role"];
 });
