@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { register } from "../../redux/actions/auth";
@@ -25,6 +25,7 @@ const registrationSchema = Yup.object().shape({
 
 const RegistrationPage = () => {
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const handleSubmit = async (values, formikBag) => {
         try {
@@ -38,6 +39,7 @@ const RegistrationPage = () => {
             );
             unwrapResult(result);
             formikBag.resetForm();
+            history.push(RoutePaths.account);
         } catch (e) {
             formikBag.setFieldError("username", e.message);
         }

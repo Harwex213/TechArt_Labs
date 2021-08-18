@@ -7,7 +7,7 @@ import { Layout } from "antd";
 import AuthorizationPage from "../pages/Authorization/AuthorizationPage";
 import RegistrationPage from "../pages/Registration/RegistrationPage";
 import AccountPage from "../pages/Account/AccountPage";
-import AppNavbar from "../components/AppNavbar/AppNavbar";
+import AppLeftNavbar from "../components/AppNavbar/AppLeftNavbar";
 import AppHeader from "../components/AppHeader/AppHeader";
 
 import RoutePaths from "../config/constants/RoutePaths";
@@ -19,7 +19,7 @@ function App() {
         <Router>
             <Layout style={styles.layout}>
                 <Layout.Sider style={styles.sider}>
-                    <AppNavbar />
+                    <AppLeftNavbar />
                 </Layout.Sider>
                 <Layout>
                     <Layout.Header style={styles.header}>
