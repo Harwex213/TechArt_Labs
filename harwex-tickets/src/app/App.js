@@ -10,6 +10,8 @@ import { Layout } from "antd";
 import AuthorizationPage from "../pages/Authorization/AuthorizationPage";
 import RegistrationPage from "../pages/Registration/RegistrationPage";
 import AccountPage from "../pages/Account/AccountPage";
+import CinemasPage from "../pages/Cinemas/CinemasPage";
+
 import AppLeftNavbar from "../components/AppNavbar/AppLeftNavbar";
 import AppHeader from "../components/AppHeader/AppHeader";
 
@@ -52,12 +54,20 @@ function App() {
                     <Layout.Content style={styles.contentWrapper}>
                         <div style={styles.content}>
                             <Switch>
-                                <Route path={RoutePaths.auth}>
+                                <RoleRoute
+                                    roles={[UserRoles.guest]}
+                                    redirectPathname={RoutePaths.account}
+                                    path={RoutePaths.auth}
+                                >
                                     <AuthorizationPage />
-                                </Route>
-                                <Route path={RoutePaths.reg}>
+                                </RoleRoute>
+                                <RoleRoute
+                                    roles={[UserRoles.guest]}
+                                    redirectPathname={RoutePaths.account}
+                                    path={RoutePaths.reg}
+                                >
                                     <RegistrationPage />
-                                </Route>
+                                </RoleRoute>
 
                                 <Route path={RoutePaths.movies}>{/*<MyNotesPage />*/}</Route>
                                 <Route path={RoutePaths.about}>{/*<AboutPage />*/}</Route>
@@ -65,13 +75,18 @@ function App() {
 
                                 <RoleRoute
                                     roles={[UserRoles.user, UserRoles.admin]}
+                                    redirectPathname={RoutePaths.auth}
                                     path={RoutePaths.account}
                                 >
                                     <AccountPage />
                                 </RoleRoute>
 
-                                <RoleRoute roles={[UserRoles.admin]} path={RoutePaths.cinemas}>
-                                    {/*<MyNotesPage />*/}
+                                <RoleRoute
+                                    roles={[UserRoles.admin]}
+                                    redirectPathname={RoutePaths.auth}
+                                    path={RoutePaths.cinemas}
+                                >
+                                    <CinemasPage />
                                 </RoleRoute>
 
                                 <Route exact path={RoutePaths.empty}>

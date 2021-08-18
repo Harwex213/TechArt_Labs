@@ -4,9 +4,7 @@ import { useSelector } from "react-redux";
 import { selectUser } from "../redux/slices/userSlice";
 import PropTypes from "prop-types";
 
-import RoutePaths from "../config/constants/RoutePaths";
-
-const RoleRoute = ({ children, roles, ...rest }) => {
+const RoleRoute = ({ children, roles, redirectPathname, ...rest }) => {
     const user = useSelector(selectUser);
 
     return (
@@ -17,7 +15,7 @@ const RoleRoute = ({ children, roles, ...rest }) => {
                 ) : (
                     <Redirect
                         to={{
-                            pathname: RoutePaths.auth,
+                            pathname: redirectPathname,
                             state: { from: location },
                         }}
                     />
@@ -30,6 +28,7 @@ const RoleRoute = ({ children, roles, ...rest }) => {
 RoleRoute.propTypes = {
     children: PropTypes.element,
     roles: PropTypes.array,
+    redirectPathname: PropTypes.string,
 };
 
 export default RoleRoute;
