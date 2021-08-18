@@ -67,7 +67,7 @@ const AdminMenuRouteId = {
     [RoutePaths.about]: "2",
 };
 
-const AppMenu = () => {
+const AppLeftMenu = () => {
     const user = useSelector(selectUser);
     const location = useLocation();
     const [selectedKey, setSelectedKey] = useState();
@@ -97,4 +97,4 @@ const AppMenu = () => {
     );
 };
 
-export default AppMenu;
+export default AppLeftMenu;

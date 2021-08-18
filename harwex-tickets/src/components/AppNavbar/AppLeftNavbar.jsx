@@ -1,16 +1,16 @@
 import React from "react";
 
-import AppMenu from "../AppMenu/AppMenu";
+import AppLeftMenu from "../AppMenu/AppLeftMenu";
 
 import styles from "./styles";
 
-const AppNavbar = () => {
+const AppLeftNavbar = () => {
     return (
         <div style={styles.layout}>
             <div style={styles.logo} />
-            <AppMenu />
+            <AppLeftMenu />
         </div>
     );
 };
 
-export default AppNavbar;
+export default AppLeftNavbar;
