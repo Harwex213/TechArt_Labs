@@ -27,15 +27,8 @@ export const login = createAsyncThunk("login", async ({ username, password }, th
 
 export const logout = createAsyncThunk("logout", async (_, thunkAPI) => {
     const accessToken = getAccessToken();
-    const response = await authApi.logout({ accessToken });
-    if (!response.ok) {
-        const result = await thunkAPI.dispatch(refresh());
-        unwrapResult(result);
-        await authApi.logout({ accessToken });
-    }
-
+    await authApi.logout({ accessToken });
     deleteTokens();
-
     thunkAPI.dispatch(persistUser(UserInitialState));
 });
 

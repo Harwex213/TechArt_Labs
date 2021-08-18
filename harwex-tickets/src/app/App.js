@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import RoleRoute from "../route/RoleRoute";
+import { useDispatch } from "react-redux";
+import { unwrapResult } from "@reduxjs/toolkit";
+import { logout, refresh } from "../redux/actions/auth";
 
 import { Layout } from "antd";
 
@@ -10,11 +13,32 @@ import AccountPage from "../pages/Account/AccountPage";
 import AppLeftNavbar from "../components/AppNavbar/AppLeftNavbar";
 import AppHeader from "../components/AppHeader/AppHeader";
 
+import { checkIsTokenExpired, getAccessToken } from "../utils/tokens";
 import RoutePaths from "../config/constants/RoutePaths";
 import { UserRoles } from "../config/constants/User";
 import styles from "./styles";
 
 function App() {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        const tryRefresh = async () => {
+            try {
+                const refreshResult = await dispatch(refresh());
+                unwrapResult(refreshResult);
+            } catch (e) {
+                const logoutResult = await dispatch(logout());
+                unwrapResult(logoutResult);
+            }
+        };
+        const accessToken = getAccessToken();
+        const isTokenExpired = checkIsTokenExpired(accessToken);
+
+        if (isTokenExpired) {
+            tryRefresh().then();
+        }
+    }, [dispatch]);
+
     return (
         <Router>
             <Layout style={styles.layout}>
