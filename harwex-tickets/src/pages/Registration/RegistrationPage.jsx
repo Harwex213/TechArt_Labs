@@ -8,7 +8,7 @@ import { Formik } from "formik";
 import { Form, Input, SubmitButton, DatePicker } from "formik-antd";
 import * as Yup from "yup";
 
-import { RoutePaths } from "../../config/constants/RoutePaths";
+import RoutePaths from "../../config/constants/RoutePaths";
 import styles from "./styles";
 
 const registrationSchema = Yup.object().shape({

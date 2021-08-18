@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import RoleRoute from "../route/RoleRoute";
 
 import { Layout } from "antd";
 
@@ -9,7 +10,8 @@ import AccountPage from "../pages/Account/AccountPage";
 import AppNavbar from "../components/AppNavbar/AppNavbar";
 import AppHeader from "../components/AppHeader/AppHeader";
 
-import { RoutePaths } from "../config/constants/RoutePaths";
+import RoutePaths from "../config/constants/RoutePaths";
+import UserRoles from "../config/constants/UserRoles";
 import styles from "./styles";
 
 function App() {
@@ -34,12 +36,20 @@ function App() {
                                 </Route>
 
                                 <Route path={RoutePaths.movies}>{/*<MyNotesPage />*/}</Route>
-                                <Route path={RoutePaths.cinemas}>{/*<MyNotesPage />*/}</Route>
-                                <Route path={RoutePaths.account}>
-                                    <AccountPage />
-                                </Route>
                                 <Route path={RoutePaths.about}>{/*<AboutPage />*/}</Route>
                                 <Route path={RoutePaths.notFound}>{/*<NotFoundPage />*/}</Route>
+
+                                <RoleRoute
+                                    roles={[UserRoles.user, UserRoles.admin]}
+                                    path={RoutePaths.account}
+                                >
+                                    <AccountPage />
+                                </RoleRoute>
+
+                                <RoleRoute roles={[UserRoles.admin]} path={RoutePaths.cinemas}>
+                                    {/*<MyNotesPage />*/}
+                                </RoleRoute>
+
                                 <Route exact path={RoutePaths.empty}>
                                     <Redirect to={RoutePaths.about} />
                                 </Route>

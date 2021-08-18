@@ -10,4 +10,4 @@ const RoutePaths = {
     notFound: "/not-found",
 };
 
-export { RoutePaths };
+export default RoutePaths;

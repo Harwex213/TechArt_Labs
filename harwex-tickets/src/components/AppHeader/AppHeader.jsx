@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Avatar } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 
-import { RoutePaths } from "../../config/constants/RoutePaths";
+import RoutePaths from "../../config/constants/RoutePaths";
 import styles from "./styles";
 
 const AppHeader = () => {

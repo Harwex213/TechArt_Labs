@@ -12,7 +12,7 @@ import {
 } from "@ant-design/icons";
 
 import UserRoles from "../../config/constants/UserRoles";
-import { RoutePaths } from "../../config/constants/RoutePaths";
+import RoutePaths from "../../config/constants/RoutePaths";
 
 const GuestMenu = () => (
     <>
