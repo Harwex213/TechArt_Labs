@@ -11,7 +11,7 @@ import AppNavbar from "../components/AppNavbar/AppNavbar";
 import AppHeader from "../components/AppHeader/AppHeader";
 
 import RoutePaths from "../config/constants/RoutePaths";
-import UserRoles from "../config/constants/UserRoles";
+import { UserRoles } from "../config/constants/User";
 import styles from "./styles";
 
 function App() {

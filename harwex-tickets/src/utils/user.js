@@ -1,14 +1,7 @@
-const saveUser = (user) => {
+export const saveLocalUser = (user) => {
     localStorage.setItem("user", JSON.stringify(user));
 };
 
-const getUser = () => {
-    return localStorage.getItem("user");
+export const getLocalUser = () => {
+    return JSON.parse(localStorage.getItem("user"));
 };
-
-const userPersist = {
-    saveUser,
-    getUser,
-};
-
-export default userPersist;

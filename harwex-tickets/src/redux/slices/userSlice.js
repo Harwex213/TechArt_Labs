@@ -1,27 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { login, refresh, register } from "../actions/auth";
-import { checkIsTokenExpired, getAccessToken } from "../../utils/tokens";
-import UserRoles from "../../config/constants/UserRoles";
-import userPersist from "../../utils/user";
+import { persistUser } from "../actions/user";
 
-const initialState = {
-    userId: -1,
-    role: UserRoles.guest,
-    username: "",
-    firstname: "",
-    lastname: "",
-    dateOfBirth: "",
-    phoneNumber: "",
-};
+import { checkIsTokenExpired, getAccessToken } from "../../utils/tokens";
+import { getLocalUser } from "../../utils/user";
+import { UserInitialState } from "../../config/constants/User";
 
 const getInitialState = () => {
     const accessToken = getAccessToken();
     const isTokenExpired = checkIsTokenExpired(accessToken);
 
     if (isTokenExpired) {
-        return initialState;
+        return UserInitialState;
     } else {
-        return userPersist.getUser();
+        return getLocalUser() ?? UserInitialState;
     }
 };
 
@@ -29,13 +20,7 @@ export const userSlice = createSlice({
     name: "user",
     initialState: getInitialState(),
     extraReducers: {
-        [login.fulfilled]: (state, action) => (state = action.payload),
-        [register.fulfilled]: (state, action) => (state = action.payload),
-        [refresh.fulfilled]: (state, action) => {
-            state.id = action.payload.id;
-            state.role = action.payload.role;
-            state.username = action.payload.username;
-        },
+        [persistUser.fulfilled]: (state, action) => (state = action.payload),
     },
 });
 
