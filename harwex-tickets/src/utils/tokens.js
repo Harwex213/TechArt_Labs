@@ -13,8 +13,8 @@ export const deleteTokens = () => {
 export const checkAccessTokenOnExp = (accessToken) => {
     if (accessToken) {
         const decoded = jwtDecode(accessToken);
-        const expirationTime = new Date(Number(decoded["exp"]) * 1000);
-        return expirationTime > Date.now();
+        const expirationTime = Number(decoded["exp"]) * 1000;
+        return expirationTime < Date.now();
     }
     return false;
 };
