@@ -57,6 +57,7 @@ export const register = createAsyncThunk(
         unwrapResult(result);
 
         return createUser({
+            id: result.payload.id,
             role: result.payload.role,
             username,
             phoneNumber,

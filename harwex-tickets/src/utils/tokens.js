@@ -10,13 +10,13 @@ export const deleteTokens = () => {
     localStorage.removeItem("refreshToken");
 };
 
-export const checkAccessTokenOnExp = (accessToken) => {
-    if (accessToken) {
-        const decoded = jwtDecode(accessToken);
+export const checkIsTokenExpired = (token) => {
+    if (token) {
+        const decoded = jwtDecode(token);
         const expirationTime = Number(decoded["exp"]) * 1000;
         return expirationTime < Date.now();
     }
-    return false;
+    return true;
 };
 
 export const getAccessToken = () => localStorage.getItem("accessToken");

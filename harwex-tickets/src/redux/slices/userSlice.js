@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { login, refresh, register } from "../actions/auth";
-import { checkAccessTokenOnExp, getAccessToken } from "../../utils/tokens";
+import { checkIsTokenExpired, getAccessToken } from "../../utils/tokens";
 import UserRoles from "../../config/constants/UserRoles";
 import userPersist from "../../utils/user";
 
@@ -16,7 +16,7 @@ const initialState = {
 
 const getInitialState = () => {
     const accessToken = getAccessToken();
-    const isTokenExpired = checkAccessTokenOnExp(accessToken);
+    const isTokenExpired = checkIsTokenExpired(accessToken);
 
     if (isTokenExpired) {
         return initialState;
