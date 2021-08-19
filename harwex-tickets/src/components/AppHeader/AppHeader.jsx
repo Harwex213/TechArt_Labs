@@ -12,7 +12,7 @@ import styles from "./styles";
 
 const AppHeader = () => {
     const location = useLocation();
-    const locationName = location.pathname[1].toUpperCase() + location.pathname.substring(2);
+    const locationName = location.pathname[1]?.toUpperCase() + location.pathname.substring(2);
     const user = useSelector(selectUser);
 
     return (
