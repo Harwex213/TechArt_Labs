@@ -1,18 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { login, logout, refresh, register } from "../../actions/auth";
-
-const initialState = {
-    status: "idle",
-    error: null,
-};
+import { RequestInitialState } from "../../../config/constants/Request";
 
 export const authRequestsSlice = createSlice({
     name: "authRequests",
     initialState: {
-        logIn: initialState,
-        logOut: initialState,
-        register: initialState,
-        refresh: initialState,
+        logIn: RequestInitialState,
+        logOut: RequestInitialState,
+        register: RequestInitialState,
+        refresh: RequestInitialState,
     },
     extraReducers: {
         [login.pending]: (state, _) => {
@@ -25,7 +21,7 @@ export const authRequestsSlice = createSlice({
         [login.fulfilled]: (state, _) => {
             state.logIn.status = "fulfilled";
 
-            state.logOut = initialState;
+            state.logOut = RequestInitialState;
         },
 
         [register.pending]: (state, _) => {
@@ -38,7 +34,7 @@ export const authRequestsSlice = createSlice({
         [register.fulfilled]: (state, _) => {
             state.register.status = "fulfilled";
 
-            state.logOut = initialState;
+            state.logOut = RequestInitialState;
         },
 
         [logout.pending]: (state, _) => {
@@ -51,8 +47,8 @@ export const authRequestsSlice = createSlice({
         [logout.fulfilled]: (state, _) => {
             state.logOut.status = "fulfilled";
 
-            state.logIn = initialState;
-            state.register = initialState;
+            state.logIn = RequestInitialState;
+            state.register = RequestInitialState;
         },
 
         [refresh.pending]: (state, _) => {
@@ -65,7 +61,7 @@ export const authRequestsSlice = createSlice({
         [refresh.fulfilled]: (state, _) => {
             state.refresh.status = "fulfilled";
 
-            state.logOut = initialState;
+            state.logOut = RequestInitialState;
         },
     },
 });
