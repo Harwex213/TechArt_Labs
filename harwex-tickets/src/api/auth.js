@@ -36,7 +36,7 @@ const refresh = ({ refreshToken }) => {
         headers: {
             "Content-Type": "application/json;charset=utf-8",
         },
-        body: JSON.stringify(refreshToken),
+        body: JSON.stringify({ refreshToken }),
     });
 };
 
