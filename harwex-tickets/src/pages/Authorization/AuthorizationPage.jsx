@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { login } from "../../redux/actions/auth";
@@ -20,14 +20,11 @@ const authValidationSchema = Yup.object().shape({
 
 const AuthorizationPage = () => {
     const dispatch = useDispatch();
-    const history = useHistory();
 
     const handleSubmit = async (values, formikBag) => {
         try {
             const result = await dispatch(login(values));
             unwrapResult(result);
-            formikBag.resetForm();
-            history.push(RoutePaths.account);
         } catch (e) {
             formikBag.setFieldError("username", e.message);
         }
