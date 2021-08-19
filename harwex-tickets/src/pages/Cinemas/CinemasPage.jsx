@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Switch, Route, useRouteMatch, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCinemas } from "../../redux/actions/cinemas";
 import { selectFetchCinemasRequest } from "../../redux/slices/requests/cinemasRequestsSlice";
+import { selectCinemas } from "../../redux/slices/cinemasSlice";
 
 import { Empty, Row, Col, notification } from "antd";
+
+import CinemaPage from "../Cinema/CinemaPage";
 
 import Cinema from "../../components/Cinema/Cinema";
 import CinemaAdd from "../../components/CinemaAdd/CinemaAdd";
@@ -16,22 +19,15 @@ const CinemasPage = () => {
     const history = useHistory();
     const dispatch = useDispatch();
     const { status, error } = useSelector(selectFetchCinemasRequest);
-    const [cinemas, setCinemas] = useState([]);
+    const cinemas = useSelector(selectCinemas);
 
     const handleCinemaClick = (id) => {
         history.push(`${url}/${id}`);
     };
 
-    const handleCinemaAdd = (cinema) => {
-        const cinemasCopy = [...cinemas];
-        cinemasCopy.push(cinema);
-        setCinemas(cinemasCopy);
-    };
-
     useEffect(() => {
         const action = async () => {
-            const result = await dispatch(fetchCinemas());
-            setCinemas(result.payload ?? []);
+            await dispatch(fetchCinemas());
         };
         if (status === "idle") {
             action();
@@ -48,11 +44,11 @@ const CinemasPage = () => {
         <Switch>
             <Route exact path={path}>
                 <div style={styles.addCinemaIconWrapper}>
-                    <CinemaAdd style={styles.addCinemaIcon} onCinemaAdd={handleCinemaAdd} />
+                    <CinemaAdd style={styles.addCinemaIcon} />
                 </div>
                 <Row gutter={[16, 24]}>
                     {cinemas.map((item) => (
-                        <Col key={item.id} span={4}>
+                        <Col key={item.id} span={8}>
                             <Cinema
                                 style={styles.cinemaCard}
                                 photo={<Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />}
@@ -64,7 +60,7 @@ const CinemasPage = () => {
                 </Row>
             </Route>
             <Route path={`${path}/:cinemaId`}>
-                <h1>Hello....</h1>
+                <CinemaPage />
             </Route>
         </Switch>
     );

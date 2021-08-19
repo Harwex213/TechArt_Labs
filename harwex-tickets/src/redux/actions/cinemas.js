@@ -22,7 +22,7 @@ export const fetchCinemas = createAsyncThunk("fetchCinemas", async () => {
     });
 });
 
-export const createCinema = createAsyncThunk("fetchCinemas", async ({ name, cityName }) => {
+export const createCinema = createAsyncThunk("createCinema", async ({ name, cityName }) => {
     const cityResponse = await citiesApi.getCitiesByName({ cityName });
     const city = await cityResponse.json();
     validateResponse(cityResponse, city);
@@ -42,10 +42,10 @@ export const createCinema = createAsyncThunk("fetchCinemas", async ({ name, city
     };
 });
 
-export const updateCinema = createAsyncThunk("fetchCinemas", async ({ id, name, cityId }) => {
+export const updateCinema = createAsyncThunk("updateCinema", async ({ id, name, cityId }) => {
     //Todo: updateCinema
 });
 
-export const deleteCinema = createAsyncThunk("fetchCinemas", async ({ id }) => {
+export const deleteCinema = createAsyncThunk("deleteCinema", async ({ id }) => {
     //Todo: deleteCinema
 });

@@ -15,7 +15,7 @@ const cinemaAddValidationSchema = Yup.object().shape({
     cityName: Yup.string().min(4, "Too Short!").max(50, "Too Long!").required("Required"),
 });
 
-const CinemaAdd = ({ style, onCinemaAdd }) => {
+const CinemaAdd = ({ style }) => {
     const formRef = useRef();
     const dispatch = useDispatch();
     const [isCinemaAddModalVisible, setIsCinemaAddModalVisible] = useState(false);
@@ -32,7 +32,6 @@ const CinemaAdd = ({ style, onCinemaAdd }) => {
         try {
             const result = await dispatch(createCinema(values));
             unwrapResult(result);
-            onCinemaAdd(result.payload);
             setIsCinemaAddModalVisible(false);
             formikBag.resetForm();
             notification["success"]({
@@ -80,7 +79,6 @@ const CinemaAdd = ({ style, onCinemaAdd }) => {
 };
 CinemaAdd.propTypes = {
     style: PropTypes.object,
-    onCinemaAdd: PropTypes.func,
 };
 
 export default CinemaAdd;
