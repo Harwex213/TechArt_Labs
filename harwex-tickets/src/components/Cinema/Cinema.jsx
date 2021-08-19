@@ -14,7 +14,7 @@ const Cinema = ({ style, photo, cinema, onClick }) => {
         <Card style={style} onClick={handleClick}>
             {photo}
             <h1 style={styles.name}>{cinema.name}</h1>
-            <h5>{cinema.cityName}</h5>
+            <h5 style={styles.city}>{cinema.cityName}</h5>
         </Card>
     );
 };

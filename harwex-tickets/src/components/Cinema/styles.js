@@ -1,7 +1,10 @@
 const styles = {
     name: {
         fontSize: "24px",
-        margin: "0",
+        overflowWrap: "break-word",
+    },
+    city: {
+        marginBottom: "0",
     },
 };
 
