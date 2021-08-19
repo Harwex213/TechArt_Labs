@@ -1,8 +1,5 @@
 const styles = {
-    layout: {
-        height: "100%",
-        width: "100%",
-    },
+    layout: {},
     cinemaCard: {
         height: "100%",
         cursor: "pointer",
