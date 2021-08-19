@@ -1,42 +1,51 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Switch, Route, useRouteMatch, useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCinemas } from "../../redux/actions/cinemas";
+import { selectFetchCinemasRequest } from "../../redux/slices/requests/cinemasRequestsSlice";
 
-import { Empty, Row, Col } from "antd";
+import { Empty, Row, Col, notification } from "antd";
 
 import Cinema from "../../components/Cinema/Cinema";
-
-import styles from "./styles";
 import CinemaAdd from "../../components/CinemaAdd/CinemaAdd";
 
-const data = [
-    {
-        id: 0,
-        name: "Победа",
-        cityName: "Минск",
-    },
-    {
-        id: 1,
-        name: "Спартак",
-        cityName: "Витебск",
-    },
-];
+import styles from "./styles";
 
 const CinemasPage = () => {
     const { path, url } = useRouteMatch();
     const history = useHistory();
+    const dispatch = useDispatch();
+    const { status, error } = useSelector(selectFetchCinemasRequest);
+    const [cinemas, setCinemas] = useState([]);
 
     const handleCinemaClick = (id) => {
         history.push(`${url}/${id}`);
     };
 
+    useEffect(() => {
+        const action = async () => {
+            const result = await dispatch(fetchCinemas());
+            setCinemas(result.payload ?? []);
+        };
+        if (status === "idle") {
+            action();
+        }
+        if (status === "rejected") {
+            notification["error"]({
+                message: "Something went wrong...",
+                description: error,
+            });
+        }
+    }, [dispatch, error, status]);
+
     return (
         <Switch>
             <Route exact path={path}>
+                <div style={styles.addCinemaIconWrapper}>
+                    <CinemaAdd style={styles.addCinemaIcon} />
+                </div>
                 <Row gutter={[16, 24]}>
-                    <Col key={-1} span={4} style={styles.addCinemaIconWrapper}>
-                        <CinemaAdd style={styles.addCinemaIcon} />
-                    </Col>
-                    {data.map((item) => (
+                    {cinemas.map((item) => (
                         <Col key={item.id} span={4}>
                             <Cinema
                                 style={styles.cinemaCard}

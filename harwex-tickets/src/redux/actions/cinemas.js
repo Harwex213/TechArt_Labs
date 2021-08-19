@@ -1,0 +1,35 @@
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { cinemasApi } from "../../api/cinemas";
+import { validateResponse } from "../../utils/response";
+import { citiesApi } from "../../api/cities";
+
+export const fetchCinemas = createAsyncThunk("fetchCinemas", async () => {
+    const cinemasResponse = await cinemasApi.getCinemas();
+    const cinemas = await cinemasResponse.json();
+    validateResponse(cinemasResponse, cinemas);
+
+    const citiesResponse = await citiesApi.getCities();
+    const cities = await citiesResponse.json();
+    validateResponse(citiesResponse, cities);
+
+    return cinemas.map((cinema) => {
+        const city = cities.find((city) => city.id === cinema.cityId);
+        return {
+            id: cinema.id,
+            name: cinema.name,
+            cityName: city.name,
+        };
+    });
+});
+
+export const createCinema = createAsyncThunk("fetchCinemas", async ({ name, cityId }) => {
+    //Todo: createCinema
+});
+
+export const updateCinema = createAsyncThunk("fetchCinemas", async ({ id, name, cityId }) => {
+    //Todo: updateCinema
+});
+
+export const deleteCinema = createAsyncThunk("fetchCinemas", async ({ id }) => {
+    //Todo: deleteCinema
+});

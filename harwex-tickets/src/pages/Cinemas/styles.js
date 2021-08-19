@@ -1,4 +1,8 @@
 const styles = {
+    layout: {
+        height: "100%",
+        width: "100%",
+    },
     cinemaCard: {
         height: "100%",
         cursor: "pointer",
@@ -7,6 +11,7 @@ const styles = {
         display: "flex",
         justifyContent: "center",
         alignContent: "center",
+        marginBottom: "50px",
     },
     addCinemaIcon: {
         fontSize: "64px",
