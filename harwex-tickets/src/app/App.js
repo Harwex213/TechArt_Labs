@@ -36,7 +36,7 @@ function App() {
         const accessToken = getAccessToken();
         const isTokenExpired = checkIsTokenExpired(accessToken);
 
-        if (isTokenExpired) {
+        if (isTokenExpired && accessToken) {
             tryRefresh().then();
         }
     }, [dispatch]);
