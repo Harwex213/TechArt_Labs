@@ -56,7 +56,7 @@ export const refresh = createAsyncThunk("refresh", async (_, thunkAPI) => {
 
     saveTokens(data.accessToken, data.refreshToken);
 
-    const accessTokenDecoded = jwtDecode(data.payload.accessToken);
+    const accessTokenDecoded = jwtDecode(data.accessToken);
     thunkAPI.dispatch(
         persistUser({
             id: accessTokenDecoded["id"],
