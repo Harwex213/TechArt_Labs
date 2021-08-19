@@ -22,6 +22,12 @@ const CinemasPage = () => {
         history.push(`${url}/${id}`);
     };
 
+    const handleCinemaAdd = (cinema) => {
+        const cinemasCopy = [...cinemas];
+        cinemasCopy.push(cinema);
+        setCinemas(cinemasCopy);
+    };
+
     useEffect(() => {
         const action = async () => {
             const result = await dispatch(fetchCinemas());
@@ -42,7 +48,7 @@ const CinemasPage = () => {
         <Switch>
             <Route exact path={path}>
                 <div style={styles.addCinemaIconWrapper}>
-                    <CinemaAdd style={styles.addCinemaIcon} />
+                    <CinemaAdd style={styles.addCinemaIcon} onCinemaAdd={handleCinemaAdd} />
                 </div>
                 <Row gutter={[16, 24]}>
                     {cinemas.map((item) => (

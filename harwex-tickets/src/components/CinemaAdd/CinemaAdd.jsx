@@ -8,13 +8,14 @@ import * as Yup from "yup";
 import { Form, Input, SubmitButton } from "formik-antd";
 import { Modal, notification } from "antd";
 import { VideoCameraAddOutlined } from "@ant-design/icons";
+import { createCinema } from "../../redux/actions/cinemas";
 
 const cinemaAddValidationSchema = Yup.object().shape({
     name: Yup.string().min(4, "Too Short!").max(50, "Too Long!").required("Required"),
     cityName: Yup.string().min(4, "Too Short!").max(50, "Too Long!").required("Required"),
 });
 
-const CinemaAdd = ({ style }) => {
+const CinemaAdd = ({ style, onCinemaAdd }) => {
     const formRef = useRef();
     const dispatch = useDispatch();
     const [isCinemaAddModalVisible, setIsCinemaAddModalVisible] = useState(false);
@@ -29,8 +30,9 @@ const CinemaAdd = ({ style }) => {
 
     const handleSubmit = async (values, formikBag) => {
         try {
-            // const result = await dispatch(login(values));
-            // unwrapResult(result);
+            const result = await dispatch(createCinema(values));
+            unwrapResult(result);
+            onCinemaAdd(result.payload);
             setIsCinemaAddModalVisible(false);
             formikBag.resetForm();
             notification["success"]({
@@ -78,6 +80,7 @@ const CinemaAdd = ({ style }) => {
 };
 CinemaAdd.propTypes = {
     style: PropTypes.object,
+    onCinemaAdd: PropTypes.func,
 };
 
 export default CinemaAdd;

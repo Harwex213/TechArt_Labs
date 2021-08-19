@@ -22,8 +22,24 @@ export const fetchCinemas = createAsyncThunk("fetchCinemas", async () => {
     });
 });
 
-export const createCinema = createAsyncThunk("fetchCinemas", async ({ name, cityId }) => {
-    //Todo: createCinema
+export const createCinema = createAsyncThunk("fetchCinemas", async ({ name, cityName }) => {
+    const cityResponse = await citiesApi.getCitiesByName({ cityName });
+    const city = await cityResponse.json();
+    validateResponse(cityResponse, city);
+
+    if (city.length === 0) {
+        throw new Error("Cities with such name doesn't exists");
+    }
+
+    const createCinemaResponse = await cinemasApi.createCinema({ name, cityId: city[0].id });
+    const cinema = await createCinemaResponse.json();
+    validateResponse(createCinemaResponse, cinema);
+
+    return {
+        id: cinema.id,
+        name,
+        cityName,
+    };
 });
 
 export const updateCinema = createAsyncThunk("fetchCinemas", async ({ id, name, cityId }) => {

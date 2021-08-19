@@ -1,11 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchCinemas } from "../../actions/cinemas";
+import { createCinema, deleteCinema, fetchCinemas, updateCinema } from "../../actions/cinemas";
 import { RequestInitialState } from "../../../config/constants/Request";
 
 export const cinemasRequestsSlice = createSlice({
     name: "cinemasRequests",
     initialState: {
         fetchCinemas: RequestInitialState,
+        createCinema: RequestInitialState,
+        updateCinema: RequestInitialState,
+        deleteCinema: RequestInitialState,
     },
     extraReducers: {
         [fetchCinemas.pending]: (state, _) => {
@@ -17,6 +20,39 @@ export const cinemasRequestsSlice = createSlice({
         },
         [fetchCinemas.fulfilled]: (state, _) => {
             state.fetchCinemas.status = "fulfilled";
+        },
+
+        [createCinema.pending]: (state, _) => {
+            state.createCinema.status = "pending";
+        },
+        [createCinema.rejected]: (state, action) => {
+            state.createCinema.status = "rejected";
+            state.createCinema.error = action.payload ?? action.error.message;
+        },
+        [createCinema.fulfilled]: (state, _) => {
+            state.createCinema.status = "fulfilled";
+        },
+
+        [updateCinema.pending]: (state, _) => {
+            state.updateCinema.status = "pending";
+        },
+        [updateCinema.rejected]: (state, action) => {
+            state.updateCinema.status = "rejected";
+            state.updateCinema.error = action.payload ?? action.error.message;
+        },
+        [updateCinema.fulfilled]: (state, _) => {
+            state.updateCinema.status = "fulfilled";
+        },
+
+        [deleteCinema.pending]: (state, _) => {
+            state.deleteCinema.status = "pending";
+        },
+        [deleteCinema.rejected]: (state, action) => {
+            state.deleteCinema.status = "rejected";
+            state.deleteCinema.error = action.payload ?? action.error.message;
+        },
+        [deleteCinema.fulfilled]: (state, _) => {
+            state.deleteCinema.status = "fulfilled";
         },
     },
 });

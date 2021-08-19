@@ -7,6 +7,7 @@ const styles = {
     },
     header: {
         padding: "0",
+        zIndex: "2",
     },
     contentWrapper: {
         overflow: "auto",
@@ -17,7 +18,6 @@ const styles = {
         background: "#fff",
         marginTop: "20px",
         padding: "50px 30px",
-        height: "100%",
     },
 };
 
