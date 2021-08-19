@@ -10,13 +10,13 @@ export const cinemasSlice = createSlice({
             state.unshift(action.payload);
         },
         [updateCinema.fulfilled]: (state, action) => {
-            const index = state.indexOf(action.payload);
+            const index = state.findIndex((cinema) => (cinema.id = action.payload.id));
             if (index > -1) {
                 state[index] = action.payload;
             }
         },
         [deleteCinema.fulfilled]: (state, action) => {
-            const index = state.indexOf(action.payload);
+            const index = state.findIndex((cinema) => (cinema.id = action.payload.id));
             if (index > -1) {
                 state.splice(index, 1);
             }

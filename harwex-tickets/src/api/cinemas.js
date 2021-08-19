@@ -20,7 +20,7 @@ const createCinema = ({ name, cityId }) => {
 
 const updateCinema = ({ id, name, cityId }) => {
     return fetch(`${ApiEndPoint}/cinemas/${id}`, {
-        method: "POST",
+        method: "PUT",
         headers: {
             "Content-Type": "application/json;charset=utf-8",
         },
@@ -29,7 +29,9 @@ const updateCinema = ({ id, name, cityId }) => {
 };
 
 const deleteCinema = ({ id }) => {
-    return fetch(`${ApiEndPoint}/cinemas/${id}`);
+    return fetch(`${ApiEndPoint}/cinemas/${id}`, {
+        method: "DELETE",
+    });
 };
 
 export const cinemasApi = {
