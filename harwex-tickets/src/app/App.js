@@ -19,6 +19,7 @@ import { checkIsTokenExpired, getAccessToken } from "../utils/tokens";
 import RoutePaths from "../config/constants/RoutePaths";
 import { UserRoles } from "../config/constants/User";
 import styles from "./styles";
+import MoviesPage from "../pages/Movies/MoviesPage";
 
 function App() {
     const dispatch = useDispatch();
@@ -69,22 +70,24 @@ function App() {
                                     <RegistrationPage />
                                 </RoleRoute>
 
-                                <Route path={RoutePaths.movies}>{/*<MyNotesPage />*/}</Route>
+                                <Route path={RoutePaths.movies}>
+                                    <MoviesPage />
+                                </Route>
                                 <Route path={RoutePaths.about}>{/*<AboutPage />*/}</Route>
                                 <Route path={RoutePaths.notFound}>{/*<NotFoundPage />*/}</Route>
 
                                 <RoleRoute
+                                    path={RoutePaths.account}
                                     roles={[UserRoles.user, UserRoles.admin]}
                                     redirectPathname={RoutePaths.auth}
-                                    path={RoutePaths.account}
                                 >
                                     <AccountPage />
                                 </RoleRoute>
 
                                 <RoleRoute
+                                    path={RoutePaths.cinemas}
                                     roles={[UserRoles.admin]}
                                     redirectPathname={RoutePaths.auth}
-                                    path={RoutePaths.cinemas}
                                 >
                                     <CinemasPage />
                                 </RoleRoute>

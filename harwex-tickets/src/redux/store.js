@@ -6,6 +6,7 @@ import citiesSlice from "./slices/citiesSlice";
 import authRequestsSlice from "./slices/requests/authRequestsSlice";
 import cinemasRequestsSlice from "./slices/requests/cinemasRequestsSlice";
 import citiesRequestsSlice from "./slices/requests/citiesRequestSlice";
+import moviesRequestsSlice from "./slices/requests/moviesRequestSlice";
 
 export default configureStore({
     reducer: {
@@ -16,5 +17,6 @@ export default configureStore({
         authRequests: authRequestsSlice,
         cinemasRequests: cinemasRequestsSlice,
         citiesRequests: citiesRequestsSlice,
+        moviesRequests: moviesRequestsSlice,
     },
 });

@@ -5,22 +5,22 @@ import { fetchCities } from "../../actions/cities";
 export const citiesRequestsSlice = createSlice({
     name: "citiesRequests",
     initialState: {
-        fetchCinemas: RequestInitialState,
+        fetchCities: RequestInitialState,
     },
     extraReducers: {
         [fetchCities.pending]: (state, _) => {
-            state.fetchCinemas.status = "pending";
+            state.fetchCities.status = "pending";
         },
         [fetchCities.rejected]: (state, action) => {
-            state.fetchCinemas.status = "rejected";
-            state.fetchCinemas.error = action.payload ?? action.error.message;
+            state.fetchCities.status = "rejected";
+            state.fetchCities.error = action.payload ?? action.error.message;
         },
         [fetchCities.fulfilled]: (state, _) => {
-            state.fetchCinemas.status = "fulfilled";
+            state.fetchCities.status = "fulfilled";
         },
     },
 });
 
-export const selectFetchCitiesRequest = (state) => state.citiesRequests.fetchCinemas;
+export const selectFetchCitiesRequest = (state) => state.citiesRequests.fetchCities;
 
 export default citiesRequestsSlice.reducer;
