@@ -40,6 +40,7 @@ export const createCinema = createAsyncThunk("createCinema", async ({ name, city
         id: cinema.id,
         name,
         cityName,
+        halls: [],
     };
 });
 
@@ -70,7 +71,34 @@ export const deleteCinema = createAsyncThunk("deleteCinema", async ({ id, name, 
 
     return {
         id,
-        name,
-        cityName,
     };
+});
+
+export const createHall = createAsyncThunk("createHall", async ({ cinemaId, rowsAmount, colsAmount }) => {
+    const createHallResponse = await cinemasApi.createHall({ cinemaId, rowsAmount, colsAmount });
+    const hall = await createHallResponse.json();
+    validateResponse(createHallResponse, hall);
+
+    return {
+        id: hall.id,
+        cinemaId,
+        rowsAmount,
+        colsAmount,
+    };
+});
+
+export const updateHall = createAsyncThunk("updateHall", async ({ id, cinemaId, rowsAmount, colsAmount }) => {
+    const updateHallResponse = await cinemasApi.updateHall({ id, rowsAmount, colsAmount });
+    const hall = await updateHallResponse.json();
+    validateResponse(updateHallResponse, hall);
+
+    return { id, cinemaId, rowsAmount, colsAmount };
+});
+
+export const deleteHall = createAsyncThunk("deleteHall", async ({ id, cinemaId }) => {
+    const deleteHallResponse = await cinemasApi.deleteHall({ id });
+    const hall = await deleteHallResponse.json();
+    validateResponse(deleteHallResponse, hall);
+
+    return { id, cinemaId };
 });

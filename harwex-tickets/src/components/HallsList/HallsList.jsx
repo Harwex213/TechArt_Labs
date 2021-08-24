@@ -1,7 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { unwrapResult } from "@reduxjs/toolkit";
+import { useDispatch } from "react-redux";
+import { deleteHall, updateHall } from "../../redux/actions/cinemas";
 
-import { Button, List } from "antd";
+import { Button, List, notification } from "antd";
 import { Formik } from "formik";
 import { Form, InputNumber, SubmitButton } from "formik-antd";
 import * as Yup from "yup";
@@ -17,13 +20,45 @@ const hallValidationSchema = Yup.object().shape({
 
 const HallsList = ({ cinemaId, halls }) => {
     let id = 1;
+    const dispatch = useDispatch();
 
-    const handleUpdate = (values, formikBag, hall) => {
-        console.log(hall);
+    const handleUpdate = async (values, formikBag, hall) => {
+        try {
+            const result = await dispatch(
+                updateHall({
+                    id: hall.id,
+                    cinemaId,
+                    rowsAmount: values.rowsAmount,
+                    colsAmount: values.colsAmount,
+                })
+            );
+            unwrapResult(result);
+            notification["success"]({
+                message: "Successfully updated.",
+            });
+        } catch (e) {
+            formikBag.setFieldError("name", e.message);
+        }
     };
 
-    const handleDelete = (hall) => {
-        console.log(hall);
+    const handleDelete = async (hall) => {
+        try {
+            const result = await dispatch(
+                deleteHall({
+                    id: hall.id,
+                    cinemaId,
+                })
+            );
+            unwrapResult(result);
+            notification["success"]({
+                message: "Successfully deleted.",
+            });
+        } catch (e) {
+            notification["error"]({
+                message: "Something went wrong...",
+                description: e.message,
+            });
+        }
     };
 
     return (
