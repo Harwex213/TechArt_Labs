@@ -8,13 +8,13 @@ const getCinema = ({ id }) => {
     return fetch(`${ApiEndPoint}/cinemas/${id}`);
 };
 
-const createCinema = ({ name, cityId, halls: { rowsAmount, colsAmount } }) => {
+const createCinema = ({ name, cityId }) => {
     return fetch(`${ApiEndPoint}/cinemas`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json;charset=utf-8",
         },
-        body: JSON.stringify({ name, cityId, halls: { rowsAmount, colsAmount } }),
+        body: JSON.stringify({ name, cityId }),
     });
 };
 
