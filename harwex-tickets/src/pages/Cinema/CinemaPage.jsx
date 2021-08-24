@@ -4,10 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { deleteCinema, updateCinema } from "../../redux/actions/cinemas";
 import { selectCinemas } from "../../redux/slices/cinemasSlice";
+import { selectCities } from "../../redux/slices/citiesSlice";
 
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { Form, Input, SubmitButton } from "formik-antd";
+import { Form, Input, SubmitButton, Select } from "formik-antd";
 import { Button, Divider, notification } from "antd";
 
 import HallsList from "../../components/HallsList/HallsList";
@@ -26,6 +27,7 @@ const CinemaPage = () => {
 
     const dispatch = useDispatch();
     const cinemas = useSelector(selectCinemas);
+    const cities = useSelector(selectCities);
 
     const [cinema, setCinema] = useState(undefined);
     const [halls, setHalls] = useState(undefined);
@@ -82,12 +84,26 @@ const CinemaPage = () => {
                 validationSchema={cinemaValidationSchema}
                 onSubmit={handleUpdate}
             >
-                <Form>
+                <Form autoComplete="off">
                     <Form.Item name="name">
                         <Input name="name" placeholder="Cinema name" />
                     </Form.Item>
                     <Form.Item name="cityName">
-                        <Input name="cityName" placeholder="City name" />
+                        <Select
+                            name="cityName"
+                            showSearch
+                            placeholder="Select a city"
+                            optionFilterProp="children"
+                            filterOption={(input, option) =>
+                                option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                            }
+                        >
+                            {cities.map((city) => (
+                                <Select.Option key={city?.id} value={city?.name}>
+                                    {city?.name}
+                                </Select.Option>
+                            ))}
+                        </Select>
                     </Form.Item>
                     <div style={styles.wrapper}>
                         <SubmitButton type="default">Save</SubmitButton>

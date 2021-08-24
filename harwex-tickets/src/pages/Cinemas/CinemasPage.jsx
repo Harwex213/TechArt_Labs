@@ -2,7 +2,9 @@ import React, { useEffect } from "react";
 import { Switch, Route, useRouteMatch, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCinemas } from "../../redux/actions/cinemas";
+import { fetchCities } from "../../redux/actions/cities";
 import { selectFetchCinemasRequest } from "../../redux/slices/requests/cinemasRequestsSlice";
+import { selectFetchCitiesRequest } from "../../redux/slices/requests/citiesRequestSlice";
 import { selectCinemas } from "../../redux/slices/cinemasSlice";
 
 import { Empty, Row, Col, notification } from "antd";
@@ -17,8 +19,10 @@ import styles from "./styles";
 const CinemasPage = () => {
     const { path, url } = useRouteMatch();
     const history = useHistory();
+
     const dispatch = useDispatch();
-    const { status, error } = useSelector(selectFetchCinemasRequest);
+    const cinemasRequest = useSelector(selectFetchCinemasRequest);
+    const citiesRequest = useSelector(selectFetchCitiesRequest);
     const cinemas = useSelector(selectCinemas);
 
     const handleCinemaClick = (id) => {
@@ -29,16 +33,31 @@ const CinemasPage = () => {
         const action = async () => {
             await dispatch(fetchCinemas());
         };
-        if (status === "idle") {
+        if (cinemasRequest.status === "idle") {
             action();
         }
-        if (status === "rejected") {
+        if (cinemasRequest.status === "rejected") {
             notification["error"]({
                 message: "Something went wrong...",
-                description: error,
+                description: cinemasRequest.error,
             });
         }
-    }, [dispatch, error, status]);
+    }, [dispatch, cinemasRequest]);
+
+    useEffect(() => {
+        const action = async () => {
+            await dispatch(fetchCities());
+        };
+        if (citiesRequest.status === "idle") {
+            action();
+        }
+        if (citiesRequest.status === "rejected") {
+            notification["error"]({
+                message: "Something went wrong...",
+                description: citiesRequest.error,
+            });
+        }
+    }, [dispatch, citiesRequest]);
 
     return (
         <Switch>
