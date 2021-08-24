@@ -8,7 +8,9 @@ import { selectCinemas } from "../../redux/slices/cinemasSlice";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { Form, Input, SubmitButton } from "formik-antd";
-import { Button, notification } from "antd";
+import { Button, Divider, notification } from "antd";
+
+import HallsList from "../../components/HallsList/HallsList";
 
 import RoutePaths from "../../config/constants/RoutePaths";
 import styles from "./styles";
@@ -20,12 +22,21 @@ const cinemaValidationSchema = Yup.object().shape({
 
 const CinemaPage = () => {
     const history = useHistory();
-    const dispatch = useDispatch();
     const { cinemaId } = useParams();
-    const cinemas = useSelector(selectCinemas);
-    const [cinema, setCinema] = useState(null);
 
-    const handleSubmit = async (values, formikBag) => {
+    const dispatch = useDispatch();
+    const cinemas = useSelector(selectCinemas);
+
+    const [cinema, setCinema] = useState(undefined);
+    const [halls, setHalls] = useState(undefined);
+
+    useEffect(() => {
+        const cinema = cinemas.find((cinema) => cinema.id === Number(cinemaId));
+        setCinema(cinema ?? undefined);
+        setHalls(cinema ? cinema.halls : undefined);
+    }, [cinemaId, cinemas]);
+
+    const handleUpdate = async (values, formikBag) => {
         try {
             const result = await dispatch(
                 updateCinema({
@@ -40,7 +51,7 @@ const CinemaPage = () => {
         }
     };
 
-    const handleDeleteButton = async () => {
+    const handleDelete = async () => {
         try {
             const result = await dispatch(
                 deleteCinema({
@@ -59,21 +70,17 @@ const CinemaPage = () => {
         }
     };
 
-    useEffect(() => {
-        setCinema(cinemas.find((cinema) => cinema.id === Number(cinemaId)));
-    }, [cinemaId, cinemas]);
-
     return (
         <div style={styles.layout}>
-            <h1 style={styles.name}>{cinema?.name}</h1>
-            <h3 style={styles.cityName}>{cinema?.cityName}</h3>
+            <h1 style={styles.title}>{cinema?.name}</h1>
+            <h3 style={styles.subTitle}>{cinema?.cityName}</h3>
             <Formik
                 initialValues={{
                     name: "",
                     cityName: "",
                 }}
                 validationSchema={cinemaValidationSchema}
-                onSubmit={handleSubmit}
+                onSubmit={handleUpdate}
             >
                 <Form>
                     <Form.Item name="name">
@@ -82,14 +89,18 @@ const CinemaPage = () => {
                     <Form.Item name="cityName">
                         <Input name="cityName" placeholder="City name" />
                     </Form.Item>
-                    <div style={{ display: "flex" }}>
-                        <SubmitButton>Save</SubmitButton>
-                        <Button style={styles.deleteButton} onClick={handleDeleteButton}>
+                    <div style={styles.wrapper}>
+                        <SubmitButton type="default">Save</SubmitButton>
+                        <Button style={styles.deleteButton} onClick={handleDelete}>
                             Delete
                         </Button>
                     </div>
                 </Form>
             </Formik>
+
+            <Divider />
+            <h1 style={styles.title}>Halls: {halls?.length}</h1>
+            <HallsList halls={halls} cinemaId={cinema?.id} />
         </div>
     );
 };

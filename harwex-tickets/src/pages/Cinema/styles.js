@@ -1,15 +1,23 @@
 const styles = {
     layout: {},
-    name: {
+    title: {
         fontSize: "36px",
+        margin: "0",
     },
-    cityName: {
+    subTitle: {
         fontSize: "18px",
         marginBottom: "35px",
     },
     header: {},
+    wrapper: {
+        display: "flex",
+        alignItems: "center",
+    },
     deleteButton: {
         marginLeft: "auto",
+    },
+    deleteHallButton: {
+        marginLeft: "50px",
     },
 };
 

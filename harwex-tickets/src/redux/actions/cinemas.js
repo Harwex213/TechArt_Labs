@@ -18,6 +18,7 @@ export const fetchCinemas = createAsyncThunk("fetchCinemas", async () => {
             id: cinema.id,
             name: cinema.name,
             cityName: city.name,
+            halls: cinema.halls,
         };
     });
 });
