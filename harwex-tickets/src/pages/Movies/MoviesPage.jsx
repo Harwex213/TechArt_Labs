@@ -1,4 +1,5 @@
 import React from "react";
+import { Route, Switch, useHistory, useRouteMatch } from "react-router-dom";
 import { useFetchData } from "../../hooks/fetches";
 import { fetchMovies } from "../../redux/actions/movies";
 import { fetchCities } from "../../redux/actions/cities";
@@ -10,16 +11,22 @@ import { selectCities } from "../../redux/slices/citiesSlice";
 import { Empty, List, Select } from "antd";
 
 import Movie from "../../components/Movie/Movie";
+import TicketOrder from "../../components/TicketOrder/TicketOrder";
 
 import styles from "./styles";
 
 const MoviesPage = () => {
+    const { path, url } = useRouteMatch();
+    const history = useHistory();
+
     const movies = useFetchData(fetchCities, selectFetchMoviesRequest, selectMovies);
     const cities = useFetchData(fetchMovies, selectFetchCitiesRequest, selectCities);
 
     const handleCitySelect = () => {};
 
-    const handleMovieClick = () => {};
+    const handleMovieClick = (id) => {
+        history.push(`${url}/${id}`);
+    };
 
     return (
         <>
@@ -33,22 +40,29 @@ const MoviesPage = () => {
                     ))}
                 </Select>
             </div>
-            <List
-                grid={{ gutter: 20, column: 3 }}
-                itemLayout="vertical"
-                dataSource={movies}
-                split={false}
-                renderItem={(item) => (
-                    <List.Item>
-                        <Movie
-                            style={styles.movieCard}
-                            photo={<Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />}
-                            movie={item}
-                            onClick={handleMovieClick}
-                        />
-                    </List.Item>
-                )}
-            />
+            <Switch>
+                <Route exact path={path}>
+                    <List
+                        grid={{ gutter: 20, column: 3 }}
+                        itemLayout="vertical"
+                        dataSource={movies}
+                        split={false}
+                        renderItem={(item) => (
+                            <List.Item>
+                                <Movie
+                                    style={styles.movieCard}
+                                    photo={<Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />}
+                                    movie={item}
+                                    onClick={handleMovieClick}
+                                />
+                            </List.Item>
+                        )}
+                    />
+                </Route>
+                <Route path={`${path}/:movieId`}>
+                    <TicketOrder />
+                </Route>
+            </Switch>
         </>
     );
 };
