@@ -3,6 +3,7 @@ import userSlice from "../redux/slices/userSlice";
 import cinemasSlice from "../redux/slices/cinemasSlice";
 import citiesSlice from "./slices/citiesSlice";
 import moviesSlice from "./slices/moviesSclise";
+import ticketsSlice from "./slices/ticketsSlice";
 
 import authRequestsSlice from "./slices/requests/authRequestsSlice";
 import cinemasRequestsSlice from "./slices/requests/cinemasRequestsSlice";
@@ -15,6 +16,7 @@ export default configureStore({
         cinemas: cinemasSlice,
         cities: citiesSlice,
         movies: moviesSlice,
+        tickets: ticketsSlice,
 
         authRequests: authRequestsSlice,
         cinemasRequests: cinemasRequestsSlice,

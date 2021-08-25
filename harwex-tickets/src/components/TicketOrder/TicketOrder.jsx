@@ -4,9 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { selectMovies } from "../../redux/slices/moviesSclise";
 import { selectCinemas } from "../../redux/slices/cinemasSlice";
+import { selectUser } from "../../redux/slices/userSlice";
 import { selectFetchCinemasRequest } from "../../redux/slices/requests/cinemasRequestsSlice";
 import { fetchCinemas } from "../../redux/actions/cinemas";
-import { fetchSessions } from "../../redux/actions/sessions";
+import { fetchSessionFreeSeats, fetchSessions } from "../../redux/actions/sessions";
+import { orderTicket } from "../../redux/actions/tickets";
 
 import { useFetchData } from "../../hooks/fetches";
 
@@ -20,6 +22,7 @@ import styles from "./styles";
 const ticketOrderValidationSchema = Yup.object().shape({
     cinemaId: Yup.number().required("Required"),
     sessionId: Yup.number().required("Required"),
+    seatId: Yup.number().required("Required"),
 });
 
 const TicketOrder = () => {
@@ -28,9 +31,11 @@ const TicketOrder = () => {
     const dispatch = useDispatch();
     const formRef = useRef();
 
+    const user = useSelector(selectUser);
     const movies = useSelector(selectMovies);
     const cinemas = useFetchData(fetchCinemas, selectFetchCinemasRequest, selectCinemas);
     const [sessions, setSessions] = useState(undefined);
+    const [freeSeats, setFreeSeats] = useState(undefined);
 
     const [movie, setMovie] = useState(undefined);
 
@@ -39,8 +44,30 @@ const TicketOrder = () => {
         setMovie(movie ?? undefined);
     }, [movieId, movies]);
 
-    const handleOrder = (values) => {
-        console.log(values);
+    const handleOrder = async (values, formikBag) => {
+        try {
+            const result = await dispatch(
+                orderTicket({
+                    sessionId: values.sessionId,
+                    seatId: values.seatId,
+                    userId: user.id,
+                })
+            );
+            unwrapResult(result);
+
+            notification["success"]({
+                message: "Ticket has been successfully ordered",
+            });
+            formikBag.resetForm();
+            setSessions(undefined);
+            setFreeSeats(undefined);
+        } catch (e) {
+            console.log(e);
+            notification["error"]({
+                message: "Failed to order ticket",
+                description: e.message,
+            });
+        }
     };
 
     const handleCinemaSelect = async (cinemaId) => {
@@ -52,6 +79,24 @@ const TicketOrder = () => {
         } catch (e) {
             notification["error"]({
                 message: "Failed to fetch sessions of such cinema and movie",
+                description: e.message,
+            });
+        }
+    };
+
+    const handleSessionSelect = async (sessionId) => {
+        await fetchFreeSeats(sessionId);
+    };
+
+    const fetchFreeSeats = async (sessionId) => {
+        try {
+            const result = await dispatch(fetchSessionFreeSeats({ sessionId }));
+            unwrapResult(result);
+            setFreeSeats(result.payload);
+            formRef.current.setFieldValue("seatId", "");
+        } catch (e) {
+            notification["error"]({
+                message: "Failed to fetch free seats of session",
                 description: e.message,
             });
         }
@@ -81,6 +126,7 @@ const TicketOrder = () => {
                         initialValues={{
                             cinemaId: "",
                             sessionId: "",
+                            seatId: "",
                         }}
                         validationSchema={ticketOrderValidationSchema}
                         onSubmit={handleOrder}
@@ -98,11 +144,21 @@ const TicketOrder = () => {
                             </Form.Item>
                             <Form.Item name="sessionId">
                                 <p>Choose Session</p>
-                                <Select name="sessionId" style={styles.select}>
+                                <Select name="sessionId" style={styles.select} onSelect={handleSessionSelect}>
                                     {sessions?.map((session) => (
                                         <Select.Option key={session?.id} value={session?.id}>
                                             {session?.time.replace("T", " ")}, hall {hallId++}, price{" "}
                                             {session?.price} BYN
+                                        </Select.Option>
+                                    ))}
+                                </Select>
+                            </Form.Item>
+                            <Form.Item name="seatId">
+                                <p>Choose Seat</p>
+                                <Select name="seatId" style={styles.select}>
+                                    {freeSeats?.map((seat) => (
+                                        <Select.Option key={seat?.id} value={seat?.id}>
+                                            Row: {seat?.row}, Position: {seat?.position}
                                         </Select.Option>
                                     ))}
                                 </Select>

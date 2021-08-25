@@ -9,3 +9,11 @@ export const fetchSessions = createAsyncThunk("fetchSessions", async ({ cinemaId
 
     return sessions;
 });
+
+export const fetchSessionFreeSeats = createAsyncThunk("fetchSessions", async ({ sessionId }) => {
+    const sessionFreeSeatsResponse = await sessionsApi.getSessionFreeSeats({ sessionId });
+    const seats = await sessionFreeSeatsResponse.json();
+    validateResponse(sessionFreeSeatsResponse, seats);
+
+    return seats;
+});
