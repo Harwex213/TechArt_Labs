@@ -8,7 +8,7 @@ import { selectFetchCitiesRequest } from "../../redux/slices/requests/citiesRequ
 import { selectMovies } from "../../redux/slices/moviesSclise";
 import { selectCities } from "../../redux/slices/citiesSlice";
 
-import { Empty, List, Select } from "antd";
+import { Divider, Empty, List, Select } from "antd";
 
 import Movie from "../../components/Movie/Movie";
 import TicketOrder from "../../components/TicketOrder/TicketOrder";
@@ -40,24 +40,28 @@ const MoviesPage = () => {
                     ))}
                 </Select>
             </div>
+            <Divider />
             <Switch>
                 <Route exact path={path}>
-                    <List
-                        grid={{ gutter: 20, column: 3 }}
-                        itemLayout="vertical"
-                        dataSource={movies}
-                        split={false}
-                        renderItem={(item) => (
-                            <List.Item>
-                                <Movie
-                                    style={styles.movieCard}
-                                    photo={<Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />}
-                                    movie={item}
-                                    onClick={handleMovieClick}
-                                />
-                            </List.Item>
-                        )}
-                    />
+                    <>
+                        <h2>Current movies</h2>
+                        <List
+                            grid={{ gutter: 20, column: 3 }}
+                            itemLayout="vertical"
+                            dataSource={movies}
+                            split={false}
+                            renderItem={(item) => (
+                                <List.Item>
+                                    <Movie
+                                        style={styles.movieCard}
+                                        photo={<Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />}
+                                        movie={item}
+                                        onClick={handleMovieClick}
+                                    />
+                                </List.Item>
+                            )}
+                        />
+                    </>
                 </Route>
                 <Route path={`${path}/:movieId`}>
                     <TicketOrder />
