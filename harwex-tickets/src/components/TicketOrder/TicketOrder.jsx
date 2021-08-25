@@ -62,11 +62,11 @@ const TicketOrder = () => {
             setSessions(undefined);
             setFreeSeats(undefined);
         } catch (e) {
-            console.log(e);
             notification["error"]({
                 message: "Failed to order ticket",
                 description: e.message,
             });
+            await fetchFreeSeats(values.sessionId);
         }
     };
 
