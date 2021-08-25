@@ -1,42 +1,40 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { selectFetchMoviesRequest } from "../../redux/slices/requests/moviesRequestSlice";
+import React from "react";
+import { useFetchData } from "../../hooks/fetches";
 import { fetchMovies } from "../../redux/actions/movies";
+import { fetchCities } from "../../redux/actions/cities";
+import { selectFetchMoviesRequest } from "../../redux/slices/requests/moviesRequestSlice";
+import { selectFetchCitiesRequest } from "../../redux/slices/requests/citiesRequestSlice";
+import { selectMovies } from "../../redux/slices/moviesSclise";
+import { selectCities } from "../../redux/slices/citiesSlice";
 
-import { Empty, List, notification } from "antd";
+import { Empty, List, Select } from "antd";
 
 import Movie from "../../components/Movie/Movie";
 
 import styles from "./styles";
 
 const MoviesPage = () => {
-    const dispatch = useDispatch();
-    const moviesRequest = useSelector(selectFetchMoviesRequest);
+    const movies = useFetchData(fetchCities, selectFetchMoviesRequest, selectMovies);
+    const cities = useFetchData(fetchMovies, selectFetchCitiesRequest, selectCities);
 
-    const [movies, setMovies] = useState(undefined);
-
-    useEffect(() => {
-        const action = async () => {
-            const result = await dispatch(fetchMovies());
-            setMovies(result.payload ?? undefined);
-        };
-        if (moviesRequest.status === "idle") {
-            action();
-        }
-        if (moviesRequest.status === "rejected") {
-            notification["error"]({
-                message: "Something went wrong...",
-                description: moviesRequest.error,
-            });
-        }
-    }, [dispatch, moviesRequest]);
+    const handleCitySelect = () => {};
 
     const handleMovieClick = () => {};
 
     return (
         <>
+            <div style={styles.citySelectWrapper}>
+                <h1 style={styles.citySelectPrefix}>Select your city: </h1>
+                <Select style={styles.citySelect} onSelect={handleCitySelect}>
+                    {cities.map((city) => (
+                        <Select.Option key={city?.id} value={city?.name}>
+                            {city?.name}
+                        </Select.Option>
+                    ))}
+                </Select>
+            </div>
             <List
-                grid={{ gutter: 20, column: 4 }}
+                grid={{ gutter: 20, column: 3 }}
                 itemLayout="vertical"
                 dataSource={movies}
                 split={false}
