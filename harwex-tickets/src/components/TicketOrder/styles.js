@@ -1,6 +1,6 @@
 const styles = {
     movieInfoWrapper: {},
-    cinemaSelect: {
+    select: {
         minWidth: "250px",
     },
 };

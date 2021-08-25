@@ -1,29 +1,36 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { unwrapResult } from "@reduxjs/toolkit";
 import { selectMovies } from "../../redux/slices/moviesSclise";
 import { selectCinemas } from "../../redux/slices/cinemasSlice";
 import { selectFetchCinemasRequest } from "../../redux/slices/requests/cinemasRequestsSlice";
 import { fetchCinemas } from "../../redux/actions/cinemas";
+import { fetchSessions } from "../../redux/actions/sessions";
 
 import { useFetchData } from "../../hooks/fetches";
 
+import { Divider, notification } from "antd";
 import { Formik } from "formik";
 import { Form, SubmitButton, Select } from "formik-antd";
+import * as Yup from "yup";
 
 import styles from "./styles";
-import * as Yup from "yup";
-import { Divider } from "antd";
 
 const ticketOrderValidationSchema = Yup.object().shape({
     cinemaId: Yup.number().required("Required"),
+    sessionId: Yup.number().required("Required"),
 });
 
 const TicketOrder = () => {
+    let hallId = 1;
     const { movieId } = useParams();
+    const dispatch = useDispatch();
+    const formRef = useRef();
 
     const movies = useSelector(selectMovies);
     const cinemas = useFetchData(fetchCinemas, selectFetchCinemasRequest, selectCinemas);
+    const [sessions, setSessions] = useState(undefined);
 
     const [movie, setMovie] = useState(undefined);
 
@@ -34,6 +41,20 @@ const TicketOrder = () => {
 
     const handleOrder = (values) => {
         console.log(values);
+    };
+
+    const handleCinemaSelect = async (cinemaId) => {
+        try {
+            const result = await dispatch(fetchSessions({ cinemaId, movieId }));
+            unwrapResult(result);
+            setSessions(result.payload);
+            formRef.current.setFieldValue("sessionId", "");
+        } catch (e) {
+            notification["error"]({
+                message: "Failed to fetch sessions of such cinema and movie",
+                description: e.message,
+            });
+        }
     };
 
     const movieInfo = (
@@ -56,8 +77,10 @@ const TicketOrder = () => {
                     <Divider />
                     <h2>Ticket ordering</h2>
                     <Formik
+                        innerRef={formRef}
                         initialValues={{
                             cinemaId: "",
+                            sessionId: "",
                         }}
                         validationSchema={ticketOrderValidationSchema}
                         onSubmit={handleOrder}
@@ -65,10 +88,21 @@ const TicketOrder = () => {
                         <Form>
                             <Form.Item name="cinemaId">
                                 <p>Choose Cinema</p>
-                                <Select name="cinemaId" style={styles.cinemaSelect}>
+                                <Select name="cinemaId" style={styles.select} onSelect={handleCinemaSelect}>
                                     {cinemas.map((cinema) => (
                                         <Select.Option key={cinema?.id} value={cinema?.id}>
                                             {cinema?.name} , {cinema?.cityName}
+                                        </Select.Option>
+                                    ))}
+                                </Select>
+                            </Form.Item>
+                            <Form.Item name="sessionId">
+                                <p>Choose Session</p>
+                                <Select name="sessionId" style={styles.select}>
+                                    {sessions?.map((session) => (
+                                        <Select.Option key={session?.id} value={session?.id}>
+                                            {session?.time.replace("T", " ")}, hall {hallId++}, price{" "}
+                                            {session?.price} BYN
                                         </Select.Option>
                                     ))}
                                 </Select>
