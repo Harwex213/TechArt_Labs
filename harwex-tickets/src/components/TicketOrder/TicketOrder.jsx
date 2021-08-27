@@ -1,14 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { unwrapResult } from "@reduxjs/toolkit";
+import { useSelector } from "react-redux";
 import { selectMovies } from "../../redux/slices/moviesSclise";
 import { selectCinemas } from "../../redux/slices/cinemasSlice";
 import { selectUser } from "../../redux/slices/userSlice";
 import { selectFetchCinemasRequest } from "../../redux/slices/requests/cinemasRequestsSlice";
 import { fetchCinemas } from "../../redux/actions/cinemas";
-import { fetchSessionFreeSeats, fetchSessions } from "../../redux/actions/sessions";
-import { orderTicket } from "../../redux/actions/tickets";
+
+import { useLazyGetSessionFreeSeatsQuery, useLazyGetSessionsQuery } from "../../redux/api/sessions";
+import { useOrderTicketMutation } from "../../redux/api/tickets";
 
 import { useFetchData } from "../../hooks/fetches";
 
@@ -28,14 +28,15 @@ const ticketOrderValidationSchema = Yup.object().shape({
 const TicketOrder = () => {
     let hallId = 1;
     const { movieId } = useParams();
-    const dispatch = useDispatch();
     const formRef = useRef();
+
+    const [getSessions, { data: sessions }] = useLazyGetSessionsQuery();
+    const [getFreeSeats, getFreeSeatsResult] = useLazyGetSessionFreeSeatsQuery();
+    const [orderTicket] = useOrderTicketMutation();
 
     const user = useSelector(selectUser);
     const movies = useSelector(selectMovies);
     const cinemas = useFetchData(fetchCinemas, selectFetchCinemasRequest, selectCinemas);
-    const [sessions, setSessions] = useState(undefined);
-    const [freeSeats, setFreeSeats] = useState(undefined);
 
     const [movie, setMovie] = useState(undefined);
 
@@ -45,61 +46,29 @@ const TicketOrder = () => {
     }, [movieId, movies]);
 
     const handleOrder = async (values, formikBag) => {
-        try {
-            const result = await dispatch(
-                orderTicket({
-                    sessionId: values.sessionId,
-                    seatId: values.seatId,
-                    userId: user.id,
-                })
-            );
-            unwrapResult(result);
-
-            notification["success"]({
-                message: "Ticket has been successfully ordered",
+        orderTicket({ sessionId: values.sessionId, seatId: values.seatId, userId: user.id })
+            .unwrap()
+            .then(() => {
+                notification["success"]({
+                    message: "Ticket has been successfully ordered",
+                });
+                formikBag.resetForm();
+            })
+            .catch((error) => {
+                console.log(error);
+                notification["error"]({
+                    message: "Failed to order ticket",
+                    description: error.message,
+                });
             });
-            formikBag.resetForm();
-            setSessions(undefined);
-            setFreeSeats(undefined);
-        } catch (e) {
-            notification["error"]({
-                message: "Failed to order ticket",
-                description: e.message,
-            });
-            await fetchFreeSeats(values.sessionId);
-        }
     };
 
-    const handleCinemaSelect = async (cinemaId) => {
-        try {
-            const result = await dispatch(fetchSessions({ cinemaId, movieId }));
-            unwrapResult(result);
-            setSessions(result.payload);
-            formRef.current.setFieldValue("sessionId", "");
-        } catch (e) {
-            notification["error"]({
-                message: "Failed to fetch sessions of such cinema and movie",
-                description: e.message,
-            });
-        }
+    const handleCinemaSelect = (cinemaId) => {
+        getSessions({ cinemaId, movieId });
     };
 
-    const handleSessionSelect = async (sessionId) => {
-        await fetchFreeSeats(sessionId);
-    };
-
-    const fetchFreeSeats = async (sessionId) => {
-        try {
-            const result = await dispatch(fetchSessionFreeSeats({ sessionId }));
-            unwrapResult(result);
-            setFreeSeats(result.payload);
-            formRef.current.setFieldValue("seatId", "");
-        } catch (e) {
-            notification["error"]({
-                message: "Failed to fetch free seats of session",
-                description: e.message,
-            });
-        }
+    const handleSessionSelect = (sessionId) => {
+        getFreeSeats(sessionId);
     };
 
     const movieInfo = (
@@ -156,7 +125,7 @@ const TicketOrder = () => {
                             <Form.Item name="seatId">
                                 <p>Choose Seat</p>
                                 <Select name="seatId" style={styles.select}>
-                                    {freeSeats?.map((seat) => (
+                                    {getFreeSeatsResult.data?.map((seat) => (
                                         <Select.Option key={seat?.id} value={seat?.id}>
                                             Row: {seat?.row}, Position: {seat?.position}
                                         </Select.Option>

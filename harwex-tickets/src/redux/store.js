@@ -10,7 +10,9 @@ import cinemasRequestsSlice from "./slices/requests/cinemasRequestsSlice";
 import citiesRequestsSlice from "./slices/requests/citiesRequestSlice";
 import moviesRequestsSlice from "./slices/requests/moviesRequestSlice";
 
-export default configureStore({
+import { emptySplitApi } from "./split";
+
+export const store = configureStore({
     reducer: {
         user: userSlice,
         cinemas: cinemasSlice,
@@ -22,5 +24,8 @@ export default configureStore({
         cinemasRequests: cinemasRequestsSlice,
         citiesRequests: citiesRequestsSlice,
         moviesRequests: moviesRequestsSlice,
+
+        [emptySplitApi.reducerPath]: emptySplitApi.reducer,
     },
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(emptySplitApi.middleware),
 });
